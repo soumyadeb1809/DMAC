@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GSTR Number"
+            android:textSize="12sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/label_gstr_number"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:background="@drawable/back_et_form"
+            android:id="@+id/et_gstr_number"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload GST Registration Copy"
+            android:textSize="12sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/label_others_copy"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/back_et_form"
+                android:id="@+id/img_gst_copy"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GSTR Portal User ID"
+            android:textSize="12sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/label_gstr_user_id"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:background="@drawable/back_et_form"
+            android:id="@+id/et_gstr_user_id"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GSTR Portal Password"
+            android:textSize="12sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/label_gstr_password"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:background="@drawable/back_et_form"
+            android:id="@+id/et_gstr_password"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

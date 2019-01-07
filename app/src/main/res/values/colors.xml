@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="bannerFilter">#1A237E</color>
+    <color name="colorYellow">#FFD600</color>
+    <color name="colorOrange">#FE6D23</color>
+    <color name="colorLightGray">#ADADAD</color>
+    <color name="colorIndigoLight">#c81a237e</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorLighterGray">#F4F4F4</color>
+</resources>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CA/ITP Details"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="16dp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="12sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/label_ca_name"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:inputType="textPersonName"
+            android:fontFamily="@font/montserrat_regular"
+            android:background="@drawable/back_et_form"
+            android:id="@+id/et_ca_name"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Address"
+            android:textSize="12sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/label_ca_email"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:inputType="textEmailAddress"
+            android:fontFamily="@font/montserrat_regular"
+            android:background="@drawable/back_et_form"
+            android:id="@+id/et_ca_email"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone Number"
+            android:textSize="12sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/label_ca_phone"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="14sp"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:fontFamily="@font/montserrat_regular"
+            android:background="@drawable/back_et_form"
+            android:id="@+id/et_ca_phone"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textSize="12sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/label_ca_address"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:fontFamily="@font/montserrat_regular"
+            android:background="@drawable/back_et_form"
+            android:id="@+id/et_ca_address"
+            />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@color/colorLighterGray"
+        android:layout_marginTop="16dp"
+        />
+
+</LinearLayout>

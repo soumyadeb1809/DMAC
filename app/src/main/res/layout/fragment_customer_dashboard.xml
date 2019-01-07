@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.dashboard.customer.CustomerDashboardFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        android:padding="20dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DASHBOARD"
+            android:textSize="20sp"
+            android:id="@+id/title_login"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/bannerFilter"
+            />
+
+        <View
+            android:layout_width="48dp"
+            android:layout_height="3dp"
+            android:background="@color/colorYellow"
+            android:layout_marginTop="8dp"
+            android:id="@+id/title_dash_login"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:padding="20dp"
+            android:elevation="5dp"
+            android:clickable="true"
+            android:id="@+id/grp_total_jobs"
+            android:background="@drawable/back_registration_alert"
+            >
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_total_jobs"
+                android:id="@+id/img_total_jobs"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="166"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginTop="10dp"
+                android:textSize="36sp"
+                android:id="@+id/txt_total_jobs"
+                android:textColor="@color/colorBlack"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JOBS SO FAR"
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_regular"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:padding="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:elevation="5dp"
+            android:clickable="true"
+            android:background="@drawable/back_registration_alert"
+            >
+
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_verified"
+                android:id="@+id/img_verified_jobs"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="76"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginTop="10dp"
+                android:textSize="36sp"
+                android:id="@+id/txt_verified_jobs"
+                android:textColor="@color/colorBlack"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VERIFIED JOBS"
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_regular"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
