@@ -4,76 +4,62 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import in.teamconsultants.dmac.R;
+import in.teamconsultants.dmac.model.CustomerJob;
+import in.teamconsultants.dmac.model.JobUploadFile;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CustomerJobsFragment.OnCustomerJobsFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CustomerJobsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CustomerJobsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnCustomerJobsFragmentInteractionListener mListener;
+
+    private RecyclerView rvCustomerJobs;
+
+    private ArrayList<CustomerJob> customerJobsList;
+    private CustomerJobsAdapter customerJobsAdapter;
 
     public CustomerJobsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CustomerJobsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CustomerJobsFragment newInstance(String param1, String param2) {
-        CustomerJobsFragment fragment = new CustomerJobsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_jobs, container, false);
+        View v = inflater.inflate(R.layout.fragment_customer_jobs, container, false);
+
+        initializeViews(v);
+
+        initDummyData();
+
+        return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onCustomerJobsFragmentInteraction(uri);
-        }
+
+    private void initializeViews(View v) {
+
+        rvCustomerJobs = v.findViewById(R.id.rv_customer_jobs);
+
+        customerJobsList = new ArrayList<>();
+        customerJobsAdapter = new CustomerJobsAdapter(getContext(), customerJobsList);
+
+        rvCustomerJobs.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvCustomerJobs.setAdapter(customerJobsAdapter);
+
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -92,18 +78,93 @@ public class CustomerJobsFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnCustomerJobsFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onCustomerJobsFragmentInteraction(Uri uri);
+
+    }
+
+    private void initDummyData() {
+
+
+        CustomerJob customerJob1 = new CustomerJob();
+        customerJob1.setJobName("DMAC_04012019_115");
+        customerJob1.setAccountName("DMAC");
+        customerJob1.setEndCustomer("Customer DMAC");
+        customerJob1.setJobStatus("In progress");
+        customerJob1.setCreateDate("2019-01-04 08:30:58");
+        customerJob1.setUpdateDate("2019-01-04 08:30:58");
+        customerJob1.setJobUrl("https://staging.teamconsultants.in/dmac/Job/DownloadJob/N2hjVDVSNnRXd3crUXdhWGE0ZWttUT09");
+
+        ArrayList<JobUploadFile> cb1FilesList = new ArrayList<>();
+        JobUploadFile cb1File1 = new JobUploadFile();
+        cb1File1.setFileNo(1);
+        cb1File1.setFileCategory("Sale Invoices");
+        cb1File1.setFileType("GST invoices");
+        cb1File1.setFileUrl("https://staging.teamconsultants.in/upload/account//job/job_file_115_0_1546570858.jpg");
+        cb1File1.setFileStatus("Validation Completed");
+        cb1File1.setUploadAgain(false);
+        cb1File1.setFileNotes("Some notes goes here for the uploaded file...");
+        cb1FilesList.add(cb1File1);
+
+        JobUploadFile cb1File2 = new JobUploadFile();
+        cb1File2.setFileNo(2);
+        cb1File2.setFileCategory("Others");
+        cb1File2.setFileType("Other Bills");
+        cb1File2.setFileUrl("https://staging.teamconsultants.in/upload/account//job/job_file_115_1_1546570858.jpg");
+        cb1File2.setFileStatus("Validation Failed");
+        cb1File2.setUploadAgain(true);
+        cb1File2.setFileNotes("Some notes goes here for the uploaded file...");
+        cb1FilesList.add(cb1File2);
+
+        customerJob1.setJobUploadFiles(cb1FilesList);
+
+        customerJobsList.add(customerJob1);
+
+        customerJobsAdapter.notifyDataSetChanged();
+
+        CustomerJob customerJob2 = new CustomerJob();
+        customerJob2.setJobName("DMAC_03012019_113");
+        customerJob2.setAccountName("DMAC");
+        customerJob2.setEndCustomer("Customer DMAC");
+        customerJob2.setJobStatus("In progress");
+        customerJob2.setCreateDate("2019-01-03 10:59:27");
+        customerJob2.setUpdateDate("2019-01-04 13:44:23");
+        customerJob2.setJobUrl("https://staging.teamconsultants.in/dmac/Job/DownloadJob/aDJlR0Uzc2dsTUJKM3UvdnpMVEkwUT09");
+
+        ArrayList<JobUploadFile> cb2FilesList = new ArrayList<>();
+        JobUploadFile cb2File1 = new JobUploadFile();
+        cb2File1.setFileNo(1);
+        cb2File1.setFileCategory("Sale Invoices");
+        cb2File1.setFileType("GST invoices");
+        cb2File1.setFileUrl("https://staging.teamconsultants.in/upload/account//job/job_file_113_0_1546493367.jpg");
+        cb2File1.setFileStatus("Validation Failed");
+        cb2File1.setUploadAgain(true);
+        cb2File1.setFileNotes("Some notes goes here for the uploaded file...");
+        cb2FilesList.add(cb2File1);
+
+        JobUploadFile cb2File2 = new JobUploadFile();
+        cb2File2.setFileNo(2);
+        cb2File2.setFileCategory("Purchase Bills");
+        cb2File2.setFileType("Raw Material Bills");
+        cb2File2.setFileUrl("https://staging.teamconsultants.in/upload/account//job/job_file_113_1_1546493367.jpg");
+        cb2File2.setFileStatus("Data Entry Completed");
+        cb2File2.setUploadAgain(false);
+        cb2File2.setFileNotes("Some notes goes here for the uploaded file...");
+        cb2FilesList.add(cb2File2);
+
+        customerJob2.setJobUploadFiles(cb2FilesList);
+
+        customerJobsList.add(customerJob2);
+
+        customerJobsList.add(customerJob1);
+        customerJobsList.add(customerJob2);
+        customerJobsList.add(customerJob1);
+        customerJobsList.add(customerJob2);
+        customerJobsList.add(customerJob1);
+        customerJobsList.add(customerJob2);
+        customerJobsList.add(customerJob1);
+        customerJobsList.add(customerJob2);
+
+        customerJobsAdapter.notifyDataSetChanged();
+
     }
 }

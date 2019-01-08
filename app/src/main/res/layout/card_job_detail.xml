@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    android:padding="20dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JOB DETAILS"
+            android:textSize="20sp"
+            android:id="@+id/title_job_detail"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/bannerFilter"
+            />
+
+        <View
+            android:layout_width="48dp"
+            android:layout_height="3dp"
+            android:background="@color/colorYellow"
+            android:layout_marginTop="8dp"
+            android:id="@+id/title_dash_login"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:id="@+id/grp_job_name">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Job Name"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAME_OF_THE_JOB"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="16sp"
+            android:id="@+id/txt_job_name"
+            android:textColor="@color/colorBlack"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:id="@+id/grp_account_name">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account Name"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAME_OF_THE_ACCOUNT"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="16sp"
+            android:id="@+id/txt_account_name"
+            android:textColor="@color/colorBlack"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:id="@+id/grp_end_customer">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Customer Name"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAME_OF_THE_CUSTOMER"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="16sp"
+            android:id="@+id/txt_customer_name"
+            android:textColor="@color/colorBlack"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:id="@+id/grp_created_on">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Created On"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DATE_CREATED_ON"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="16sp"
+            android:id="@+id/txt_created_on"
+            android:textColor="@color/colorBlack"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:id="@+id/grp_updated_on">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Updated On"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DATE_UPDATED_ON"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="16sp"
+            android:id="@+id/txt_updated_on"
+            android:textColor="@color/colorBlack"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="In Progress"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:background="@drawable/back_blue_rounded"
+        android:textColor="@color/colorWhite"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="6dp"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="6dp"
+        android:id="@+id/txt_job_status"
+        />
+
+</LinearLayout>

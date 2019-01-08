@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.teamconsultants.dmac">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -21,9 +23,17 @@
         <activity
             android:name=".ui.registration.RegisterActivity"
             android:parentActivityName=".ui.login.LoginActivity" />
-        <activity android:name=".ui.home.dashboard.customer.CustomerHomeActivity">
+        <activity android:name=".ui.home.dashboard.customer.CustomerHomeActivity" />
+        <activity android:name=".ui.home.jobs.JobDetailActivity" />
+        <activity android:name=".ui.home.dashboard.fe.FeHomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".ui.home.accounts.AccountDetailActivity" />
+        <activity android:name=".ui.home.jobs.NewJobActivity"></activity>
     </application>
 
 </manifest>

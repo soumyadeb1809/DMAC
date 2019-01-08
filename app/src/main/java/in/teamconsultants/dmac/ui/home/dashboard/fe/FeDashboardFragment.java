@@ -1,4 +1,4 @@
-package in.teamconsultants.dmac.ui.home.profile;
+package in.teamconsultants.dmac.ui.home.dashboard.fe;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,46 +7,40 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import in.teamconsultants.dmac.R;
 
+public class FeDashboardFragment extends Fragment {
 
-public class ProfileFragment extends Fragment {
+    private OnFeDashboardInteractionListener mListener;
 
-    private OnProfileFragmentInteractionListener mListener;
-
-    private TextView tvName, tvEmail, tvPhone, tvRole, tvAccountName, tvKeyUser;
-
-    private LinearLayout grpLogout;
-
-    public ProfileFragment() {
+    public FeDashboardFragment() {
         // Required empty public constructor
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_fe_dashboard, container, false);
     }
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnProfileFragmentInteractionListener) {
-            mListener = (OnProfileFragmentInteractionListener) context;
+        if (context instanceof OnFeDashboardInteractionListener) {
+            mListener = (OnFeDashboardInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnProfileFragmentInteractionListener");
+                    + " must implement OnFeDashboardInteractionListener");
         }
     }
 
@@ -57,8 +51,7 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    public interface OnProfileFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onProfileFragmentInteraction(Uri uri);
+    public interface OnFeDashboardInteractionListener {
+
     }
 }

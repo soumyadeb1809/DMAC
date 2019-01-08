@@ -1,13 +1,18 @@
 package in.teamconsultants.dmac.ui.home.dashboard.customer;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import in.teamconsultants.dmac.ui.home.dashboard.customer.CustomerDashboardFragment;
 import in.teamconsultants.dmac.ui.home.jobs.CustomerJobsFragment;
+import in.teamconsultants.dmac.ui.home.jobs.NewJobActivity;
 import in.teamconsultants.dmac.ui.home.profile.ProfileFragment;
 
 import in.teamconsultants.dmac.R;
@@ -20,6 +25,8 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
     private CustomerDashboardFragment customerDashboardFragment;
     private CustomerJobsFragment customerJobsFragment;
     private ProfileFragment profileFragment;
+
+    private LinearLayout grpNewJob;
 
     {
         customerDashboardFragment = new CustomerDashboardFragment();
@@ -64,11 +71,28 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
         navigation.setSelectedItemId(R.id.navigation_dashboard);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, customerDashboardFragment).commit();
 
+        initializeUi();
 
+        setOnClickListeners();
+
+    }
+
+    private void initializeUi() {
+        grpNewJob = findViewById(R.id.grp_new_job);
 
     }
 
 
+    private void setOnClickListeners() {
+
+        grpNewJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CustomerHomeActivity.this, NewJobActivity.class));
+            }
+        });
+
+    }
 
 
     /*
@@ -79,10 +103,6 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
 
     }
 
-    @Override
-    public void onCustomerJobsFragmentInteraction(Uri uri) {
-
-    }
 
     @Override
     public void onProfileFragmentInteraction(Uri uri) {

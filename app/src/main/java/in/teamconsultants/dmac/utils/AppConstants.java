@@ -9,6 +9,7 @@ public class AppConstants {
 
     public static class INTENT_TAG {
         public static final String REG_TYPE = "reg_type";
+        public static final String CUSTOMER_JOB = "customer_job";
     }
 
 }

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorLighterGray"
-    tools:context=".ui.home.dashboard.customer.CustomerHomeActivity">
+    tools:context=".ui.home.dashboard.fe.FeHomeActivity">
+
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:paddingTop="11dp"
             android:paddingBottom="11dp"
             android:clickable="true"
-            android:id="@+id/grp_new_job"
+            android:id="@+id/grp_new_account"
             android:background="@drawable/back_new_job"
             android:layout_gravity="bottom|end"
             android:layout_margin="20dp"
@@ -45,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NEW JOB"
+                android:text="NEW ACCOUNT"
                 android:textColor="@color/colorWhite"
                 android:fontFamily="@font/montserrat_bold"
                 android:layout_marginStart="8dp"
@@ -62,7 +63,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@android:color/white"
-        app:menu="@menu/customer_nav_menu"
+        app:menu="@menu/fe_nav_menu"
         />
+
 
 </LinearLayout>

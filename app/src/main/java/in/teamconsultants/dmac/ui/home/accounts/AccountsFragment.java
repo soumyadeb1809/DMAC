@@ -1,4 +1,4 @@
-package in.teamconsultants.dmac.ui.home.profile;
+package in.teamconsultants.dmac.ui.home.accounts;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,23 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import in.teamconsultants.dmac.R;
 
 
-public class ProfileFragment extends Fragment {
+public class AccountsFragment extends Fragment {
 
-    private OnProfileFragmentInteractionListener mListener;
 
-    private TextView tvName, tvEmail, tvPhone, tvRole, tvAccountName, tvKeyUser;
+    private OnAccountsInteractionListener mListener;
 
-    private LinearLayout grpLogout;
-
-    public ProfileFragment() {
+    public AccountsFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,18 +31,18 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_accounts, container, false);
     }
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnProfileFragmentInteractionListener) {
-            mListener = (OnProfileFragmentInteractionListener) context;
+        if (context instanceof OnAccountsInteractionListener) {
+            mListener = (OnAccountsInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnProfileFragmentInteractionListener");
+                    + " must implement OnAccountsInteractionListener");
         }
     }
 
@@ -56,9 +52,7 @@ public class ProfileFragment extends Fragment {
         mListener = null;
     }
 
+    public interface OnAccountsInteractionListener {
 
-    public interface OnProfileFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onProfileFragmentInteraction(Uri uri);
     }
 }

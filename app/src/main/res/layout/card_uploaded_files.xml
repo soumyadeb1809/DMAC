@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.home.jobs.CustomerJobsFragment">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/colorWhite"
-        android:padding="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MY JOBS"
+            android:text="UPLOADED FILES"
             android:textSize="20sp"
-            android:id="@+id/title_login"
+            android:id="@+id/title_uploaded_files"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/bannerFilter"
             />
@@ -29,14 +30,19 @@
             android:layout_height="3dp"
             android:background="@color/colorYellow"
             android:layout_marginTop="8dp"
-            android:id="@+id/title_my_jobs"
+            android:id="@+id/title_dash_login"
             />
 
     </LinearLayout>
 
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rv_customer_jobs"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/rv_job_file_upload"
+        android:layout_marginBottom="20dp"
+        android:minHeight="480dp"
+        />
 
 </LinearLayout>
