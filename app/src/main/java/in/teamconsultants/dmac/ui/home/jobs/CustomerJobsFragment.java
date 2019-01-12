@@ -159,10 +159,7 @@ public class CustomerJobsFragment extends Fragment {
         customerJobsList.add(customerJob2);
         customerJobsList.add(customerJob1);
         customerJobsList.add(customerJob2);
-        customerJobsList.add(customerJob1);
-        customerJobsList.add(customerJob2);
-        customerJobsList.add(customerJob1);
-        customerJobsList.add(customerJob2);
+
 
         customerJobsAdapter.notifyDataSetChanged();
 

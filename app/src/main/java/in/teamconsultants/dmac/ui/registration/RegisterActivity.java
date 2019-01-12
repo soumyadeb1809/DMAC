@@ -29,11 +29,18 @@ public class RegisterActivity extends AppCompatActivity implements QuickRegister
             finish();
         }
 
-        int registrationType = intent.getIntExtra("reg_type", AppConstants.REGISTRATION.QUICK);
+        int registrationType = intent.getIntExtra(AppConstants.INTENT_TAG.REG_TYPE, AppConstants.REGISTRATION.QUICK);
+        int initiator = intent.getIntExtra(AppConstants.INTENT_TAG.REG_INITIATOR, AppConstants.REGISTRATION.INITIATOR.CUSTOMER);
 
         if(registrationType == AppConstants.REGISTRATION.REGULAR) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new RegularRegisterFragment()).commit();
-            getSupportActionBar().setTitle("Regular Registration");
+            if(initiator == AppConstants.REGISTRATION.INITIATOR.CUSTOMER) {
+                getSupportActionBar().setTitle("Regular Registration");
+            }
+            else {
+                getSupportActionBar().setTitle("Add New Account");
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            }
         }
         else {
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new QuickRegisterFragment()).commit();

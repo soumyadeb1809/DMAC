@@ -2,19 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
+    android:background="@drawable/back_white_accent_rounded"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="16dp"
+    android:clickable="true"
     android:elevation="4dp"
+    android:padding="20dp"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/grp_name">
+        android:layout_marginTop="1dp"
+        android:id="@+id/grp_business_legal_name">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="Business Legal Name"
             android:fontFamily="@font/montserrat_regular"
             android:textSize="12sp"
             />
@@ -22,10 +28,89 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NAME_OF_USER"
+            android:text="BUSINESS_NAME"
             android:fontFamily="@font/montserrat_semi_bold"
             android:textSize="16sp"
-            android:id="@+id/txt_name"
+            android:maxLines="1"
+            android:id="@+id/txt_business_legal_name"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:id="@+id/grp_business_shortname">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Business Short Name"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BUSINESS_NAME"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:id="@+id/txt_business_short_name"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:id="@+id/grp_customer_code">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer Code"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CUSTOMER_CODE"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:id="@+id/txt_customer_code"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:id="@+id/grp_gstr_number">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GSTR Number"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GSTR_NUMBER"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:id="@+id/txt_gstr_number"
             android:textColor="@color/colorBlack"
             />
 
@@ -35,12 +120,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="14dp"
-        android:id="@+id/grp_email">
+        android:layout_marginTop="8dp"
+        android:id="@+id/grp_pan_number">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="PAN Number"
             android:fontFamily="@font/montserrat_regular"
             android:textSize="12sp"
             />
@@ -48,10 +133,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="USER_EMAIL"
+            android:text="PAN_CARD_NUMBER"
             android:fontFamily="@font/montserrat_semi_bold"
             android:textSize="16sp"
-            android:id="@+id/txt_email"
+            android:maxLines="1"
+            android:id="@+id/txt_pan_number"
             android:textColor="@color/colorBlack"
             />
 
@@ -61,12 +147,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="14dp"
-        android:id="@+id/grp_phone">
+        android:layout_marginTop="8dp"
+        android:id="@+id/grp_created_on">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Phone"
+            android:text="Created On"
             android:fontFamily="@font/montserrat_regular"
             android:textSize="12sp"
             />
@@ -74,91 +160,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PHONE_NUMBER"
+            android:text="4 Dec 2018"
             android:fontFamily="@font/montserrat_semi_bold"
             android:textSize="16sp"
-            android:id="@+id/txt_phone"
+            android:maxLines="1"
+            android:id="@+id/txt_created_on"
             android:textColor="@color/colorBlack"
             />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="14dp"
-        android:id="@+id/grp_role">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Role"
-            android:fontFamily="@font/montserrat_regular"
-            android:textSize="12sp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="USER_ROLE"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="16sp"
-            android:id="@+id/txt_role"
-            android:textColor="@color/colorBlack"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="14dp"
-        android:id="@+id/grp_account_name">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Account Name"
-            android:fontFamily="@font/montserrat_regular"
-            android:textSize="12sp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ACCOUNT_NAME"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="16sp"
-            android:id="@+id/txt_account_name"
-            android:textColor="@color/colorBlack"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="14dp"
-        android:id="@+id/grp_key_user">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Key User"
-            android:fontFamily="@font/montserrat_regular"
-            android:textSize="12sp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="KEY_USER"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="16sp"
-            android:id="@+id/txt_key_user"
-            android:textColor="@color/colorBlack"
-            />
-
-    </LinearLayout>
+        android:text="NEW"
+        android:textSize="10sp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/back_blue_rounded"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:id="@+id/txt_account_status"
+        android:layout_gravity="end"
+        />
 
 </LinearLayout>

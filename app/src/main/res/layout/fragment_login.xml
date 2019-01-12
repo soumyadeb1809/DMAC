@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/img_banner_filter"
                 android:background="@color/bannerFilter"
-                android:alpha="0.6"
+                android:alpha="0.55"
                 />
 
 
@@ -92,12 +92,24 @@
                 android:textSize="14sp"
                 />
 
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/dmac_logo_small"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="20dp"
+                    />
+
+
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2.3"
+            android:layout_weight="2.5"
             >
             <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
@@ -110,7 +122,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="24dp"
-                    android:minHeight="278dp"
+                    android:minHeight="260dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="8dp">
 
@@ -140,7 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="24dp"
-                    android:minHeight="278dp"
+                    android:minHeight="260dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="0dp">
 
@@ -174,7 +186,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:layout_below="@+id/title_dash_login"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="18dp"
                             android:layout_marginStart="4dp"
                             android:layout_marginEnd="4dp"
                             android:drawablePadding="16dp"
@@ -195,7 +207,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:layout_below="@+id/et_username"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="18dp"
                             android:layout_marginStart="4dp"
                             android:layout_marginEnd="4dp"
                             android:drawablePadding="16dp"
@@ -218,7 +230,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/et_password"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="10dp"
                             android:orientation="horizontal">
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -328,7 +340,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/txt_create_account"
                 android:clickable="true"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal"
                 android:id="@+id/grp_create_account"
                 android:gravity="center"
@@ -343,6 +355,19 @@
                     android:textStyle="bold"
                     />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Privacy Policy"
+                android:layout_below="@+id/grp_create_account"
+                android:layout_marginTop="12dp"
+                android:textSize="12sp"
+                android:id="@+id/txt_privacy_policy"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/colorLightGray"
+                />
 
         </RelativeLayout>
 

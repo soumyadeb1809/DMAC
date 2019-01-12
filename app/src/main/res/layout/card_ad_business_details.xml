@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<!--    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,6 +43,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
+            android:text="DMAC Customer Account"
+            android:focusable="false"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_business_legal_name"
@@ -81,6 +76,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
+            android:focusable="false"
+            android:text="DMAC"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_business_short_name"
@@ -108,10 +105,13 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
+            android:text="Abd Street, Gachibowli"
+            android:focusable="false"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_business_address"
@@ -137,7 +137,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select State"
+                android:text="State"
                 android:textSize="12sp"
                 android:fontFamily="@font/montserrat_regular"
                 android:layout_marginBottom="10dp"
@@ -148,10 +148,17 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/back_et_form"
                 >
-                <Spinner
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:id="@+id/spinner_state"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textSize="14sp"
+                    android:focusable="false"
+                    android:text="Telangana"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:background="@drawable/back_et_form"
+                    android:id="@+id/et_state"
                     />
             </LinearLayout>
 
@@ -169,7 +176,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select City"
+                android:text="City"
                 android:textSize="12sp"
                 android:fontFamily="@font/montserrat_regular"
                 android:layout_marginBottom="10dp"
@@ -180,10 +187,17 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/back_et_form"
                 >
-                <Spinner
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:id="@+id/spinner_city"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textSize="14sp"
+                    android:text="Hyderabad"
+                    android:focusable="false"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:background="@drawable/back_et_form"
+                    android:id="@+id/et_city"
                     />
             </LinearLayout>
 
@@ -216,6 +230,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
+            android:focusable="false"
+            android:text="500431"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_pin_code"
@@ -245,10 +261,17 @@
             android:layout_height="wrap_content"
             android:background="@drawable/back_et_form"
             >
-            <Spinner
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:id="@+id/spinner_entity_type"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textSize="14sp"
+                android:focusable="false"
+                android:text="Company"
+                android:fontFamily="@font/montserrat_regular"
+                android:background="@drawable/back_et_form"
+                android:id="@+id/et_business_type"
                 />
         </LinearLayout>
 
@@ -265,7 +288,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload others copy"
+            android:text="Others copy"
             android:textSize="12sp"
             android:fontFamily="@font/montserrat_regular"
             android:layout_marginBottom="10dp"
@@ -285,7 +308,7 @@
 
         </LinearLayout>
 
-     </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -298,7 +321,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin = "20dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center_vertical"
             >
 
@@ -313,7 +336,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:id="@+id/rg_gst"
                 >
 
@@ -321,6 +344,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes"
+                    android:checked="true"
+                    android:clickable="false"
                     android:fontFamily="@font/montserrat_regular"
                     android:id="@+id/rb_gst_yes"
                     android:layout_marginEnd="16dp"
@@ -330,6 +355,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/rb_gst_no"
+                    android:clickable="false"
                     android:text="No"
                     />
 
@@ -337,8 +363,6 @@
 
         </LinearLayout>
 
-        <include layout="@layout/card_gst_info"
-            android:id="@+id/card_gst_info"/>
     </LinearLayout>
 
     <LinearLayout
@@ -375,15 +399,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes"
+                    android:focusable="false"
                     android:fontFamily="@font/montserrat_regular"
                     android:id="@+id/rb_it_yes"
+                    android:clickable="false"
                     android:layout_marginEnd="30dp"
+                    android:checked="true"
                     />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/rb_it_no"
+                    android:focusable="false"
+                    android:clickable="false"
                     android:text="No"
                     />
 
@@ -391,9 +420,6 @@
 
         </LinearLayout>
 
-        <include layout="@layout/card_it_info"
-            android:id="@+id/card_it_info"
-            />
     </LinearLayout>
 
     <View
@@ -402,8 +428,5 @@
         android:background="@color/colorLighterGray"
         android:layout_marginTop="16dp"
         />
-<!--
-    </LinearLayout>
-    </ScrollView>-->
 
 </LinearLayout>

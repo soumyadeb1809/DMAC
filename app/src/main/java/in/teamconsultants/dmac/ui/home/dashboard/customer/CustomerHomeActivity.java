@@ -43,13 +43,16 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
                 switch (item.getItemId()) {
                     case R.id.navigation_dashboard:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, customerDashboardFragment).commit();
+                        grpNewJob.setVisibility(View.VISIBLE);
                         return true;
                     case R.id.navigation_my_jobs:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, customerJobsFragment).commit();
+                        grpNewJob.setVisibility(View.VISIBLE);
                         return true;
 
                     case R.id.navigation_profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
+                        grpNewJob.setVisibility(View.GONE);
                         return true;
                 }
             }

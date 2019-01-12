@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorLighterGray"
     tools:context=".ui.home.accounts.AccountsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        android:padding="20dp"
+        android:elevation="4dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ACCOUNTS"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/bannerFilter"
+            />
+
+        <View
+            android:layout_width="48dp"
+            android:layout_height="3dp"
+            android:background="@color/colorYellow"
+            android:layout_marginTop="8dp"
+            android:id="@+id/title_my_jobs"
+            />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/rv_accounts_list"/>
 
-</FrameLayout>
+
+</LinearLayout>

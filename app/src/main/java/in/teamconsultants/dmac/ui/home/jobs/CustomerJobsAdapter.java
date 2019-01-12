@@ -80,8 +80,10 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
                 }
             });
 
-            if(position == customerJobsList.size() - 1){
-                
+            if (position == customerJobsList.size() - 1){
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(40, 40, 40, 200);
+                jobsViewHolder.view.setLayoutParams(params);
             }
         }
 

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.ui.home.dashboard.customer.CustomerHomeActivity;
+import in.teamconsultants.dmac.ui.home.dashboard.fe.FeHomeActivity;
 import in.teamconsultants.dmac.ui.registration.QuickRegisterFragment;
 import in.teamconsultants.dmac.ui.registration.RegisterActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
@@ -67,7 +68,17 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CustomerHomeActivity.class));
+                String username = etUsername.getText().toString();
+                if(username.contains("customer")) {
+                    startActivity(new Intent(getActivity(), CustomerHomeActivity.class));
+                    getActivity().finish();
+                }
+                else if (username.contains("fe")) {
+                    startActivity(new Intent(getActivity(), FeHomeActivity.class));
+                    getActivity().finish();
+                }
+
+
             }
         });
 
@@ -119,6 +130,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), RegisterActivity.class);
                 intent.putExtra(AppConstants.INTENT_TAG.REG_TYPE, AppConstants.REGISTRATION.QUICK);
+                intent.putExtra(AppConstants.INTENT_TAG.REG_INITIATOR, AppConstants.REGISTRATION.INITIATOR.CUSTOMER);
                 startActivity(intent);
                 dialog.dismiss();
             }
@@ -129,6 +141,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), RegisterActivity.class);
                 intent.putExtra(AppConstants.INTENT_TAG.REG_TYPE, AppConstants.REGISTRATION.REGULAR);
+                intent.putExtra(AppConstants.INTENT_TAG.REG_INITIATOR, AppConstants.REGISTRATION.INITIATOR.CUSTOMER);
                 startActivity(intent);
                 dialog.dismiss();
             }
