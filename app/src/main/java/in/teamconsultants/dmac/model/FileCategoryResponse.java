@@ -1,0 +1,43 @@
+package in.teamconsultants.dmac.model;
+
+import java.util.ArrayList;
+
+public class FileCategoryResponse {
+
+    private String Status;
+    private String Message;
+    private ArrayList<FileCategoryObj> FileCategoryList;
+
+    public FileCategoryResponse() {
+    }
+
+    public FileCategoryResponse(String status, String message, ArrayList<FileCategoryObj> fileCategoryList) {
+        Status = status;
+        Message = message;
+        FileCategoryList = fileCategoryList;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public void setMessage(String message) {
+        Message = message;
+    }
+
+    public ArrayList<FileCategoryObj> getFileCategoryList() {
+        return FileCategoryList;
+    }
+
+    public void setFileCategoryList(ArrayList<FileCategoryObj> fileCategoryList) {
+        FileCategoryList = fileCategoryList;
+    }
+}

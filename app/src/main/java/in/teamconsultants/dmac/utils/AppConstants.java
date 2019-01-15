@@ -18,4 +18,25 @@ public class AppConstants {
         public static final String CUSTOMER_JOB = "customer_job";
     }
 
+    public static final String LOG_TAG = "DMAC_LOG";
+
+    public static final int MAX_ALLOWED_JOBS = 20;
+
+    public static final class RESPONSE {
+        public static final String SUCCESS = "Success";
+        public static final String FAILED = "Failed";
+    }
+
+    public static final class SP {
+        public static final String SP_USER_DATA = "user_data";
+        public static final String TAG_USER_DETAILS = "user_details";
+        public static final String TAG_TOKEN = "token";
+
+    }
+
+    public static final class USER_ROLE {
+        public static final String CUSTOMER = "3";
+        public static final String FE = "2";
+    }
+
 }

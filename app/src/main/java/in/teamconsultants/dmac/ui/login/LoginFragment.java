@@ -1,26 +1,37 @@
 package in.teamconsultants.dmac.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import in.teamconsultants.dmac.R;
+import in.teamconsultants.dmac.model.LoginResponse;
+import in.teamconsultants.dmac.network.ApiClient;
+import in.teamconsultants.dmac.network.ApiInterface;
 import in.teamconsultants.dmac.ui.home.dashboard.customer.CustomerHomeActivity;
 import in.teamconsultants.dmac.ui.home.dashboard.fe.FeHomeActivity;
-import in.teamconsultants.dmac.ui.registration.QuickRegisterFragment;
 import in.teamconsultants.dmac.ui.registration.RegisterActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
+import in.teamconsultants.dmac.utils.Utility;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class LoginFragment extends Fragment {
@@ -52,6 +63,10 @@ public class LoginFragment extends Fragment {
         btnCreateAccount = v.findViewById(R.id.grp_create_account);
         cbRememberMe = v.findViewById(R.id.cb_remember_me);
 
+
+        etUsername.setText("customer@dmac.com");
+        etPassword.setText("9848012345");
+
         setOnClickListeners();
         return v;
     }
@@ -68,6 +83,7 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 String username = etUsername.getText().toString();
                 if(username.contains("customer")) {
                     startActivity(new Intent(getActivity(), CustomerHomeActivity.class));
@@ -77,18 +93,81 @@ public class LoginFragment extends Fragment {
                     startActivity(new Intent(getActivity(), FeHomeActivity.class));
                     getActivity().finish();
                 }
+*/              String email = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
 
+                if(TextUtils.isEmpty(email)){
+                    Toast.makeText(getContext(), "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(password)) {
+                    Toast.makeText(getContext(), "Please enter a valid password", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    validateUser(email, password);
+                }
 
             }
         });
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void validateUser(String email, String password) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+
+        progressDialog.setMessage("Validating your credentials...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
+        Call<LoginResponse> apiCall = apiInterface.doUserLogin(email, password);
+
+        final Gson gson = new Gson();
+
+        apiCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                progressDialog.dismiss();
+                Log.d(AppConstants.LOG_TAG, "response: "+ gson.toJson(response.body()));
+                LoginResponse loginResponse = response.body();
+
+                if(loginResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
+                    SharedPreferences spUserData = getContext().getSharedPreferences(AppConstants.SP.SP_USER_DATA, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor userDataEditor = spUserData.edit();
+                    userDataEditor.putString(AppConstants.SP.TAG_USER_DETAILS, gson.toJson(loginResponse.getUserData()));
+                    userDataEditor.putString(AppConstants.SP.TAG_TOKEN, loginResponse.getTokenId());
+                    userDataEditor.commit();
+                    if(loginResponse.getUserData().getRoleId().equals(AppConstants.USER_ROLE.CUSTOMER)){
+                        startActivity(new Intent(getActivity(), CustomerHomeActivity.class));
+                        getActivity().finish();
+                    }
+                    else if(loginResponse.getUserData().getRoleId().equals(AppConstants.USER_ROLE.FE)){
+                        startActivity(new Intent(getActivity(), FeHomeActivity.class));
+                        getActivity().finish();
+                    }
+
+                }
+                else if (loginResponse.getStatus().equals(AppConstants.RESPONSE.FAILED)){
+                    Utility.showAlert(getContext(), "Invalid credentials", "Please verify your email and password and try again");
+                }
+                else {
+                    Utility.showAlert(getContext(), "Error", "An unknown error occurred, please try again");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Utility.showAlert(getContext(), "Error", "An unknown error occurred, please try again");
+                Log.d(AppConstants.LOG_TAG, "FAILED: " + t.getMessage());
+                t.printStackTrace();
+                Log.d(AppConstants.LOG_TAG, "Call: "+call.request().toString());
+                Log.d(AppConstants.LOG_TAG, "Body: "+gson.toJson(call.request().body()));
+            }
+        });
+
     }
 
     @Override

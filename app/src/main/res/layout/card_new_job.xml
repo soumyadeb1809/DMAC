@@ -15,6 +15,37 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="File Category"
+            android:textSize="12sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/label_file_category"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_et_form"
+            >
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:id="@+id/spinner_file_category"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="File Type"
             android:textSize="12sp"
             android:fontFamily="@font/montserrat_regular"
@@ -35,36 +66,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="File Category"
-            android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/label_file_category"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back_et_form"
-            >
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:id="@+id/spinner_file_category"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -128,6 +129,7 @@
                 android:layout_height="80dp"
                 android:id="@+id/img_attach_file"
                 android:src="@drawable/back_et_form"
+                android:clickable="true"
                 />
 
             <View
@@ -145,7 +147,7 @@
                 android:background="@drawable/back_remove"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
-                android:id="@+id/grp_remove_director"
+                android:id="@+id/grp_remove_job"
                 >
 
 
