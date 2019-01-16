@@ -64,7 +64,7 @@ public class LoginFragment extends Fragment {
         cbRememberMe = v.findViewById(R.id.cb_remember_me);
 
 
-        etUsername.setText("customer@dmac.com");
+        etUsername.setText("fe@dmac.com");
         etPassword.setText("9848012345");
 
         setOnClickListeners();

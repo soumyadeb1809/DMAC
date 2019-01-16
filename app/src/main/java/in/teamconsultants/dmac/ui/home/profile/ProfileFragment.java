@@ -2,18 +2,24 @@ package in.teamconsultants.dmac.ui.home.profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.model.User;
+import in.teamconsultants.dmac.model.UserData;
 import in.teamconsultants.dmac.ui.login.LoginActivity;
+import in.teamconsultants.dmac.utils.AppConstants;
 
 
 public class ProfileFragment extends Fragment {
@@ -67,23 +73,47 @@ public class ProfileFragment extends Fragment {
 
     private void populateData() {
 
-        User user = new User();
+        //User user = new User();
 
-        user.setName("FE DMAC");
+        SharedPreferences sp = getContext().getSharedPreferences(AppConstants.SP.SP_USER_DATA, Context.MODE_PRIVATE);
+
+        Gson gson = new Gson();
+
+        UserData userData = gson.fromJson(sp.getString(AppConstants.SP.TAG_USER_DETAILS, null), UserData.class);
+
+       /* user.setName("FE DMAC");
         user.setAccountName("DMAC");
         user.setEmail("fe@dmac.com");
         user.setPhone("9876543210");
         user.setKeyUser(true);
         user.setRole("Field Executive");
         user.setCreatedAt("2018-11-26 01:38:14");
-        user.setUpdatedAt("0000-00-00 00:00:00");
+        user.setUpdatedAt("0000-00-00 00:00:00");*/
 
-        tvName.setText(user.getName());
-        tvEmail.setText(user.getEmail());
-        tvPhone.setText(user.getPhone());
-        tvRole.setText(user.getRole());
-        tvAccountName.setText(user.getAccountName());
-        tvKeyUser.setText("Yes");
+        tvName.setText(userData.getFullName());
+        tvEmail.setText(userData.getEmail());
+        if(TextUtils.isEmpty(userData.getPhone())){
+            tvPhone.setText("NA");
+        }
+        else {
+            tvPhone.setText(userData.getPhone());
+        }
+
+        String role = "NA";
+        if(userData.getRoleId().equals(AppConstants.USER_ROLE.FE)){
+            role = "Field Executive";
+        }
+        else {
+            role = "Customer";
+        }
+        tvRole.setText(role);
+        tvAccountName.setText(userData.getAccountId());
+        if(userData.getKeyUser().equals("1")) {
+            tvKeyUser.setText("Yes");
+        }
+        else {
+            tvKeyUser.setText("No");
+        }
 
     }
 

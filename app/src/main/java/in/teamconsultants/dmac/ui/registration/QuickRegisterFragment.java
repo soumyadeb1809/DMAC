@@ -172,7 +172,7 @@ public class QuickRegisterFragment extends Fragment {
 
         String state = (String) spinnerState.getSelectedItem();
         String city = (String) spinnerCity.getSelectedItem();
-        String entityType = (String) spinnerCity.getSelectedItem();
+        String entityType = (String) spinnerBusinessEntityType.getSelectedItem();
 
         HashMap<String, String> fieldMap = new HashMap<>();
         fieldMap.put("FullName", fullName);
