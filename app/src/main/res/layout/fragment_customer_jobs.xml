@@ -1,42 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.home.jobs.CustomerJobsFragment">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorWhite"
-        android:padding="20dp"
-        android:elevation="4dp"
-        >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MY JOBS"
-            android:textSize="20sp"
-            android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/bannerFilter"
-            />
+            android:orientation="vertical"
+            android:background="@color/colorWhite"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:elevation="4dp"
+            >
 
-        <View
-            android:layout_width="48dp"
-            android:layout_height="3dp"
-            android:background="@color/colorYellow"
-            android:layout_marginTop="8dp"
-            android:id="@+id/title_my_jobs"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Files"
+                android:textSize="26sp"
+                android:id="@+id/title_my_files"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/bannerFilter"
+                />
+
+
+            <View
+                android:layout_width="48dp"
+                android:layout_height="3dp"
+                android:layout_below="@id/title_my_files"
+                android:background="@color/colorYellow"
+                android:layout_marginTop="8dp"
+                android:id="@+id/title_my_jobs"
+                />
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/btn_search_file"
+                android:background="@drawable/ic_search"
+                />
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rv_customer_jobs"/>
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rv_customer_jobs"/>
+    <include layout="@layout/card_no_search_result"
+        android:id="@+id/grp_no_result"
+        android:visibility="gone"/>
 
-</LinearLayout>
+</RelativeLayout>

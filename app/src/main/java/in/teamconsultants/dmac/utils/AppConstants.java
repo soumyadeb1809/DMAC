@@ -1,5 +1,7 @@
 package in.teamconsultants.dmac.utils;
 
+import java.util.ArrayList;
+
 public class AppConstants {
 
     public static class REGISTRATION {
@@ -16,6 +18,8 @@ public class AppConstants {
         public static final String REG_TYPE = "reg_type";
         public static final String REG_INITIATOR = "reg_initiator";
         public static final String CUSTOMER_JOB = "customer_job";
+
+        public static final String CAMSCANNER_INTENT_URI = "com.intsig.camscanner";
     }
 
     public static final String LOG_TAG = "DMAC_LOG";
@@ -37,6 +41,12 @@ public class AppConstants {
     public static final class USER_ROLE {
         public static final String CUSTOMER = "3";
         public static final String FE = "2";
+    }
+
+    public static final class FILE_SEARCH {
+        public static String INVALID_START_DATE = "Start Date";
+        public static String INVALID_END_DATE = "End Date";
+        public static int INVALID_STATUS = -1;
     }
 
 }

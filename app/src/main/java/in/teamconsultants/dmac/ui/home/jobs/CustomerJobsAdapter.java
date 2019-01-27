@@ -3,6 +3,7 @@ package in.teamconsultants.dmac.ui.home.jobs;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.model.CustomerJob;
@@ -22,23 +24,28 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
 
     private ArrayList<CustomerJob> customerJobsList;
     private Context context;
+    private HashMap<String, String> statusMap;
 
     public class JobsViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView tvJobName, tvCreateDate, tvJobStatus;
-        public View view;
+        public TextView tvFileName, tvCreateDate, tvFileStatus, tvFileNotes;
+        public LinearLayout contentView;
+        public View extraSpace;
         public JobsViewHolder(@NonNull View itemView) {
             super(itemView);
-            view = itemView;
-            tvJobName = itemView.findViewById(R.id.txt_job_name);
+            contentView = itemView.findViewById(R.id.grp_content);
+            tvFileName = itemView.findViewById(R.id.txt_file_name);
             tvCreateDate = itemView.findViewById(R.id.txt_date);
-            tvJobStatus = itemView.findViewById(R.id.txt_job_status);
+            tvFileStatus = itemView.findViewById(R.id.txt_job_status);
+            extraSpace = itemView.findViewById(R.id.extra_space);
+            tvFileNotes = itemView.findViewById(R.id.txt_file_notes);
         }
     }
 
-    public CustomerJobsAdapter(Context context, ArrayList<CustomerJob> customerJobsList) {
+    public CustomerJobsAdapter(Context context, ArrayList<CustomerJob> customerJobsList, HashMap<String, String> statusMap) {
         this.customerJobsList = customerJobsList;
         this.context = context;
+        this.statusMap = statusMap;
     }
 
     @NonNull
@@ -53,9 +60,10 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
 
         if(null != customerJobsList.get(position)) {
             final CustomerJob customerJob = customerJobsList.get(position);
-            jobsViewHolder.tvJobName.setText(customerJob.getJobName());
-            jobsViewHolder.tvJobStatus.setText(customerJob.getJobStatus());
-            String createDate = customerJob.getCreateDate();
+            jobsViewHolder.tvFileName.setText(customerJob.getName());
+            jobsViewHolder.tvFileStatus.setText(statusMap.get(customerJob.getStatusId()));
+            jobsViewHolder.tvFileNotes.setText(customerJob.getNotes());
+            String createDate = customerJob.getCreatedAt();
             String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateTimeFormat);
             String finalDate = createDate;
@@ -71,7 +79,8 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
 
             jobsViewHolder.tvCreateDate.setText(finalDate);
 
-            jobsViewHolder.view.setOnClickListener(new View.OnClickListener() {
+
+            jobsViewHolder.contentView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, JobDetailActivity.class);
@@ -80,11 +89,12 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
                 }
             });
 
-            if (position == customerJobsList.size() - 1){
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.setMargins(40, 40, 40, 200);
-                jobsViewHolder.view.setLayoutParams(params);
+           if (position == customerJobsList.size() - 1){
+                jobsViewHolder.extraSpace.setVisibility(View.VISIBLE);
             }
+            else {
+               jobsViewHolder.extraSpace.setVisibility(View.GONE);
+           }
         }
 
     }

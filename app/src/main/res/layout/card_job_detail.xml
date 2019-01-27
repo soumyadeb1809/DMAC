@@ -56,7 +56,7 @@
             android:text="NAME_OF_THE_JOB"
             android:fontFamily="@font/montserrat_semi_bold"
             android:textSize="16sp"
-            android:id="@+id/txt_job_name"
+            android:id="@+id/txt_file_name"
             android:textColor="@color/colorBlack"
             />
 

@@ -7,6 +7,7 @@ import java.util.Map;
 import in.teamconsultants.dmac.model.AccountSearchResult;
 import in.teamconsultants.dmac.model.CreateJobResponse;
 import in.teamconsultants.dmac.model.FileCategoryResponse;
+import in.teamconsultants.dmac.model.FileSearchResponse;
 import in.teamconsultants.dmac.model.FileTypeResponse;
 import in.teamconsultants.dmac.model.LoginResponse;
 import in.teamconsultants.dmac.model.QuickRegisterResponse;
@@ -24,6 +25,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface ApiInterface {
 
@@ -73,6 +75,13 @@ public interface ApiInterface {
     Call<StatusResponse> doGetStatus(
             @HeaderMap Map<String, String> headers,
             @Query("Type") String type
+    );
+
+
+    @GET("get_jobList")
+    Call<FileSearchResponse> doSearchFiles(
+            @HeaderMap Map<String, String> headers,
+            @QueryMap Map<String, Object> queries
     );
 
 }

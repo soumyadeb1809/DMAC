@@ -51,12 +51,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static in.teamconsultants.dmac.utils.AppConstants.INTENT_TAG.CAMSCANNER_INTENT_URI;
+
 public class NewJobActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private LinearLayout grpJobs;
     private LinearLayout grpDefaultJob;
-    private LinearLayout btnAddJob;
+    private LinearLayout btnAddFile;
     private LinearLayout btnUploadJob;
 
     private ArrayList<LinearLayout> jobsGrpList;
@@ -85,7 +87,7 @@ public class NewJobActivity extends AppCompatActivity {
         // Set up toolbar:
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Add New Job");
+        getSupportActionBar().setTitle("Add New File");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Initialize API Interface:
@@ -109,7 +111,7 @@ public class NewJobActivity extends AppCompatActivity {
 
         grpJobs = findViewById(R.id.grp_jobs);
         grpDefaultJob = findViewById(R.id.grp_default_job);
-        btnAddJob = findViewById(R.id.grp_add_job);
+        btnAddFile = findViewById(R.id.grp_add_job);
         btnUploadJob = findViewById(R.id.grp_upload_job);
 
         jobsGrpList = new ArrayList<>();
@@ -122,6 +124,12 @@ public class NewJobActivity extends AppCompatActivity {
 
         setListenerForNewJobLayout(grpDefaultJob);
 
+        if(Utility.appInstalledOrNot(this, CAMSCANNER_INTENT_URI)){
+            Log.d(AppConstants.LOG_TAG, "CamScanner Installed");
+        }
+        else {
+            Log.d(AppConstants.LOG_TAG, "CamScanner NOT Installed");
+        }
 
 
         jobFileUriMap = new HashMap<>();
@@ -133,7 +141,7 @@ public class NewJobActivity extends AppCompatActivity {
 
     private void setOnClickListeners() {
 
-        btnAddJob.setOnClickListener(new View.OnClickListener() {
+        btnAddFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(jobsGrpList.size() < AppConstants.MAX_ALLOWED_JOBS) {
@@ -142,6 +150,13 @@ public class NewJobActivity extends AppCompatActivity {
                     grpJobs.addView(newJobLayout);
                     jobsGrpList.add(newJobLayout);
                     setListenerForNewJobLayout(newJobLayout);
+
+                    if(jobsGrpList.size() == AppConstants.MAX_ALLOWED_JOBS){
+                        btnAddFile.setVisibility(View.INVISIBLE);
+                    }
+                    else {
+                        btnAddFile.setVisibility(View.VISIBLE);
+                    }
                 }
                 else {
                     Toast.makeText(NewJobActivity.this, "Max allowed job upload limit is "+AppConstants.MAX_ALLOWED_JOBS, Toast.LENGTH_SHORT).show();
@@ -363,6 +378,15 @@ public class NewJobActivity extends AppCompatActivity {
 
             jobFileUriMap.put(requestCode, filePath);
 
+            /*Intent intent = new Intent("com.intsig.camscanner.ACTION_SCAN");
+            // Or content uri picked from gallery
+            Uri uri = Uri.fromFile(new File(filePath));
+            intent.putExtra(Intent.EXTRA_STREAM, uri);
+            intent.putExtra("scanned_image", "/sdcard/scanned.jpg");
+            intent.putExtra("pdf_path", "/sdcard/processed.jpg");
+            intent.putExtra("org_image", "/sdcard/org.jpg");
+            startActivityForResult(intent, 101);*/
+
             try {
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
@@ -403,7 +427,7 @@ public class NewJobActivity extends AppCompatActivity {
             String jobNotes = etNotes.getText().toString();
 
             if(TextUtils.isEmpty(jobNotes)){
-                Utility.showAlert(NewJobActivity.this, "Info", "Please enter notes for all Job Files");
+                Utility.showAlert(NewJobActivity.this, "Info", "Please enter notes for all Files");
                 return;
             }
 
@@ -454,7 +478,7 @@ public class NewJobActivity extends AppCompatActivity {
                 if(createJobResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(NewJobActivity.this);
                     alertBuilder.setTitle("Success");
-                    alertBuilder.setMessage("Job uploaded successfully");
+                    alertBuilder.setMessage("File(s) uploaded successfully");
                     alertBuilder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

@@ -53,7 +53,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add Job "
+                    android:text="Add File "
                     android:textColor="@color/colorBlack"
                     android:fontFamily="@font/montserrat_semi_bold"
                     android:layout_marginStart="8dp"
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="@color/colorWhite"
-                    android:text="Upload Job"
+                    android:text="Upload File"
                     android:fontFamily="@font/montserrat_bold"
                     android:textStyle="bold"
                     />

@@ -64,7 +64,7 @@ public class LoginFragment extends Fragment {
         cbRememberMe = v.findViewById(R.id.cb_remember_me);
 
 
-        etUsername.setText("fe@dmac.com");
+        etUsername.setText("customer@dmac.com");
         etPassword.setText("9848012345");
 
         setOnClickListeners();
@@ -83,17 +83,7 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                String username = etUsername.getText().toString();
-                if(username.contains("customer")) {
-                    startActivity(new Intent(getActivity(), CustomerHomeActivity.class));
-                    getActivity().finish();
-                }
-                else if (username.contains("fe")) {
-                    startActivity(new Intent(getActivity(), FeHomeActivity.class));
-                    getActivity().finish();
-                }
-*/              String email = etUsername.getText().toString();
+                String email = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
                 if(TextUtils.isEmpty(email)){

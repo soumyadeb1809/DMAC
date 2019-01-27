@@ -55,7 +55,7 @@ public class JobDetailActivity extends AppCompatActivity {
 
     private void initializeUi() {
 
-        tvJobName = findViewById(R.id.txt_job_name);
+        tvJobName = findViewById(R.id.txt_file_name);
         tvAccountName = findViewById(R.id.txt_account_name);
         tvEndCustomerName = findViewById(R.id.txt_customer_name);
         tvCreatedOn = findViewById(R.id.txt_created_on);
@@ -67,19 +67,18 @@ public class JobDetailActivity extends AppCompatActivity {
 
         jobUploadFilesList = new ArrayList<>();
 
-
     }
 
 
     private void populateUi() {
 
-        tvJobName.setText(customerJob.getJobName());
+      /*  tvFileName.setText(customerJob.getJobName());
         tvAccountName.setText(customerJob.getAccountName());
         tvEndCustomerName.setText(customerJob.getEndCustomer());
         tvCreatedOn.setText(getFormattedDate(customerJob.getCreateDate()));
         tvUpdatedOn.setText(getFormattedDate(customerJob.getUpdateDate()));
 
-        tvJobStatus.setText(customerJob.getJobStatus());
+        tvFileStatus.setText(customerJob.getJobStatus());
 
         if(null != customerJob.getJobUploadFiles() && customerJob.getJobUploadFiles().size() > 0){
             jobUploadFilesList = customerJob.getJobUploadFiles();
@@ -90,7 +89,7 @@ public class JobDetailActivity extends AppCompatActivity {
         }
         else {
             grpUploadedFiles.setVisibility(View.GONE);
-        }
+        }*/
 
     }
 

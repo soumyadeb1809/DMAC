@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.support.v7.widget.Toolbar;
 
 import in.teamconsultants.dmac.ui.home.dashboard.customer.CustomerDashboardFragment;
 import in.teamconsultants.dmac.ui.home.jobs.CustomerJobsFragment;
@@ -25,6 +26,8 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
     private CustomerDashboardFragment customerDashboardFragment;
     private CustomerJobsFragment customerJobsFragment;
     private ProfileFragment profileFragment;
+
+    private Toolbar toolbar;
 
     private LinearLayout grpNewJob;
 
@@ -71,8 +74,14 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+       /* toolbar = findViewById(R.id.toolbar); */
+
         navigation.setSelectedItemId(R.id.navigation_dashboard);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, customerDashboardFragment).commit();
+
+        setSupportActionBar(toolbar);
+
+        /*getSupportActionBar().setTitle("DMAC");*/
 
         initializeUi();
 

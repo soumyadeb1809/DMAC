@@ -8,6 +8,9 @@
     android:background="@color/colorLighterGray"
     tools:context=".ui.home.dashboard.customer.CustomerHomeActivity">
 
+<!--    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>-->
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,7 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NEW JOB"
+                android:text="NEW FILE"
                 android:textColor="@color/colorWhite"
                 android:fontFamily="@font/montserrat_bold"
                 android:layout_marginStart="8dp"

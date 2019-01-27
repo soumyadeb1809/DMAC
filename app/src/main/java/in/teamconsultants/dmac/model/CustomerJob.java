@@ -5,92 +5,121 @@ import java.util.ArrayList;
 
 public class CustomerJob implements Serializable {
 
-    private String jobName;
-    private String createDate;
-    private String updateDate;
-    private String jobStatus;
-    private String accountName;
-    private String endCustomer;
-    private String jobUrl;
-    private ArrayList<JobUploadFile> jobUploadFiles;
+    private String FId;
+    private String Name;
+    private String FilePath;
+    private String Notes;
+    private String StatusId;
+    private String FileTypeId;
+    private String AccountId;
+    private String EndCustomerUserId;
+    private String CreatedAt;
+    private String UpdatedAt;
+    private String FileName;
 
-    public CustomerJob(){
-        // Empty constructor
+    public CustomerJob() {
     }
 
-    public CustomerJob(String jobName, String createDate, String updateDate, String jobStatus,
-                       String accountName, String endCustomer, String jobUrl, ArrayList<JobUploadFile> jobUploadFiles) {
-        this.jobName = jobName;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
-        this.jobStatus = jobStatus;
-        this.accountName = accountName;
-        this.endCustomer = endCustomer;
-        this.jobUploadFiles = jobUploadFiles;
-        this.jobUrl = jobUrl;
+    public CustomerJob(String FId, String name, String filePath, String notes, String statusId, String fileTypeId,
+                       String accountId, String endCustomerUserId, String createdAt, String updatedAt, String fileName) {
+        this.FId = FId;
+        Name = name;
+        FilePath = filePath;
+        Notes = notes;
+        StatusId = statusId;
+        FileTypeId = fileTypeId;
+        AccountId = accountId;
+        EndCustomerUserId = endCustomerUserId;
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
+        FileName = fileName;
     }
 
-    public String getJobName() {
-        return jobName;
+    public String getFId() {
+        return FId;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public void setFId(String FId) {
+        this.FId = FId;
     }
 
-    public String getUpdateDate() {
-        return updateDate;
+    public String getName() {
+        return Name;
     }
 
-    public String getJobStatus() {
-        return jobStatus;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getFilePath() {
+        return FilePath;
     }
 
-    public String getEndCustomer() {
-        return endCustomer;
+    public void setFilePath(String filePath) {
+        FilePath = filePath;
     }
 
-    public String getJobUrl() {
-        return jobUrl;
+    public String getNotes() {
+        return Notes;
     }
 
-    public ArrayList<JobUploadFile> getJobUploadFiles() {
-        return jobUploadFiles;
+    public void setNotes(String notes) {
+        Notes = notes;
     }
 
-    public void setJobName(String jobName) {
-        this.jobName = jobName;
+    public String getStatusId() {
+        return StatusId;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
+    public void setStatusId(String statusId) {
+        StatusId = statusId;
     }
 
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
+    public String getFileTypeId() {
+        return FileTypeId;
     }
 
-    public void setJobStatus(String jobStatus) {
-        this.jobStatus = jobStatus;
+    public void setFileTypeId(String fileTypeId) {
+        FileTypeId = fileTypeId;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public String getAccountId() {
+        return AccountId;
     }
 
-    public void setEndCustomer(String endCustomer) {
-        this.endCustomer = endCustomer;
+    public void setAccountId(String accountId) {
+        AccountId = accountId;
     }
 
-    public void setJobUploadFiles(ArrayList<JobUploadFile> jobUploadFiles) {
-        this.jobUploadFiles = jobUploadFiles;
+    public String getEndCustomerUserId() {
+        return EndCustomerUserId;
     }
 
-    public void setJobUrl(String jobUrl) {
-        this.jobUrl = jobUrl;
+    public void setEndCustomerUserId(String endCustomerUserId) {
+        EndCustomerUserId = endCustomerUserId;
+    }
+
+    public String getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return UpdatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        UpdatedAt = updatedAt;
+    }
+
+    public String getFileName() {
+        return FileName;
+    }
+
+    public void setFileName(String fileName) {
+        FileName = fileName;
     }
 }
