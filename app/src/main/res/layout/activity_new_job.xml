@@ -8,8 +8,6 @@
     android:background="@color/colorLighterGray"
     tools:context=".ui.home.jobs.NewJobActivity">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,6 +17,39 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+
+            <include layout="@layout/toolbar_transparent_light"
+                android:id="@+id/toolbar"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorWhite"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New File Upload"
+                    android:textSize="24sp"
+                    android:id="@+id/title_login"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/bannerFilter"
+                    />
+
+                <View
+                    android:layout_width="48dp"
+                    android:layout_height="3dp"
+                    android:background="@color/colorYellow"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/title_dash_login"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

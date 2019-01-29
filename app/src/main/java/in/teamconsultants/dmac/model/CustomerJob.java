@@ -16,12 +16,13 @@ public class CustomerJob implements Serializable {
     private String CreatedAt;
     private String UpdatedAt;
     private String FileName;
+    private String FileCategory;
 
     public CustomerJob() {
     }
 
     public CustomerJob(String FId, String name, String filePath, String notes, String statusId, String fileTypeId,
-                       String accountId, String endCustomerUserId, String createdAt, String updatedAt, String fileName) {
+                       String accountId, String endCustomerUserId, String createdAt, String updatedAt, String fileName, String fileCategory) {
         this.FId = FId;
         Name = name;
         FilePath = filePath;
@@ -33,6 +34,7 @@ public class CustomerJob implements Serializable {
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
         FileName = fileName;
+        FileCategory = fileCategory;
     }
 
     public String getFId() {
@@ -121,5 +123,13 @@ public class CustomerJob implements Serializable {
 
     public void setFileName(String fileName) {
         FileName = fileName;
+    }
+
+    public String getFileCategory() {
+        return FileCategory;
+    }
+
+    public void setFileCategory(String fileCategory) {
+        FileCategory = fileCategory;
     }
 }

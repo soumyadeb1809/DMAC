@@ -18,6 +18,11 @@ public class AppConstants {
         public static final String REG_TYPE = "reg_type";
         public static final String REG_INITIATOR = "reg_initiator";
         public static final String CUSTOMER_JOB = "customer_job";
+        public static final String FILE_STATUS = "file_status";
+
+        public static final String IMG_SRC_TYPE = "image_source";
+        public static final String IMG_URI = "image_uri";
+        public static final String IMG_BITMAP = "image_bitmap";
 
         public static final String CAMSCANNER_INTENT_URI = "com.intsig.camscanner";
     }
@@ -47,6 +52,14 @@ public class AppConstants {
         public static String INVALID_START_DATE = "Start Date";
         public static String INVALID_END_DATE = "End Date";
         public static int INVALID_STATUS = -1;
+        public static String FAILED_STATUS_ID = "11";
+    }
+
+    public static final String FILE_BASE_URL = "https://staging.teamconsultants.in/upload/";
+
+    public static final class IMAGE_SOURCE {
+        public static String BITMAP = "bitmap";
+        public static String URI = "uri";
     }
 
 }

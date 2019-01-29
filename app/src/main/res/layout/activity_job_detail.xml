@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhite"
     tools:context=".ui.home.jobs.JobDetailActivity">
 
     <ScrollView
@@ -20,6 +21,10 @@
             android:descendantFocusability="blocksDescendants"
             >
 
+
+            <include layout="@layout/toolbar_transparent_light"
+                android:id="@+id/toolbar"/>
+
             <include layout="@layout/card_job_detail"/>
 
             <View
@@ -32,9 +37,15 @@
                 android:id="@+id/grp_uploaded_files"
                 />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:background="@color/colorLighterGray"
+                />
+
         </LinearLayout>
 
 
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>

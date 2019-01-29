@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
 
     public class JobsViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView tvFileName, tvCreateDate, tvFileStatus, tvFileNotes;
+        public TextView tvFileName, tvCreateDate, tvFileStatus, tvFileNotes, tvFileId;
         public LinearLayout contentView;
         public View extraSpace;
         public JobsViewHolder(@NonNull View itemView) {
@@ -39,6 +40,7 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
             tvFileStatus = itemView.findViewById(R.id.txt_job_status);
             extraSpace = itemView.findViewById(R.id.extra_space);
             tvFileNotes = itemView.findViewById(R.id.txt_file_notes);
+            tvFileId = itemView.findViewById(R.id.txt_file_id);
         }
     }
 
@@ -77,6 +79,8 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
                 e.printStackTrace();
             }
 
+            jobsViewHolder.tvFileId.setText("#"+customerJob.getFId());
+
             jobsViewHolder.tvCreateDate.setText(finalDate);
 
 
@@ -85,6 +89,7 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
                 public void onClick(View v) {
                     Intent intent = new Intent(context, JobDetailActivity.class);
                     intent.putExtra(AppConstants.INTENT_TAG.CUSTOMER_JOB, customerJob);
+                    intent.putExtra(AppConstants.INTENT_TAG.FILE_STATUS, statusMap.get(customerJob.getStatusId()));
                     context.startActivity(intent);
                 }
             });

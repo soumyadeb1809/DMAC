@@ -18,8 +18,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="UPLOADED FILES"
-            android:textSize="20sp"
+            android:text="File Preview"
+            android:textSize="24sp"
             android:id="@+id/title_uploaded_files"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/bannerFilter"
@@ -36,13 +36,11 @@
     </LinearLayout>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:id="@+id/rv_job_file_upload"
-        android:layout_marginBottom="20dp"
-        android:minHeight="480dp"
-        />
+   <ImageView
+       android:layout_width="match_parent"
+       android:layout_height="200dp"
+       android:layout_margin="20dp"
+       android:id="@+id/img_file_preview"
+       />
 
 </LinearLayout>

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +34,24 @@ public class Utility {
         }
 
         return false;
+    }
+
+
+    public static String getFormattedDate(String dateTime){
+        String result = dateTime;
+        String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateTimeFormat);
+        try{
+            Date date = simpleDateFormat.parse(dateTime);
+            String datePattern = "HH:mm, dd MMM yyyy";
+            SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
+            result = dateFormat.format(date);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
 

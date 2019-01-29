@@ -87,8 +87,15 @@ public class NewJobActivity extends AppCompatActivity {
         // Set up toolbar:
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Add New File");
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         // Initialize API Interface:
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);

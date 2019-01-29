@@ -3,37 +3,54 @@ package in.teamconsultants.dmac.ui.home.jobs;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import in.teamconsultants.dmac.ImageDisplayActivity;
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.model.CustomerJob;
 import in.teamconsultants.dmac.model.JobUploadFile;
 import in.teamconsultants.dmac.utils.AppConstants;
+import in.teamconsultants.dmac.utils.Utility;
 
 public class JobDetailActivity extends AppCompatActivity {
 
     private CustomerJob customerJob;
 
-    private TextView tvJobName, tvAccountName, tvEndCustomerName, tvCreatedOn, tvUpdatedOn, tvJobStatus;
-    private LinearLayout grpUploadedFiles;
-    private RecyclerView rvUploadedFiles;
+    private TextView tvFileName, tvFileNotes, tvFileCategory, tvFileType, tvCreatedOn, tvUpdatedOn, tvFileStatus;
+    private Button btnReUpload;
+    private ImageView imgFilePreview;
+    private Toolbar toolbar;
 
     private JobUploadFileAdapter jobUploadFileAdapter;
     private ArrayList<JobUploadFile> jobUploadFilesList;
+    private String fileStatusStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_detail);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Intent intent = getIntent();
 
@@ -42,6 +59,7 @@ public class JobDetailActivity extends AppCompatActivity {
         }
 
         customerJob = (CustomerJob) intent.getSerializableExtra(AppConstants.INTENT_TAG.CUSTOMER_JOB);
+        fileStatusStr = intent.getStringExtra(AppConstants.INTENT_TAG.FILE_STATUS);
 
         if(customerJob == null){
             Log.d("asdf", "customerJob = null");
@@ -50,64 +68,60 @@ public class JobDetailActivity extends AppCompatActivity {
 
         initializeUi();
 
-        populateUi();
+
     }
 
     private void initializeUi() {
 
-        tvJobName = findViewById(R.id.txt_file_name);
-        tvAccountName = findViewById(R.id.txt_account_name);
-        tvEndCustomerName = findViewById(R.id.txt_customer_name);
+        tvFileName = findViewById(R.id.txt_file_name);
+        tvFileNotes = findViewById(R.id.txt_file_notes);
+        tvFileCategory = findViewById(R.id.txt_file_category);
+        tvFileType = findViewById(R.id.txt_file_type);
         tvCreatedOn = findViewById(R.id.txt_created_on);
         tvUpdatedOn = findViewById(R.id.txt_updated_on);
-        tvJobStatus = findViewById(R.id.txt_job_status);
-        grpUploadedFiles = findViewById(R.id.grp_uploaded_files);
+        tvFileStatus = findViewById(R.id.txt_job_status);
+        btnReUpload = findViewById(R.id.btn_re_upload_file);
+        imgFilePreview = findViewById(R.id.img_file_preview);
 
-        rvUploadedFiles = findViewById(R.id.rv_job_file_upload);
 
-        jobUploadFilesList = new ArrayList<>();
+        populateUi();
 
     }
 
 
     private void populateUi() {
 
-      /*  tvFileName.setText(customerJob.getJobName());
-        tvAccountName.setText(customerJob.getAccountName());
-        tvEndCustomerName.setText(customerJob.getEndCustomer());
-        tvCreatedOn.setText(getFormattedDate(customerJob.getCreateDate()));
-        tvUpdatedOn.setText(getFormattedDate(customerJob.getUpdateDate()));
-
-        tvFileStatus.setText(customerJob.getJobStatus());
-
-        if(null != customerJob.getJobUploadFiles() && customerJob.getJobUploadFiles().size() > 0){
-            jobUploadFilesList = customerJob.getJobUploadFiles();
-            jobUploadFileAdapter = new JobUploadFileAdapter(this, jobUploadFilesList);
-            rvUploadedFiles.setLayoutManager(new LinearLayoutManager(this));
-            rvUploadedFiles.setAdapter(jobUploadFileAdapter);
-            rvUploadedFiles.setHasFixedSize(false);
+        if(customerJob.getStatusId().equals(AppConstants.FILE_SEARCH.FAILED_STATUS_ID)){
+            btnReUpload.setVisibility(View.VISIBLE);
         }
         else {
-            grpUploadedFiles.setVisibility(View.GONE);
-        }*/
+            btnReUpload.setVisibility(View.GONE);
+        }
+
+        tvFileName.setText(customerJob.getName());
+        tvFileNotes.setText(customerJob.getNotes());
+        tvFileCategory.setText(customerJob.getFileCategory());
+        tvFileType.setText(customerJob.getFileName());
+
+        tvFileStatus.setText(fileStatusStr);
+
+        tvCreatedOn.setText(Utility.getFormattedDate(customerJob.getCreatedAt()));
+        tvUpdatedOn.setText(Utility.getFormattedDate(customerJob.getUpdatedAt()));
+
+        Glide.with(this).load(AppConstants.FILE_BASE_URL + customerJob.getFilePath())
+                .into(imgFilePreview).onLoadStarted(getResources().getDrawable(R.drawable.img_placeholder));
+
+        imgFilePreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JobDetailActivity.this, ImageDisplayActivity.class);
+                intent.putExtra(AppConstants.INTENT_TAG.IMG_SRC_TYPE, AppConstants.IMAGE_SOURCE.URI);
+                intent.putExtra(AppConstants.INTENT_TAG.IMG_URI, AppConstants.FILE_BASE_URL + customerJob.getFilePath());
+                startActivity(intent);
+            }
+        });
 
     }
 
-    public String getFormattedDate(String dateTime){
-        String result = dateTime;
-        String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateTimeFormat);
-        try{
-            Date date = simpleDateFormat.parse(dateTime);
-            String datePattern = "HH:mm, dd MMM yyyy";
-            SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
-            result = dateFormat.format(date);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return result;
-    }
 
 }
