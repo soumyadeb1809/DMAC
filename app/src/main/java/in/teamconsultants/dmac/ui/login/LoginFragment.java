@@ -27,6 +27,7 @@ import in.teamconsultants.dmac.network.ApiInterface;
 import in.teamconsultants.dmac.ui.home.dashboard.customer.CustomerHomeActivity;
 import in.teamconsultants.dmac.ui.home.dashboard.fe.FeHomeActivity;
 import in.teamconsultants.dmac.ui.registration.RegisterActivity;
+import in.teamconsultants.dmac.ui.registration.RegularRegistrationActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
 import retrofit2.Call;
@@ -208,9 +209,9 @@ public class LoginFragment extends Fragment {
         grpRegularReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), RegisterActivity.class);
-                intent.putExtra(AppConstants.INTENT_TAG.REG_TYPE, AppConstants.REGISTRATION.REGULAR);
-                intent.putExtra(AppConstants.INTENT_TAG.REG_INITIATOR, AppConstants.REGISTRATION.INITIATOR.CUSTOMER);
+                Intent intent = new Intent(getActivity(), RegularRegistrationActivity.class);
+                //intent.putExtra(AppConstants.INTENT_TAG.REG_TYPE, AppConstants.REGISTRATION.REGULAR);
+                //intent.putExtra(AppConstants.INTENT_TAG.REG_INITIATOR, AppConstants.REGISTRATION.INITIATOR.CUSTOMER);
                 startActivity(intent);
                 dialog.dismiss();
             }

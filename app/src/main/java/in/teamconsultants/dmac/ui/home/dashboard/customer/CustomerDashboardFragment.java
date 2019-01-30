@@ -1,79 +1,160 @@
 package in.teamconsultants.dmac.ui.home.dashboard.customer;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import in.teamconsultants.dmac.R;
+import in.teamconsultants.dmac.model.FileCountResponse;
+import in.teamconsultants.dmac.network.ApiClient;
+import in.teamconsultants.dmac.network.ApiInterface;
+import in.teamconsultants.dmac.ui.registration.RegularRegistrationActivity;
+import in.teamconsultants.dmac.utils.AppConstants;
+import in.teamconsultants.dmac.utils.Utility;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CustomerDashboardFragment.OnCustomerDashboardFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CustomerDashboardFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CustomerDashboardFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnCustomerDashboardFragmentInteractionListener mListener;
+
+    private TextView tvTotalFiles, tvVerifiedFiles;
+
+    private ApiInterface apiInterface;
+    private ProgressDialog progress;
+    private SharedPreferences spUserData;
+    private String token;
+    private Map<String, String> headerMap;
+    private Gson gson;
 
     public CustomerDashboardFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CustomerDashboardFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CustomerDashboardFragment newInstance(String param1, String param2) {
-        CustomerDashboardFragment fragment = new CustomerDashboardFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_dashboard, container, false);
+        View v = inflater.inflate(R.layout.fragment_customer_dashboard, container, false);
+
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        progress = new ProgressDialog(getContext());
+        spUserData = getContext().getSharedPreferences(AppConstants.SP.SP_USER_DATA, Context.MODE_PRIVATE);
+        token = spUserData.getString(AppConstants.SP.TAG_TOKEN, "");
+        headerMap = new HashMap<>();
+        headerMap.put("TOKEN", token);
+
+        gson = new Gson();
+
+        initializeUi(v);
+
+        loadData();
+
+        return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onCustomerDashboardFragmentInteraction(uri);
-        }
+    private void initializeUi(View v) {
+
+        tvTotalFiles = v.findViewById(R.id.txt_total_files);
+        tvVerifiedFiles = v.findViewById(R.id.txt_verified_files);
+
     }
+
+
+    private void loadData() {
+
+        String totalFiles = spUserData.getString(AppConstants.SP.TAG_TOTAL_FILES, null);
+        String verifiedFiles = spUserData.getString(AppConstants.SP.TAG_VERIFIED_FILES, null);
+
+        final SharedPreferences.Editor spEditor = spUserData.edit();
+
+        if(null == totalFiles || null == verifiedFiles){
+            progress.setMessage("Loading data...");
+            progress.setCancelable(false);
+            progress.show();
+
+            tvVerifiedFiles.setText("NA");
+            tvTotalFiles.setText("NA");
+        }
+        else {
+
+            tvTotalFiles.setText(totalFiles);
+            tvVerifiedFiles.setText(verifiedFiles);
+
+        }
+
+        Map<String, String> queries = new HashMap<>();
+
+        Call<FileCountResponse> fileCountResponseCall = apiInterface.doGetFileCount(headerMap, queries);
+        fileCountResponseCall.enqueue(new Callback<FileCountResponse>() {
+            @Override
+            public void onResponse(Call<FileCountResponse> call, Response<FileCountResponse> response) {
+                Log.d(AppConstants.LOG_TAG, "fileCountResponseCall: "+gson.toJson(response.body()));
+                FileCountResponse fileCountResponse = response.body();
+
+                tvTotalFiles.setText(String.valueOf(fileCountResponse.getFileCount()));
+                spEditor.putString(AppConstants.SP.TAG_TOTAL_FILES, String.valueOf(fileCountResponse.getFileCount()));
+                spEditor.commit();
+
+            }
+
+            @Override
+            public void onFailure(Call<FileCountResponse> call, Throwable t) {
+                progress.dismiss();
+                Utility.showAlert(getActivity(), "Error", "An unknown error occurred, please try again");
+                Log.d(AppConstants.LOG_TAG, "FAILED: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+        queries.clear();
+
+        queries.put("StatusId", "9");
+        Call<FileCountResponse> verifiedFilesResponseCall = apiInterface.doGetFileCount(headerMap, queries);
+        verifiedFilesResponseCall.enqueue(new Callback<FileCountResponse>() {
+            @Override
+            public void onResponse(Call<FileCountResponse> call, Response<FileCountResponse> response) {
+                Log.d(AppConstants.LOG_TAG, "fileCountResponseCall: "+gson.toJson(response.body()));
+                FileCountResponse fileCountResponse = response.body();
+
+                tvVerifiedFiles.setText(String.valueOf(fileCountResponse.getFileCount()));
+                spEditor.putString(AppConstants.SP.TAG_VERIFIED_FILES, String.valueOf(fileCountResponse.getFileCount()));
+                spEditor.commit();
+                progress.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<FileCountResponse> call, Throwable t) {
+                progress.dismiss();
+                Utility.showAlert(getActivity(), "Error", "An unknown error occurred, please try again");
+                Log.d(AppConstants.LOG_TAG, "FAILED: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -92,18 +173,7 @@ public class CustomerDashboardFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnCustomerDashboardFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onCustomerDashboardFragmentInteraction(Uri uri);
     }
 }

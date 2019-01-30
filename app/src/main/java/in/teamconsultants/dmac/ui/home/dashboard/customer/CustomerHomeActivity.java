@@ -107,17 +107,9 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
     }
 
 
-    /*
-     * Fragment Interaction Listeners
-     */
-    @Override
-    public void onCustomerDashboardFragmentInteraction(Uri uri) {
-
-    }
-
-
     @Override
     public void onProfileFragmentInteraction(Uri uri) {
 
     }
+
 }

@@ -12,11 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-import in.teamconsultants.dmac.ImageDisplayActivity;
+import in.teamconsultants.dmac.image.ImageDisplayActivity;
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.model.CustomerJob;
 import in.teamconsultants.dmac.model.JobUploadFile;

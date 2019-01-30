@@ -4,13 +4,17 @@ package in.teamconsultants.dmac.network;
 import java.util.List;
 import java.util.Map;
 
+import in.teamconsultants.dmac.model.AccountCountResponse;
 import in.teamconsultants.dmac.model.AccountSearchResult;
+import in.teamconsultants.dmac.model.CityResponse;
 import in.teamconsultants.dmac.model.CreateJobResponse;
 import in.teamconsultants.dmac.model.FileCategoryResponse;
+import in.teamconsultants.dmac.model.FileCountResponse;
 import in.teamconsultants.dmac.model.FileSearchResponse;
 import in.teamconsultants.dmac.model.FileTypeResponse;
 import in.teamconsultants.dmac.model.LoginResponse;
 import in.teamconsultants.dmac.model.QuickRegisterResponse;
+import in.teamconsultants.dmac.model.StateResponse;
 import in.teamconsultants.dmac.model.StatusResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -28,8 +32,6 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 public interface ApiInterface {
-
-
 
    @POST("user_login")
    @FormUrlEncoded
@@ -82,6 +84,28 @@ public interface ApiInterface {
     Call<FileSearchResponse> doSearchFiles(
             @HeaderMap Map<String, String> headers,
             @QueryMap Map<String, Object> queries
+    );
+
+
+    @GET("get_state_list")
+    Call<StateResponse> doGetStates();
+
+
+    @GET("get_city_list")
+    Call<CityResponse> doGetCities();
+
+
+    @GET("get_account_count")
+    Call<AccountCountResponse> doGetAccountCount(
+            @HeaderMap Map<String, String> headers,
+            @QueryMap Map<String, String> queries
+    );
+
+
+    @GET("get_file_count")
+    Call<FileCountResponse> doGetFileCount(
+            @HeaderMap Map<String, String> headers,
+            @QueryMap Map<String, String> queries
     );
 
 }

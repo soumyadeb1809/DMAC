@@ -1,4 +1,4 @@
-package in.teamconsultants.dmac;
+package in.teamconsultants.dmac.image;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.utils.AppConstants;
 
 public class ImageDisplayActivity extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Image Preview");
+        getSupportActionBar().setTitle("");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

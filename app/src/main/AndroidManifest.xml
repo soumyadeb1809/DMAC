@@ -13,7 +13,7 @@
         android:roundIcon="@drawable/dmac_logo_small"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity" />
+        <activity android:name=".splash.SplashActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait">
@@ -43,8 +43,9 @@
         <activity
             android:name=".ui.home.jobs.NewJobActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ImageDisplayActivity" />
-        <activity android:name=".ui.home.jobs.FileDetailsActivity"></activity>
+        <activity android:name=".image.ImageDisplayActivity" />
+        <activity android:name=".ui.home.jobs.FileDetailsActivity" />
+        <activity android:name=".ui.registration.RegularRegistrationActivity"></activity>
     </application>
 
 </manifest>

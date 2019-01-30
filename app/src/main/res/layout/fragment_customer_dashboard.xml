@@ -73,7 +73,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:layout_marginTop="10dp"
                 android:textSize="36sp"
-                android:id="@+id/txt_total_jobs"
+                android:id="@+id/txt_total_files"
                 android:textColor="@color/colorBlack"
                 />
 
@@ -117,7 +117,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:layout_marginTop="10dp"
                 android:textSize="36sp"
-                android:id="@+id/txt_verified_jobs"
+                android:id="@+id/txt_verified_files"
                 android:textColor="@color/colorBlack"
                 />
 

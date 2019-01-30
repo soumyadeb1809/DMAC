@@ -31,6 +31,8 @@ public class AppConstants {
 
     public static final int MAX_ALLOWED_JOBS = 20;
 
+    public static final int MAX_ALLOWED_DIRECTORS = 5;
+
     public static final class RESPONSE {
         public static final String SUCCESS = "Success";
         public static final String FAILED = "Failed";
@@ -41,6 +43,12 @@ public class AppConstants {
         public static final String TAG_USER_DETAILS = "user_details";
         public static final String TAG_TOKEN = "token";
 
+        public static final String SP_DASHBOARD_DATA = "dash_data";
+        public static final String TAG_TOTAL_FILES = "total_files";
+        public static final String TAG_VERIFIED_FILES = "verified_files";
+        public static final String TAG_TOTAL_ACCOUNTS = "total_accounts";
+        public static final String TAG_OPEN_ACCOUNTS = "open_accounts";
+
     }
 
     public static final class USER_ROLE {
@@ -49,17 +57,43 @@ public class AppConstants {
     }
 
     public static final class FILE_SEARCH {
-        public static String INVALID_START_DATE = "Start Date";
-        public static String INVALID_END_DATE = "End Date";
-        public static int INVALID_STATUS = -1;
-        public static String FAILED_STATUS_ID = "11";
+        public static final String INVALID_START_DATE = "Start Date";
+        public static final String INVALID_END_DATE = "End Date";
+        public static final int INVALID_STATUS = -1;
+        public static final String FAILED_STATUS_ID = "11";
     }
 
     public static final String FILE_BASE_URL = "https://staging.teamconsultants.in/upload/";
 
     public static final class IMAGE_SOURCE {
-        public static String BITMAP = "bitmap";
-        public static String URI = "uri";
+        public static final String BITMAP = "bitmap";
+        public static final String URI = "uri";
+    }
+
+    public static final class ENTITY_TYPE {
+        public static final String PROPRIETARY = "Proprietary";
+        public static final String PARTNERSHIP = "Partnership";
+        public static final String LLP = "LLP";
+        public static final String COMPANY = "Company";
+        public static final String SOCIETY = "Society";
+        public static final String TRUST = "Trust";
+
+    }
+
+    public static final class BUSINESS_DOC_TYPE {
+        public static final int OTHERS = 1;
+        public static final int MOA = 2;
+        public static final int AOA = 3;
+        public static final int PARTNERSHIP_DEED = 4;
+        public static final int REG_CERT = 5;
+        public static final int INCORP_CERT = 6;
+        public static final int PAN = 7;
+        public static final int AUDIT_BAL_SHEET = 8;
+    }
+
+    public static final class DIRECTOR_DOC_TYPE {
+        public static final int AADHAR = 1;
+        public static final int PAN = 2;
     }
 
 }

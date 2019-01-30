@@ -15,7 +15,7 @@
         android:textSize="20sp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:id="@+id/title_business_info"
+        android:id="@+id/title_director_details"
         />
 
     <LinearLayout
@@ -25,8 +25,8 @@
         android:orientation="vertical"
         >
 
-        <include layout="@layout/card_director_info"
-            android:id="@+id/director_1_info"/>
+       <!-- <include layout="@layout/card_director_info"
+            android:id="@+id/director_1_info"/>-->
 
     </LinearLayout>
 
@@ -36,7 +36,8 @@
         android:padding="12dp"
         android:gravity="center"
         android:id="@+id/grp_add_director"
-        android:background="@drawable/back_et_form"
+        android:clickable="true"
+        android:background="@drawable/back_light_grey_rounded"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         >
@@ -51,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Director"
+            android:id="@+id/label_add_director_btn"
             android:textColor="@color/colorBlack"
             android:fontFamily="@font/montserrat_semi_bold"
             android:layout_marginStart="8dp"
