@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import in.teamconsultants.dmac.model.AccountCountResponse;
+import in.teamconsultants.dmac.model.AccountDetailResponse;
 import in.teamconsultants.dmac.model.AccountSearchResult;
 import in.teamconsultants.dmac.model.CityResponse;
 import in.teamconsultants.dmac.model.CreateAccountResponse;
@@ -15,6 +16,7 @@ import in.teamconsultants.dmac.model.FileSearchResponse;
 import in.teamconsultants.dmac.model.FileTypeResponse;
 import in.teamconsultants.dmac.model.LoginResponse;
 import in.teamconsultants.dmac.model.QuickRegisterResponse;
+import in.teamconsultants.dmac.model.ReUploadFileResponse;
 import in.teamconsultants.dmac.model.StateResponse;
 import in.teamconsultants.dmac.model.StatusResponse;
 import okhttp3.MultipartBody;
@@ -116,5 +118,21 @@ public interface ApiInterface {
             @PartMap Map<String, RequestBody> requestBodyMap,
             @Part List<MultipartBody.Part> multipartList
     );
+
+    @POST("job_file_re_upload")
+    @Multipart
+    Call<ReUploadFileResponse> doReUploadFile(
+            @HeaderMap Map<String, String> headers,
+            @PartMap Map<String, RequestBody> requestBodyMap,
+            @Part MultipartBody.Part multipartFile
+    );
+
+
+    @GET("get_account_data")
+    Call<AccountDetailResponse> doGetAccountDetails(
+            @HeaderMap Map<String, String> headers,
+            @QueryMap Map<String, String> queries
+    );
+
 
 }

@@ -1009,6 +1009,7 @@ public class RegularRegistrationActivity extends AppCompatActivity {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(RegularRegistrationActivity.this);
                 if(createAccountResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
                     alertBuilder.setTitle("Success");
+                    alertBuilder.setCancelable(false);
                     alertBuilder.setMessage("Account created successfully");
                     alertBuilder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
                         @Override

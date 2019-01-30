@@ -45,7 +45,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".image.ImageDisplayActivity" />
         <activity android:name=".ui.home.jobs.FileDetailsActivity" />
-        <activity android:name=".ui.registration.RegularRegistrationActivity"></activity>
+        <activity android:name=".ui.registration.RegularRegistrationActivity" />
+        <activity android:name=".ui.home.jobs.FileReUploadActivity"></activity>
     </application>
 
 </manifest>

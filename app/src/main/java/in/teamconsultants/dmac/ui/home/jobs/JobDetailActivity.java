@@ -119,6 +119,15 @@ public class JobDetailActivity extends AppCompatActivity {
             }
         });
 
+        btnReUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JobDetailActivity.this, FileReUploadActivity.class);
+                intent.putExtra(AppConstants.INTENT_TAG.CUSTOMER_JOB, customerJob);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

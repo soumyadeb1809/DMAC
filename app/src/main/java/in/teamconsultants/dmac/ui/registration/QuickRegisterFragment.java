@@ -201,6 +201,7 @@ public class QuickRegisterFragment extends Fragment {
                 if(quickRegisterResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
                     alertBuilder.setTitle("Success");
                     alertBuilder.setMessage("Account created successfully");
+                    alertBuilder.setCancelable(false);
                     alertBuilder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
