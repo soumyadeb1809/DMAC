@@ -88,7 +88,8 @@ public class AppConstants {
         public static final int REG_CERT = 5;
         public static final int INCORP_CERT = 6;
         public static final int PAN = 7;
-        public static final int AUDIT_BAL_SHEET = 8;
+        public static final int GST_REG = 8;
+        public static final int AUDIT_BAL_SHEET = 9;
     }
 
     public static final class DIRECTOR_DOC_TYPE {

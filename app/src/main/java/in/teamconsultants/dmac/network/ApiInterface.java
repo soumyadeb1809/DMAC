@@ -7,6 +7,7 @@ import java.util.Map;
 import in.teamconsultants.dmac.model.AccountCountResponse;
 import in.teamconsultants.dmac.model.AccountSearchResult;
 import in.teamconsultants.dmac.model.CityResponse;
+import in.teamconsultants.dmac.model.CreateAccountResponse;
 import in.teamconsultants.dmac.model.CreateJobResponse;
 import in.teamconsultants.dmac.model.FileCategoryResponse;
 import in.teamconsultants.dmac.model.FileCountResponse;
@@ -106,6 +107,14 @@ public interface ApiInterface {
     Call<FileCountResponse> doGetFileCount(
             @HeaderMap Map<String, String> headers,
             @QueryMap Map<String, String> queries
+    );
+
+    @POST("create_account")
+    @Multipart
+    Call<CreateAccountResponse> doCreateAccount(
+            @HeaderMap Map<String, String> headers,
+            @PartMap Map<String, RequestBody> requestBodyMap,
+            @Part List<MultipartBody.Part> multipartList
     );
 
 }
