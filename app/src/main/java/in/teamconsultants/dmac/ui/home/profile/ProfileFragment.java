@@ -30,6 +30,8 @@ public class ProfileFragment extends Fragment {
 
     private LinearLayout grpLogout;
 
+    private SharedPreferences sp;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -75,7 +77,7 @@ public class ProfileFragment extends Fragment {
 
         //User user = new User();
 
-        SharedPreferences sp = getContext().getSharedPreferences(AppConstants.SP.SP_USER_DATA, Context.MODE_PRIVATE);
+        sp = getContext().getSharedPreferences(AppConstants.SP.SP_USER_DATA, Context.MODE_PRIVATE);
 
         Gson gson = new Gson();
 
@@ -122,6 +124,11 @@ public class ProfileFragment extends Fragment {
         grpLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences.Editor editor = sp.edit();
+                editor.clear();
+                editor.commit();
+
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().finish();
             }

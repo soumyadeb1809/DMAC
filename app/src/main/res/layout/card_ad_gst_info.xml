@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User Information"
-        android:fontFamily="@font/montserrat_bold"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/title_user_info"
-        />
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,11 +13,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full Name"
+            android:text="GSTR Number"
             android:textSize="12sp"
             android:fontFamily="@font/montserrat_regular"
             android:layout_marginBottom="10dp"
-            android:id="@+id/label_full_name"
+            android:id="@+id/label_gstr_number"
             />
 
         <EditText
@@ -41,14 +26,13 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:inputType="textPersonName"
+            android:focusable="false"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
-            android:id="@+id/et_full_name"
+            android:id="@+id/et_gstr_number"
             />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,27 +45,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email Address"
+            android:text="Upload GST Registration Copy"
             android:textSize="12sp"
             android:fontFamily="@font/montserrat_regular"
             android:layout_marginBottom="10dp"
-            android:id="@+id/label_email"
+            android:id="@+id/label_others_copy"
             />
-
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textSize="14sp"
-            android:inputType="textEmailAddress"
-            android:fontFamily="@font/montserrat_regular"
-            android:background="@drawable/back_et_form"
-            android:id="@+id/et_email"
-            />
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:clickable="true"
+                android:src="@drawable/back_et_form"
+                android:id="@+id/img_gst_copy"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,11 +79,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Phone Number"
+            android:text="GSTR Portal User ID"
             android:textSize="12sp"
             android:fontFamily="@font/montserrat_regular"
             android:layout_marginBottom="10dp"
-            android:id="@+id/label_phone"
+            android:id="@+id/label_gstr_user_id"
             />
 
         <EditText
@@ -106,15 +91,14 @@
             android:layout_height="45dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:focusable="false"
             android:textSize="14sp"
-            android:inputType="phone"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
-            android:id="@+id/et_phone"
+            android:id="@+id/et_gstr_user_id"
             />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -122,17 +106,16 @@
         android:orientation="vertical"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="GSTR Portal Password"
             android:textSize="12sp"
             android:fontFamily="@font/montserrat_regular"
             android:layout_marginBottom="10dp"
-            android:id="@+id/label_password"
+            android:id="@+id/label_gstr_password"
             />
 
         <EditText
@@ -141,19 +124,12 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:inputType="textPassword"
+            android:focusable="false"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
-            android:id="@+id/et_password"
+            android:id="@+id/et_gstr_password"
             />
 
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:background="@color/colorLighterGray"
-        android:layout_marginTop="16dp"
-        />
 
 </LinearLayout>

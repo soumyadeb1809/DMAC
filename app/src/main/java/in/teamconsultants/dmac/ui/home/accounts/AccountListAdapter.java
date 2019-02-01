@@ -37,7 +37,7 @@ public class AccountListAdapter  extends RecyclerView.Adapter<AccountListAdapter
 
         public TextView tvLegalName, tvShortName, tvCustomerCode, tvCity, tvPanNumber;
         public TextView tvAccountStatus, tvCreateDate;
-        public View view;
+        public View view, extraSpace;
 
         public AccountsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -49,6 +49,7 @@ public class AccountListAdapter  extends RecyclerView.Adapter<AccountListAdapter
             tvPanNumber = itemView.findViewById(R.id.txt_pan_number);
             tvCreateDate = itemView.findViewById(R.id.txt_created_on);
             tvAccountStatus = itemView.findViewById(R.id.txt_account_status);
+            extraSpace = itemView.findViewById(R.id.extra_space);
 
         }
     }
@@ -88,6 +89,19 @@ public class AccountListAdapter  extends RecyclerView.Adapter<AccountListAdapter
             accountsViewHolder.tvPanNumber.setText(account.getPANNo());
         }
         accountsViewHolder.tvAccountStatus.setText(statusMap.get(account.getStatusId()).trim());
+        String statusId = account.getStatusId();
+        if(statusId.equals("16")){
+            accountsViewHolder.tvAccountStatus.setBackgroundResource(R.drawable.back_light_blue_rounded);
+        }
+        else if(statusId.equals("18")){
+            accountsViewHolder.tvAccountStatus.setBackgroundResource(R.drawable.back_orange_rounded);
+        }
+        else if(statusId.equals("24")){
+            accountsViewHolder.tvAccountStatus.setBackgroundResource(R.drawable.back_green_rounded);
+        }
+        else {
+            accountsViewHolder.tvAccountStatus.setBackgroundResource(R.drawable.back_blue_rounded);
+        }
 
         String createDate = account.getCreatedAt();
         String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
@@ -113,10 +127,12 @@ public class AccountListAdapter  extends RecyclerView.Adapter<AccountListAdapter
         });
 
         if (position == accountsList.size() - 1){
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(40, 40, 40, 200);
-            accountsViewHolder.view.setLayoutParams(params);
+            accountsViewHolder.extraSpace.setVisibility(View.VISIBLE);
         }
+        else {
+            accountsViewHolder.extraSpace.setVisibility(View.GONE);
+        }
+
 
     }
 

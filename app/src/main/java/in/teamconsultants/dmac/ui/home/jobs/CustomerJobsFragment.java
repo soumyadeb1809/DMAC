@@ -74,6 +74,8 @@ public class CustomerJobsFragment extends Fragment {
     private String token;
     private HashMap<String, String> statusMap;
 
+    boolean isSearched = false;
+
     public CustomerJobsFragment() {
         // Required empty public constructor
     }
@@ -117,7 +119,31 @@ public class CustomerJobsFragment extends Fragment {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchDialog.show();
+                if(!isSearched) {
+                    searchDialog.show();
+                }
+                else {
+                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
+                    alertBuilder.setMessage("Do you want to clear the search or edit existing search?");
+                    alertBuilder.setPositiveButton("CLEAR", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            progress.setMessage("Loading files...");
+                            progress.setCancelable(false);
+                            progress.show();
+                            HashMap<String, Object> searchQuery = new HashMap<>();
+                            searchFiles(searchQuery);
+                            isSearched = false;
+                        }
+                    });
+                    alertBuilder.setNegativeButton("EDIT", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            searchDialog.show();
+                        }
+                    });
+                    alertBuilder.show();
+                }
             }
         });
 
@@ -136,6 +162,7 @@ public class CustomerJobsFragment extends Fragment {
                 progress.show();
                 HashMap<String, Object> searchQuery = new HashMap<>();
                 searchFiles(searchQuery);
+                isSearched = false;
             }
         });
 
@@ -188,6 +215,7 @@ public class CustomerJobsFragment extends Fragment {
         builder.setPositiveButton("SEARCH", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 String fileCreatedFrom = fileCreatedStartDt.getText().toString();
                 String fileCreatedTo = fileCreatedEndDt.getText().toString();
                 String fileUpdatedFrom = lastUpdatedStartDt.getText().toString();
@@ -197,30 +225,30 @@ public class CustomerJobsFragment extends Fragment {
                 String statusSelection = fileStatusSpinner.getSelectedItem().toString();
                 int statusId = -1;
 
-                for(String key: statusMap.keySet()){
-                    if(statusSelection.equals(statusMap.get(key))){
+                for (String key : statusMap.keySet()) {
+                    if (statusSelection.equals(statusMap.get(key))) {
                         statusId = Integer.parseInt(key);
                     }
                 }
 
                 HashMap<String, Object> searchQuery = new HashMap<>();
 
-                if (!fileCreatedFrom.equals(AppConstants.FILE_SEARCH.INVALID_START_DATE)){
+                if (!fileCreatedFrom.equals(AppConstants.FILE_SEARCH.INVALID_START_DATE)) {
                     searchQuery.put("JobCreatedFrom", fileCreatedFrom);
                 }
-                if (!fileCreatedTo.equals(AppConstants.FILE_SEARCH.INVALID_END_DATE)){
-                    searchQuery.put("JobCreatedTo", fileCreatedFrom);
+                if (!fileCreatedTo.equals(AppConstants.FILE_SEARCH.INVALID_END_DATE)) {
+                    searchQuery.put("JobCreatedTo", fileCreatedTo);
                 }
-                if (!fileUpdatedFrom.equals(AppConstants.FILE_SEARCH.INVALID_START_DATE)){
-                    searchQuery.put("JobUpdatedFrom", fileCreatedFrom);
+                if (!fileUpdatedFrom.equals(AppConstants.FILE_SEARCH.INVALID_START_DATE)) {
+                    searchQuery.put("JobUpdatedFrom", fileUpdatedFrom);
                 }
-                if (!fileUpdatedTo.equals(AppConstants.FILE_SEARCH.INVALID_END_DATE)){
-                    searchQuery.put("JobUpdatedTo", fileCreatedFrom);
+                if (!fileUpdatedTo.equals(AppConstants.FILE_SEARCH.INVALID_END_DATE)) {
+                    searchQuery.put("JobUpdatedTo", fileUpdatedTo);
                 }
-                if(!TextUtils.isEmpty(fileName)){
+                if (!TextUtils.isEmpty(fileName)) {
                     searchQuery.put("FileName", fileName);
                 }
-                if(statusId != -1){
+                if (statusId != -1) {
                     searchQuery.put("StatusId", statusId);
                 }
 
@@ -231,6 +259,9 @@ public class CustomerJobsFragment extends Fragment {
                 progress.show();
 
                 searchFiles(searchQuery);
+                isSearched = true;
+
+
 
             }
         });

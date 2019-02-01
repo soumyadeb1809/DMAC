@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -41,6 +42,8 @@ public class CustomerDashboardFragment extends Fragment {
     private String token;
     private Map<String, String> headerMap;
     private Gson gson;
+
+    private ImageView btnHelp;
 
     public CustomerDashboardFragment() {
         // Required empty public constructor
@@ -78,6 +81,15 @@ public class CustomerDashboardFragment extends Fragment {
 
         tvTotalFiles = v.findViewById(R.id.txt_total_files);
         tvVerifiedFiles = v.findViewById(R.id.txt_verified_files);
+
+        btnHelp = v.findViewById(R.id.btn_help);
+
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utility.showAlert(getContext(), "Support", "You can contact us on\nPhone: 9876543210\nEmail: support@dmac.com");
+            }
+        });
 
     }
 

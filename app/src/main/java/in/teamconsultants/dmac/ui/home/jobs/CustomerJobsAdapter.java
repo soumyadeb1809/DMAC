@@ -64,6 +64,21 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
             final CustomerJob customerJob = customerJobsList.get(position);
             jobsViewHolder.tvFileName.setText(customerJob.getName());
             jobsViewHolder.tvFileStatus.setText(statusMap.get(customerJob.getStatusId()));
+            String statusId = customerJob.getStatusId();
+
+            if(statusId.equals("1")){
+                jobsViewHolder.tvFileStatus.setBackgroundResource(R.drawable.back_light_blue_rounded);
+            }
+            else if(statusId.equals("3") || statusId.equals("6") || statusId.equals("10") || statusId.equals("11")){
+                jobsViewHolder.tvFileStatus.setBackgroundResource(R.drawable.back_orange_rounded);
+            }
+            else if(statusId.equals("4") || statusId.equals("7") || statusId.equals("9")){
+                jobsViewHolder.tvFileStatus.setBackgroundResource(R.drawable.back_green_rounded);
+            }
+            else {
+                jobsViewHolder.tvFileStatus.setBackgroundResource(R.drawable.back_blue_rounded);
+            }
+
             jobsViewHolder.tvFileNotes.setText(customerJob.getNotes());
             String createDate = customerJob.getCreatedAt();
             String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
@@ -100,6 +115,9 @@ public class CustomerJobsAdapter  extends RecyclerView.Adapter<CustomerJobsAdapt
             else {
                jobsViewHolder.extraSpace.setVisibility(View.GONE);
            }
+
+
+
         }
 
     }

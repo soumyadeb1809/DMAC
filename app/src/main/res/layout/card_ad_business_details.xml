@@ -14,7 +14,7 @@
         android:textColor="@color/colorBlack"
         android:textSize="20sp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="20dp"
         android:id="@+id/title_business_info"
         />
@@ -43,7 +43,6 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:text="DMAC Customer Account"
             android:focusable="false"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
@@ -77,7 +76,6 @@
             android:paddingEnd="16dp"
             android:textSize="14sp"
             android:focusable="false"
-            android:text="DMAC"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_business_short_name"
@@ -110,7 +108,6 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:text="Abd Street, Gachibowli"
             android:focusable="false"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
@@ -132,6 +129,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="16dp"
+            android:visibility="gone"
             android:layout_weight="1">
 
             <TextView
@@ -155,7 +153,6 @@
                     android:paddingEnd="16dp"
                     android:textSize="14sp"
                     android:focusable="false"
-                    android:text="Telangana"
                     android:fontFamily="@font/montserrat_regular"
                     android:background="@drawable/back_et_form"
                     android:id="@+id/et_state"
@@ -168,7 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:layout_marginTop="16dp">
@@ -193,7 +190,6 @@
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:textSize="14sp"
-                    android:text="Hyderabad"
                     android:focusable="false"
                     android:fontFamily="@font/montserrat_regular"
                     android:background="@drawable/back_et_form"
@@ -231,7 +227,6 @@
             android:paddingEnd="16dp"
             android:textSize="14sp"
             android:focusable="false"
-            android:text="500431"
             android:fontFamily="@font/montserrat_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_pin_code"
@@ -268,7 +263,6 @@
                 android:paddingEnd="16dp"
                 android:textSize="14sp"
                 android:focusable="false"
-                android:text="Company"
                 android:fontFamily="@font/montserrat_regular"
                 android:background="@drawable/back_et_form"
                 android:id="@+id/et_business_type"
@@ -282,6 +276,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginStart="20dp"
+        android:id="@+id/grp_others_copy"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="16dp">
 
@@ -303,12 +298,207 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/img_others_copy"
+                android:clickable="true"
                 android:src="@drawable/back_et_form"
                 />
 
         </LinearLayout>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grp_partnership_uploads"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Partnership Deed Copy"
+                android:textSize="12sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:layout_marginBottom="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:clickable="true"
+                    android:id="@+id/img_part_deed_copy"
+                    android:src="@drawable/back_et_form"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Registration Certificate"
+                android:textSize="12sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:layout_marginBottom="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/img_reg_cert"
+                    android:clickable="true"
+                    android:src="@drawable/back_et_form"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/grp_company_uploads"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload MOA Copy"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_marginBottom="10dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:id="@+id/img_moa_copy"
+                        android:clickable="true"
+                        android:src="@drawable/back_et_form"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload AOA Copy"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_marginBottom="10dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:id="@+id/img_aoa_copy"
+                        android:clickable="true"
+                        android:src="@drawable/back_et_form"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Incorporation Certificate"
+                android:textSize="12sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:layout_marginBottom="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:clickable="true"
+                    android:id="@+id/img_incorp_cert"
+                    android:src="@drawable/back_et_form"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -344,11 +534,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes"
-                    android:checked="true"
                     android:clickable="false"
                     android:fontFamily="@font/montserrat_regular"
                     android:id="@+id/rb_gst_yes"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="30dp"
                     />
 
                 <RadioButton
@@ -362,6 +551,10 @@
             </RadioGroup>
 
         </LinearLayout>
+
+        <include layout="@layout/card_ad_gst_info"
+            android:id="@+id/card_gst_info"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
@@ -404,7 +597,6 @@
                     android:id="@+id/rb_it_yes"
                     android:clickable="false"
                     android:layout_marginEnd="30dp"
-                    android:checked="true"
                     />
 
                 <RadioButton
@@ -419,6 +611,11 @@
             </RadioGroup>
 
         </LinearLayout>
+
+        <include layout="@layout/card_ad_it_info"
+            android:id="@+id/card_it_info"
+            android:visibility="gone"
+            />
 
     </LinearLayout>
 

@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ import in.teamconsultants.dmac.model.State;
 import in.teamconsultants.dmac.model.StateResponse;
 import in.teamconsultants.dmac.network.ApiClient;
 import in.teamconsultants.dmac.network.ApiInterface;
+import in.teamconsultants.dmac.ui.home.jobs.FileReUploadActivity;
 import in.teamconsultants.dmac.ui.home.jobs.NewJobActivity;
 import in.teamconsultants.dmac.ui.home.spinner.SimpleSpinnerAdapter;
 import in.teamconsultants.dmac.utils.AppConstants;
@@ -123,11 +125,24 @@ public class RegularRegistrationActivity extends AppCompatActivity {
     private String imgAuditBalSheetFilepath = "";
     private Map<Integer, DirectorDocuments> directorDocumentsMap;
 
+    private Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regular_registration);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         progress = new ProgressDialog(this);
         progress.setCancelable(false);
@@ -553,11 +568,25 @@ public class RegularRegistrationActivity extends AppCompatActivity {
 
     // Select an image from gallery for the given image position:
     private void selectImage(int imagePosition) {
-        Intent intent = new Intent();
-        intent.putExtra("position", imagePosition);
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, imagePosition);
+        if(Utility.isPermissionsGranted(RegularRegistrationActivity.this)) {
+            Intent intent = new Intent();
+            intent.putExtra("position", imagePosition);
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intent, imagePosition);
+        }
+        else {
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+            alertBuilder.setMessage("Please grant the requested permissions when prompted to continue");
+            alertBuilder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Utility.askForPermissions(RegularRegistrationActivity.this);
+                }
+            });
+            alertBuilder.setCancelable(false);
+            alertBuilder.show();
+        }
     }
 
 

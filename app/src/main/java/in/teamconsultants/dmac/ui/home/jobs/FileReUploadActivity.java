@@ -206,11 +206,25 @@ public class FileReUploadActivity extends AppCompatActivity {
 
     // Select an image from gallery for the given image position:
     private void selectImage() {
-        Intent intent = new Intent();
-        intent.putExtra("position", IMG_REQUEST_CODE);
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, IMG_REQUEST_CODE);
+        if(Utility.isPermissionsGranted(FileReUploadActivity.this)) {
+            Intent intent = new Intent();
+            intent.putExtra("position", IMG_REQUEST_CODE);
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intent, IMG_REQUEST_CODE);
+        }
+        else {
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+            alertBuilder.setMessage("Please grant the requested permissions when prompted to continue");
+            alertBuilder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Utility.askForPermissions(FileReUploadActivity.this);
+                }
+            });
+            alertBuilder.setCancelable(false);
+            alertBuilder.show();
+        }
     }
 
 

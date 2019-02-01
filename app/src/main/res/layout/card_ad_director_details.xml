@@ -26,8 +26,8 @@
         android:orientation="vertical"
         >
 
-        <include layout="@layout/card_ad_director_info"
-            android:id="@+id/director_1_info"/>
+     <!--   <include layout="@layout/card_ad_director_info"
+            android:id="@+id/director_1_info"/>-->
 
     </LinearLayout>
 

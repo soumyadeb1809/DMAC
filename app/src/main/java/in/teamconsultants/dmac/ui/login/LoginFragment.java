@@ -43,6 +43,8 @@ public class LoginFragment extends Fragment {
     private LinearLayout btnCreateAccount, btnLogin;
     private CheckBox cbRememberMe;
 
+    private SharedPreferences spRememUser;
+
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -64,9 +66,16 @@ public class LoginFragment extends Fragment {
         btnCreateAccount = v.findViewById(R.id.grp_create_account);
         cbRememberMe = v.findViewById(R.id.cb_remember_me);
 
+        spRememUser = getContext().getSharedPreferences(AppConstants.SP.SP_REMEM_USER, Context.MODE_PRIVATE);
 
-        etUsername.setText("customer@dmac.com");
-        etPassword.setText("9848012345");
+        String savedUsername = spRememUser.getString(AppConstants.SP.TAG_USER_EMAIL, "");
+        String savedPassword = spRememUser.getString(AppConstants.SP.TAG_USER_PASSWORD, "");
+
+        if(!TextUtils.isEmpty(savedUsername))
+            etUsername.setText(savedUsername);
+
+        if(!TextUtils.isEmpty(savedPassword))
+            etPassword.setText(savedPassword);
 
         setOnClickListeners();
         return v;
@@ -102,7 +111,7 @@ public class LoginFragment extends Fragment {
 
     }
 
-    private void validateUser(String email, String password) {
+    private void validateUser(final String email, final String password) {
 
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
 
@@ -127,8 +136,18 @@ public class LoginFragment extends Fragment {
                     SharedPreferences spUserData = getContext().getSharedPreferences(AppConstants.SP.SP_USER_DATA, Context.MODE_PRIVATE);
                     SharedPreferences.Editor userDataEditor = spUserData.edit();
                     userDataEditor.putString(AppConstants.SP.TAG_USER_DETAILS, gson.toJson(loginResponse.getUserData()));
+                    userDataEditor.putBoolean(AppConstants.SP.IS_USER_LOGGED_IN, true);
                     userDataEditor.putString(AppConstants.SP.TAG_TOKEN, loginResponse.getTokenId());
                     userDataEditor.commit();
+
+                    if(cbRememberMe.isChecked()){
+                        SharedPreferences spRememUser = getContext().getSharedPreferences(AppConstants.SP.SP_REMEM_USER, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor sruEditor = spRememUser.edit();
+                        sruEditor.putString(AppConstants.SP.TAG_USER_EMAIL, email);
+                        sruEditor.putString(AppConstants.SP.TAG_USER_PASSWORD, password);
+                        sruEditor.commit();
+                    }
+
                     if(loginResponse.getUserData().getRoleId().equals(AppConstants.USER_ROLE.CUSTOMER)){
                         startActivity(new Intent(getActivity(), CustomerHomeActivity.class));
                         getActivity().finish();

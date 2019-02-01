@@ -1,8 +1,13 @@
 package in.teamconsultants.dmac.utils;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import java.io.File;
@@ -16,6 +21,8 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Multipart;
+
+import static android.content.Context.CONNECTIVITY_SERVICE;
 
 public class Utility {
 
@@ -87,5 +94,35 @@ public class Utility {
             MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData(partName, file.getName(), mFile);
             return fileToUpload;
     }
+
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public static boolean isPermissionsGranted(Activity activity){
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                ) {
+
+            return false;
+
+        }
+        else {
+            return true;
+        }
+    }
+
+    public static void askForPermissions(Activity activity){
+        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE}, 0);
+    }
+
 
 }

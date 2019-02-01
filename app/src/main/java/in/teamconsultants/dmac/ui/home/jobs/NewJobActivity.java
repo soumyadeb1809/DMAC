@@ -42,6 +42,7 @@ import in.teamconsultants.dmac.model.FileTypeResponse;
 import in.teamconsultants.dmac.network.ApiClient;
 import in.teamconsultants.dmac.network.ApiInterface;
 import in.teamconsultants.dmac.ui.home.spinner.SimpleSpinnerAdapter;
+import in.teamconsultants.dmac.ui.login.LoginActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
 import okhttp3.MediaType;
@@ -254,12 +255,25 @@ public class NewJobActivity extends AppCompatActivity {
     }
 
     private void selectImage(int cardPosition) {
-
-        Intent intent = new Intent();
-        intent.putExtra("position", cardPosition);
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, cardPosition);
+        Log.d(AppConstants.LOG_TAG, "Permission: " + Utility.isPermissionsGranted(NewJobActivity.this));
+        if(Utility.isPermissionsGranted(NewJobActivity.this)) {
+            Intent intent = new Intent();
+            intent.putExtra("position", cardPosition);
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intent, cardPosition);
+        } else {
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+            alertBuilder.setMessage("Please grant the requested permissions when prompted to continue");
+            alertBuilder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Utility.askForPermissions(NewJobActivity.this);
+                }
+            });
+            alertBuilder.setCancelable(false);
+            alertBuilder.show();
+        }
 
     }
 

@@ -26,36 +26,36 @@ public class AccountDetailResponse {
         return Status;
     }
 
-    public String getMessage() {
-        return Message;
-    }
-
-    public AccountDataObj getAccountDataObj() {
-        return AccountData;
-    }
-
-    public List<DirectorDataObj> getDirectorDataObj() {
-        return DirectorData;
-    }
-
-    public KeyUserDataObj getKeyUserDataObj() {
-        return KeyUserData;
-    }
-
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public String getMessage() {
+        return Message;
     }
 
     public void setMessage(String message) {
         Message = message;
     }
 
+    public AccountDataObj getAccountData() {
+        return AccountData;
+    }
+
     public void setAccountData(AccountDataObj accountData) {
         AccountData = accountData;
     }
 
+    public List<DirectorDataObj> getDirectorData() {
+        return DirectorData;
+    }
+
     public void setDirectorData(List<DirectorDataObj> directorData) {
         DirectorData = directorData;
+    }
+
+    public KeyUserDataObj getKeyUserData() {
+        return KeyUserData;
     }
 
     public void setKeyUserData(KeyUserDataObj keyUserData) {

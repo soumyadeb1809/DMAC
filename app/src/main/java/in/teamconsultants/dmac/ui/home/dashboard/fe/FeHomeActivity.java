@@ -15,6 +15,7 @@ import in.teamconsultants.dmac.ui.home.accounts.AccountsFragment;
 import in.teamconsultants.dmac.ui.home.jobs.CustomerJobsFragment;
 import in.teamconsultants.dmac.ui.home.profile.ProfileFragment;
 import in.teamconsultants.dmac.ui.registration.RegisterActivity;
+import in.teamconsultants.dmac.ui.registration.RegularRegistrationActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
 
 public class FeHomeActivity extends AppCompatActivity implements FeDashboardFragment.OnFeDashboardInteractionListener,
@@ -82,7 +83,7 @@ AccountsFragment.OnAccountsInteractionListener, ProfileFragment.OnProfileFragmen
         grpNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FeHomeActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(FeHomeActivity.this, RegularRegistrationActivity.class);
                 intent.putExtra(AppConstants.INTENT_TAG.REG_TYPE, AppConstants.REGISTRATION.REGULAR);
                 intent.putExtra(AppConstants.INTENT_TAG.REG_INITIATOR, AppConstants.REGISTRATION.INITIATOR.FE);
                 startActivity(intent);

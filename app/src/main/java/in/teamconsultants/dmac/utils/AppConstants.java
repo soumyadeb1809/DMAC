@@ -40,6 +40,7 @@ public class AppConstants {
 
     public static final class SP {
         public static final String SP_USER_DATA = "user_data";
+        public static final String SP_REMEM_USER = "remem_user";
         public static final String TAG_USER_DETAILS = "user_details";
         public static final String TAG_TOKEN = "token";
 
@@ -49,6 +50,9 @@ public class AppConstants {
         public static final String TAG_TOTAL_ACCOUNTS = "total_accounts";
         public static final String TAG_OPEN_ACCOUNTS = "open_accounts";
 
+        public static final String IS_USER_LOGGED_IN = "user_logged_in";
+        public static final String TAG_USER_EMAIL = "email";
+        public static final String TAG_USER_PASSWORD = "password";
     }
 
     public static final class USER_ROLE {
@@ -95,6 +99,11 @@ public class AppConstants {
     public static final class DIRECTOR_DOC_TYPE {
         public static final int AADHAR = 1;
         public static final int PAN = 2;
+    }
+
+    public static final class STATUS {
+        public static final String YES = "1";
+        public static final String NO = "0";
     }
 
 }

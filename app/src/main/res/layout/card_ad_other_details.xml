@@ -17,34 +17,6 @@
         />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/grp_remember_me"
-        android:layout_marginStart="20dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cb_new_company"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New company, doesn't have last year audit documents?"
-            android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/colorBlack"
-            />
-
-    </LinearLayout>
-
 
 
     <LinearLayout
@@ -58,7 +30,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload previous year audited balance sheet"
+            android:text="Previous year audited balance sheet"
             android:textSize="12sp"
             android:fontFamily="@font/montserrat_regular"
             android:layout_marginBottom="10dp"
@@ -72,6 +44,7 @@
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:clickable="true"
                 android:src="@drawable/back_et_form"
                 android:id="@+id/img_balance_sheet"
                 />
@@ -80,6 +53,11 @@
 
     </LinearLayout>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@color/colorLighterGray"
+        android:layout_marginTop="16dp"
+        />
 
 </LinearLayout>

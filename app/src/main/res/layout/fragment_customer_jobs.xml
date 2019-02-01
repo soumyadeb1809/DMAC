@@ -38,7 +38,7 @@
                 android:layout_height="3dp"
                 android:layout_below="@id/title_my_files"
                 android:background="@color/colorYellow"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:id="@+id/title_my_jobs"
                 />
 
