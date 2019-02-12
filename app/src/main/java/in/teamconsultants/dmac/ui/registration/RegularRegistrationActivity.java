@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -30,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.scanlibrary.ScanConstants;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -569,11 +572,12 @@ public class RegularRegistrationActivity extends AppCompatActivity {
     // Select an image from gallery for the given image position:
     private void selectImage(int imagePosition) {
         if(Utility.isPermissionsGranted(RegularRegistrationActivity.this)) {
-            Intent intent = new Intent();
+           /* Intent intent = new Intent();
             intent.putExtra("position", imagePosition);
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent, imagePosition);
+            startActivityForResult(intent, imagePosition);*/
+            Utility.showImageSelectionDialog(this, imagePosition);
         }
         else {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
@@ -596,9 +600,11 @@ public class RegularRegistrationActivity extends AppCompatActivity {
 
         if(resultCode == RESULT_OK && data != null){
 
-            Uri path = data.getData();
+            //Uri path = data.getData();
 
-            String wholeID = DocumentsContract.getDocumentId(path);
+            Uri path = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
+
+            /*String wholeID = DocumentsContract.getDocumentId(path);
 
             // Split at colon, use second item in the array
             String id = wholeID.split(":")[1];
@@ -610,15 +616,17 @@ public class RegularRegistrationActivity extends AppCompatActivity {
 
             Cursor cursor = getContentResolver().
                     query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            column, sel, new String[]{ id }, null);
+                            column, sel, new String[]{ id }, null);*/
 
             String filePath = "";
 
-            int columnIndex = cursor.getColumnIndex(column[0]);
+            filePath = Utility.getRealPathFromUri(this, path);
+
+           /* int columnIndex = cursor.getColumnIndex(column[0]);
 
             if (cursor.moveToFirst()) {
                 filePath = cursor.getString(columnIndex);
-            }
+            }*/
 
             Log.d(AppConstants.LOG_TAG, "Media Path Received: "+filePath);
 
@@ -626,9 +634,9 @@ public class RegularRegistrationActivity extends AppCompatActivity {
 
             try {
 
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
 
-                setBitmapToImgView(requestCode, bitmap, filePath);
+                setBitmapToImgView(requestCode, path, filePath);
 
             }
             catch (Exception e){
@@ -642,45 +650,48 @@ public class RegularRegistrationActivity extends AppCompatActivity {
 
 
     // Set the bitmap to the respective ImageViews and save filepath:
-    private void setBitmapToImgView(int requestCode, Bitmap bitmap, String filePath) {
+    private void setBitmapToImgView(int requestCode, Uri path, String filePath) {
+
+        ImageView reqImageView = null;
 
         if(requestCode < 10){
 
+
             switch (requestCode){
                 case AppConstants.BUSINESS_DOC_TYPE.OTHERS:
-                    imgOthers.setImageBitmap(bitmap);
+                    reqImageView = imgOthers;
                     imgOthersFilepath = filePath;
                     break;
                 case AppConstants.BUSINESS_DOC_TYPE.PARTNERSHIP_DEED:
-                    imgPartDeeds.setImageBitmap(bitmap);
+                    reqImageView = imgPartDeeds;
                     imgPartDeedFilePath = filePath;
                     break;
                 case AppConstants.BUSINESS_DOC_TYPE.AOA:
-                    imgAOA.setImageBitmap(bitmap);
+                    reqImageView = imgAOA;
                     imgAOAFilePath = filePath;
                     break;
                 case AppConstants.BUSINESS_DOC_TYPE.MOA:
-                    imgMOA.setImageBitmap(bitmap);
+                    reqImageView = imgMOA;
                     imgMOAFilePath = filePath;
                     break;
                 case AppConstants.BUSINESS_DOC_TYPE.INCORP_CERT:
-                    imgIncorpCert.setImageBitmap(bitmap);
+                    reqImageView = imgIncorpCert;
                     imgIncorpCertFilePath = filePath;
                     break;
                 case AppConstants.BUSINESS_DOC_TYPE.REG_CERT:
-                    imgRegCert.setImageBitmap(bitmap);
+                    reqImageView = imgRegCert;
                     imgRegCertFilePath = filePath;
                     break;
                 case AppConstants.BUSINESS_DOC_TYPE.PAN:
-                    imgPan.setImageBitmap(bitmap);
+                    reqImageView = imgPan;
                     imgPANFilePath = filePath;
                     break;
                 case AppConstants.BUSINESS_DOC_TYPE.GST_REG:
-                    imgGstReg.setImageBitmap(bitmap);
+                    reqImageView = imgGstReg;
                     imgGSTRegFilePath = filePath;
                     break;
                 case AppConstants.BUSINESS_DOC_TYPE.AUDIT_BAL_SHEET:
-                    imgAuditedSheet.setImageBitmap(bitmap);
+                    reqImageView = imgAuditedSheet;
                     imgAuditBalSheetFilepath = filePath;
                     break;
             }
@@ -703,18 +714,24 @@ public class RegularRegistrationActivity extends AppCompatActivity {
 
             if(type == AppConstants.DIRECTOR_DOC_TYPE.AADHAR){
                 ImageView imgDirectorAadhar = directorLayout.findViewById(R.id.img_director_aadhar_copy);
-                imgDirectorAadhar.setImageBitmap(bitmap);
+                reqImageView = imgDirectorAadhar;
                 directorDocuments.setImgAadharFilePath(filePath);
             }
             else if(type == AppConstants.DIRECTOR_DOC_TYPE.PAN){
                 ImageView imgDirectorPAN = directorLayout.findViewById(R.id.img_director_pan_copy);
-                imgDirectorPAN.setImageBitmap(bitmap);
+                reqImageView = imgDirectorPAN;
                 directorDocuments.setImgPANFilePath(filePath);
             }
 
             directorDocumentsMap.put(index, directorDocuments);
 
         }
+
+
+        if(null != reqImageView){
+            Picasso.get().load(path).resize(0, 500).into(reqImageView);
+        }
+
 
     }
 

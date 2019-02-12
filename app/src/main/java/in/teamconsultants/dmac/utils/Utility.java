@@ -4,11 +4,21 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+
+import com.scanlibrary.ScanActivity;
+import com.scanlibrary.ScanConstants;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -17,6 +27,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import in.teamconsultants.dmac.R;
+import in.teamconsultants.dmac.ui.home.jobs.NewJobActivity;
+import in.teamconsultants.dmac.ui.registration.RegisterActivity;
+import in.teamconsultants.dmac.ui.registration.RegularRegistrationActivity;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -108,6 +122,7 @@ public class Utility {
                 || ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
                 ) {
 
             return false;
@@ -121,7 +136,61 @@ public class Utility {
     public static void askForPermissions(Activity activity){
         ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.ACCESS_WIFI_STATE}, 0);
+                Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.CAMERA}, 0);
+    }
+
+    public static void showImageSelectionDialog(final Activity activity, final int requestCode){
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.alert_image_source_selecction, null);
+        builder.setView(dialogLayout);
+
+        final AlertDialog dialog = builder.create();
+
+        LinearLayout grpCamera = dialogLayout.findViewById(R.id.grp_snap_image);
+        LinearLayout grpGallery = dialogLayout.findViewById(R.id.grp_open_gallery);
+
+        grpCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int preference = ScanConstants.OPEN_CAMERA;
+                Intent intent = new Intent(activity, ScanActivity.class);
+                intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
+                activity.startActivityForResult(intent, requestCode);
+                dialog.dismiss();
+            }
+        });
+
+        grpGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int preference = ScanConstants.OPEN_MEDIA;
+                Intent intent = new Intent(activity, ScanActivity.class);
+                intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
+                activity.startActivityForResult(intent, requestCode);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+    public static String getRealPathFromUri(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 
 

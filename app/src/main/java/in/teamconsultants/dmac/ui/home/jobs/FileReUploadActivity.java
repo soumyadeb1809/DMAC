@@ -22,6 +22,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.scanlibrary.ScanConstants;
+import com.squareup.picasso.Picasso;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -207,11 +210,12 @@ public class FileReUploadActivity extends AppCompatActivity {
     // Select an image from gallery for the given image position:
     private void selectImage() {
         if(Utility.isPermissionsGranted(FileReUploadActivity.this)) {
-            Intent intent = new Intent();
+           /* Intent intent = new Intent();
             intent.putExtra("position", IMG_REQUEST_CODE);
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent, IMG_REQUEST_CODE);
+            startActivityForResult(intent, IMG_REQUEST_CODE);*/
+           Utility.showImageSelectionDialog(this, IMG_REQUEST_CODE);
         }
         else {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
@@ -234,9 +238,11 @@ public class FileReUploadActivity extends AppCompatActivity {
 
         if(resultCode == RESULT_OK && data != null){
 
-            Uri path = data.getData();
+            //Uri path = data.getData();
 
-            String wholeID = DocumentsContract.getDocumentId(path);
+            Uri path = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
+
+           /* String wholeID = DocumentsContract.getDocumentId(path);
 
             // Split at colon, use second item in the array
             String id = wholeID.split(":")[1];
@@ -248,15 +254,17 @@ public class FileReUploadActivity extends AppCompatActivity {
 
             Cursor cursor = getContentResolver().
                     query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            column, sel, new String[]{ id }, null);
+                            column, sel, new String[]{ id }, null);*/
 
             String filePath = "";
 
-            int columnIndex = cursor.getColumnIndex(column[0]);
+            filePath = Utility.getRealPathFromUri(this, path);
+
+            /*int columnIndex = cursor.getColumnIndex(column[0]);
 
             if (cursor.moveToFirst()) {
                 filePath = cursor.getString(columnIndex);
-            }
+            }*/
 
             Log.d(AppConstants.LOG_TAG, "Media Path Received: "+filePath);
 
@@ -264,9 +272,10 @@ public class FileReUploadActivity extends AppCompatActivity {
 
             try {
 
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
 
-                imgNewFile.setImageBitmap(bitmap);
+                //imgNewFile.setImageBitmap(bitmap);
+                Picasso.get().load(path).resize(0, 500).into(imgNewFile);
                 newFilePath = filePath;
 
             }

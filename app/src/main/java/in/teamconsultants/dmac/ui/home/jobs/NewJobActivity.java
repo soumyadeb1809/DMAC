@@ -2,6 +2,7 @@ package in.teamconsultants.dmac.ui.home.jobs;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +28,9 @@ import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.scanlibrary.ScanActivity;
+import com.scanlibrary.ScanConstants;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -257,11 +261,17 @@ public class NewJobActivity extends AppCompatActivity {
     private void selectImage(int cardPosition) {
         Log.d(AppConstants.LOG_TAG, "Permission: " + Utility.isPermissionsGranted(NewJobActivity.this));
         if(Utility.isPermissionsGranted(NewJobActivity.this)) {
-            Intent intent = new Intent();
+            /*Intent intent = new Intent();
             intent.putExtra("position", cardPosition);
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent, cardPosition);
+            startActivityForResult(intent, cardPosition);*/
+           /* int preference = ScanConstants.OPEN_MEDIA;
+            Intent intent = new Intent(NewJobActivity.this, ScanActivity.class);
+            intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
+            startActivityForResult(intent, cardPosition);*/
+            Utility.showImageSelectionDialog(this, cardPosition);
+
         } else {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
             alertBuilder.setMessage("Please grant the requested permissions when prompted to continue");
@@ -371,9 +381,10 @@ public class NewJobActivity extends AppCompatActivity {
 
         if(resultCode == RESULT_OK && data != null){
 
-            Uri path = data.getData();
+            //Uri path = data.getData();
+            Uri path = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
 
-            String wholeID = DocumentsContract.getDocumentId(path);
+            /*String wholeID = DocumentsContract.getDocumentId(path);
 
             // Split at colon, use second item in the array
             String id = wholeID.split(":")[1];
@@ -385,34 +396,27 @@ public class NewJobActivity extends AppCompatActivity {
 
             Cursor cursor = getContentResolver().
                     query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            column, sel, new String[]{ id }, null);
+                            column, sel, new String[]{ id }, null);*/
 
             String filePath = "";
 
-            int columnIndex = cursor.getColumnIndex(column[0]);
+            filePath = Utility.getRealPathFromUri(this, path);
+
+            /*int columnIndex = cursor.getColumnIndex(column[0]);
 
             if (cursor.moveToFirst()) {
                 filePath = cursor.getString(columnIndex);
             }
-
+*/
             Log.d(AppConstants.LOG_TAG, "Media Path Received: "+filePath);
 
             jobFileUriMap.put(requestCode, filePath);
 
-            /*Intent intent = new Intent("com.intsig.camscanner.ACTION_SCAN");
-            // Or content uri picked from gallery
-            Uri uri = Uri.fromFile(new File(filePath));
-            intent.putExtra(Intent.EXTRA_STREAM, uri);
-            intent.putExtra("scanned_image", "/sdcard/scanned.jpg");
-            intent.putExtra("pdf_path", "/sdcard/processed.jpg");
-            intent.putExtra("org_image", "/sdcard/org.jpg");
-            startActivityForResult(intent, 101);*/
-
             try {
 
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
 
-                setBitmapToImgAttachFile(requestCode, bitmap);
+                setBitmapToImgAttachFile(requestCode, path);
 
             }
             catch (Exception e){
@@ -424,12 +428,15 @@ public class NewJobActivity extends AppCompatActivity {
 
     }
 
-    private void setBitmapToImgAttachFile(int position, Bitmap bitmap) {
+    private void setBitmapToImgAttachFile(int position, Uri filepath) {
 
         LinearLayout grpNewJob = jobsGrpList.get(position);
 
         ImageView imgAttachFile = grpNewJob.findViewById(R.id.img_attach_file);
-        imgAttachFile.setImageBitmap(bitmap);
+
+        //Picasso.get().load(Uri.parse(filepath)).resize(0, 500).into(imgAttachFile);
+        Picasso.get().load(filepath).resize(0, 500).into(imgAttachFile);
+        //imgAttachFile.setImageBitmap(bitmap);
 
     }
 
@@ -531,6 +538,7 @@ public class NewJobActivity extends AppCompatActivity {
     public RequestBody getTextRequestBody(String text){
         return RequestBody.create(MediaType.parse("text/plain"), text);
     }
+
 
 
 }
