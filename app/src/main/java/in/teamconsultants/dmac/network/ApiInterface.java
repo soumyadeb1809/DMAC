@@ -10,6 +10,7 @@ import in.teamconsultants.dmac.model.AccountSearchResult;
 import in.teamconsultants.dmac.model.CityResponse;
 import in.teamconsultants.dmac.model.CreateAccountResponse;
 import in.teamconsultants.dmac.model.CreateJobResponse;
+import in.teamconsultants.dmac.model.CreateReportResponse;
 import in.teamconsultants.dmac.model.FileCategoryResponse;
 import in.teamconsultants.dmac.model.FileCountResponse;
 import in.teamconsultants.dmac.model.FileSearchResponse;
@@ -17,6 +18,8 @@ import in.teamconsultants.dmac.model.FileTypeResponse;
 import in.teamconsultants.dmac.model.LoginResponse;
 import in.teamconsultants.dmac.model.QuickRegisterResponse;
 import in.teamconsultants.dmac.model.ReUploadFileResponse;
+import in.teamconsultants.dmac.model.ReportTypeResponse;
+import in.teamconsultants.dmac.model.ReportsResponse;
 import in.teamconsultants.dmac.model.StateResponse;
 import in.teamconsultants.dmac.model.StatusResponse;
 import okhttp3.MultipartBody;
@@ -26,6 +29,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -133,6 +137,26 @@ public interface ApiInterface {
             @HeaderMap Map<String, String> headers,
             @QueryMap Map<String, String> queries
     );
+
+
+    @GET("get_report_type")
+    Call<ReportTypeResponse> doGetReportTypes (
+            @Header("TOKEN") String token
+    );
+
+
+    @GET("get_report_list")
+    Call<ReportsResponse> doGetReportList (
+            @Header("TOKEN") String token
+    );
+
+    @POST("create_report_request")
+    @FormUrlEncoded
+    Call<CreateReportResponse> doCreateReportRequest (
+            @Header("TOKEN") String token,
+            @FieldMap Map<String, String> fieldMap
+    );
+
 
 
 }

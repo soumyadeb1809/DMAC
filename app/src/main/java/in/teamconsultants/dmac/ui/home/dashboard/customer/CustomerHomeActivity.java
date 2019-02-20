@@ -17,6 +17,7 @@ import in.teamconsultants.dmac.ui.home.jobs.NewJobActivity;
 import in.teamconsultants.dmac.ui.home.profile.ProfileFragment;
 
 import in.teamconsultants.dmac.R;
+import in.teamconsultants.dmac.ui.home.reports.ReportsFragment;
 
 public class CustomerHomeActivity extends AppCompatActivity implements CustomerDashboardFragment.OnCustomerDashboardFragmentInteractionListener,
         CustomerJobsFragment.OnCustomerJobsFragmentInteractionListener, ProfileFragment.OnProfileFragmentInteractionListener {
@@ -26,6 +27,7 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
     private CustomerDashboardFragment customerDashboardFragment;
     private CustomerJobsFragment customerJobsFragment;
     private ProfileFragment profileFragment;
+    private ReportsFragment reportsFragment;
 
     private Toolbar toolbar;
 
@@ -35,6 +37,7 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
         customerDashboardFragment = new CustomerDashboardFragment();
         customerJobsFragment = new CustomerJobsFragment();
         profileFragment = new ProfileFragment();
+        reportsFragment = new ReportsFragment();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -57,6 +60,12 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
                         grpNewJob.setVisibility(View.GONE);
                         return true;
+
+                    case R.id.navigation_reports:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, reportsFragment).commit();
+                        grpNewJob.setVisibility(View.GONE);
+                        return true;
+
                 }
             }
             return false;

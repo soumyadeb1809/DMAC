@@ -189,25 +189,25 @@ public class CustomerJobsFragment extends Fragment {
         fileCreatedStartDt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 showDatePicker(fileCreatedStartDt);
+                 Utility.showDatePicker(getContext(),fileCreatedStartDt);
             }
         });
         fileCreatedEndDt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePicker(fileCreatedEndDt);
+                Utility.showDatePicker(getContext(), fileCreatedEndDt);
             }
         });
         lastUpdatedStartDt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePicker(lastUpdatedStartDt);
+                Utility.showDatePicker(getContext(), lastUpdatedStartDt);
             }
         });
         lastUpdatedEndDt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePicker(lastUpdatedEndDt);
+                Utility.showDatePicker(getContext(), lastUpdatedEndDt);
             }
         });
 
@@ -275,28 +275,6 @@ public class CustomerJobsFragment extends Fragment {
 
     }
 
-    private void showDatePicker(final TextView tvDate) {
-
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day= c.get(Calendar.DAY_OF_MONTH);
-
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
-                new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-                        tvDate.setText(addZeroB4DtElem(dayOfMonth)+"-" +addZeroB4DtElem((monthOfYear+1))+"-"+year);
-
-                    }
-                }, year, month, day);
-
-        datePickerDialog.show();
-
-    }
 
 
     @Override
@@ -383,13 +361,11 @@ public class CustomerJobsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<StatusResponse> call, Throwable t) {
+                Log.d(AppConstants.LOG_TAG, "FAILED: "+t.getMessage());
                 progress.dismiss();
             }
         });
 
     }
 
-    public String addZeroB4DtElem(int dateElement){
-        return String.valueOf((dateElement)<10 ? "0"+(dateElement) : (dateElement));
-    }
 }

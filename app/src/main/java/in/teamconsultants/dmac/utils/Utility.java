@@ -3,6 +3,7 @@ package in.teamconsultants.dmac.utils;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,13 +16,16 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.scanlibrary.ScanActivity;
 import com.scanlibrary.ScanConstants;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -192,6 +196,35 @@ public class Utility {
             }
         }
     }
+
+    public static void showDatePicker(Context context, final TextView tvDate) {
+
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day= c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        tvDate.setText(addZeroB4DtElem(dayOfMonth)+"-" +addZeroB4DtElem((monthOfYear+1))+"-"+year);
+
+                    }
+                }, year, month, day);
+
+        datePickerDialog.show();
+
+    }
+
+
+    public static String addZeroB4DtElem(int dateElement){
+        return String.valueOf((dateElement)<10 ? "0"+(dateElement) : (dateElement));
+    }
+
 
 
 }
