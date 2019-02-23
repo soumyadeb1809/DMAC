@@ -1,6 +1,10 @@
-package in.teamconsultants.dmac.model;
+package in.teamconsultants.dmac.network.dto;
 
 import java.util.List;
+
+import in.teamconsultants.dmac.model.AccountDataObj;
+import in.teamconsultants.dmac.model.DirectorDataObj;
+import in.teamconsultants.dmac.model.KeyUserDataObj;
 
 public class AccountDetailResponse {
 

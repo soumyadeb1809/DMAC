@@ -21,9 +21,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import in.teamconsultants.dmac.R;
-import in.teamconsultants.dmac.model.LoginResponse;
-import in.teamconsultants.dmac.network.ApiClient;
-import in.teamconsultants.dmac.network.ApiInterface;
+import in.teamconsultants.dmac.network.dto.LoginResponse;
+import in.teamconsultants.dmac.network.api.ApiClient;
+import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.ui.home.dashboard.customer.CustomerHomeActivity;
 import in.teamconsultants.dmac.ui.home.dashboard.fe.FeHomeActivity;
 import in.teamconsultants.dmac.ui.registration.RegisterActivity;

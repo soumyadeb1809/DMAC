@@ -1,16 +1,18 @@
-package in.teamconsultants.dmac.model;
+package in.teamconsultants.dmac.network.dto;
 
-public class QuickRegisterResponse {
+import in.teamconsultants.dmac.model.CreateAccountResponseDetails;
+
+public class CreateAccountResponse {
 
     private String Status;
     private String AccountId;
     private String Message;
-    private QuickRegisterResponseDetails Details;
+    private CreateAccountResponseDetails Details;
 
-    public QuickRegisterResponse() {
+    public CreateAccountResponse() {
     }
 
-    public QuickRegisterResponse(String status, String accountId, String message, QuickRegisterResponseDetails details) {
+    public CreateAccountResponse(String status, String accountId, String message, CreateAccountResponseDetails details) {
         Status = status;
         AccountId = accountId;
         Message = message;
@@ -41,11 +43,11 @@ public class QuickRegisterResponse {
         Message = message;
     }
 
-    public QuickRegisterResponseDetails getDetails() {
+    public CreateAccountResponseDetails getDetails() {
         return Details;
     }
 
-    public void setDetails(QuickRegisterResponseDetails details) {
+    public void setDetails(CreateAccountResponseDetails details) {
         Details = details;
     }
 }

@@ -5,15 +5,15 @@
         android:icon="@drawable/ic_dashboard"
         android:title="Dashboard" />
 
-    <item
+  <!--  <item
         android:id="@+id/navigation_my_jobs"
         android:title="My Files"
-        android:icon="@drawable/ic_jobs"/>
+        android:icon="@drawable/ic_jobs"/>-->
 
     <item
         android:id="@+id/navigation_reports"
         android:title="Reports"
-        android:icon="@drawable/ic_report"/>
+        android:icon="@drawable/ic_jobs"/>
 
     <item
         android:id="@+id/navigation_profile"

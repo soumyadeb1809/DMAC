@@ -1,9 +1,7 @@
 package in.teamconsultants.dmac.ui.home.reports;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,14 +24,13 @@ import java.util.List;
 import java.util.Map;
 
 import in.teamconsultants.dmac.R;
-import in.teamconsultants.dmac.model.CreateAccountResponse;
-import in.teamconsultants.dmac.model.CreateReportResponse;
+import in.teamconsultants.dmac.network.dto.CreateReportResponse;
 import in.teamconsultants.dmac.model.Report;
 import in.teamconsultants.dmac.model.ReportType;
-import in.teamconsultants.dmac.model.ReportTypeResponse;
-import in.teamconsultants.dmac.model.ReportsResponse;
-import in.teamconsultants.dmac.network.ApiClient;
-import in.teamconsultants.dmac.network.ApiInterface;
+import in.teamconsultants.dmac.network.dto.ReportTypeResponse;
+import in.teamconsultants.dmac.network.dto.ReportsResponse;
+import in.teamconsultants.dmac.network.api.ApiClient;
+import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.ui.home.spinner.SimpleSpinnerAdapter;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
@@ -175,6 +172,7 @@ public class ReportsFragment extends Fragment {
         ReportsAdapter reportsAdapter = new ReportsAdapter(getContext() , (ArrayList<Report>) reportList);
         rvReports.setLayoutManager(new LinearLayoutManager(getContext()));
         rvReports.setAdapter(reportsAdapter);
+        rvReports.setNestedScrollingEnabled(false);
 
         tvStartDate = v.findViewById(R.id.txt_start_dt);
         tvEndDate = v.findViewById(R.id.txt_end_dt);

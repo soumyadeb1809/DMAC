@@ -2,15 +2,10 @@ package in.teamconsultants.dmac.ui.home.jobs;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +23,6 @@ import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.scanlibrary.ScanActivity;
 import com.scanlibrary.ScanConstants;
 import com.squareup.picasso.Picasso;
 
@@ -38,15 +32,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import in.teamconsultants.dmac.R;
-import in.teamconsultants.dmac.model.CreateJobResponse;
+import in.teamconsultants.dmac.network.dto.CreateJobResponse;
 import in.teamconsultants.dmac.model.FileCategoryObj;
-import in.teamconsultants.dmac.model.FileCategoryResponse;
+import in.teamconsultants.dmac.network.dto.FileCategoryResponse;
 import in.teamconsultants.dmac.model.FileTypeObj;
-import in.teamconsultants.dmac.model.FileTypeResponse;
-import in.teamconsultants.dmac.network.ApiClient;
-import in.teamconsultants.dmac.network.ApiInterface;
+import in.teamconsultants.dmac.network.dto.FileTypeResponse;
+import in.teamconsultants.dmac.network.api.ApiClient;
+import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.ui.home.spinner.SimpleSpinnerAdapter;
-import in.teamconsultants.dmac.ui.login.LoginActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
 import okhttp3.MediaType;

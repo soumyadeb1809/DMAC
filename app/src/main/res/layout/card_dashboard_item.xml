@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/back_white_accent_rounded"
+    android:clickable="true"
+    android:focusable="true"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:paddingStart="20dp"
+            android:layout_weight="1"
+            android:id="@+id/txt_file_category"
+            android:fontFamily="@font/montserrat_regular"
+            />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:layout_marginBottom="20dp"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_total"
+                    android:text="10"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/colorBlack"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Files"
+                    android:textSize="10sp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_bills_entered"
+                    android:text="10"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/colorBlack"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bills Entered"
+                    android:textSize="10sp"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/colorLighterGray"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:visibility="gone"
+        android:id="@+id/extra_space"/>
+
+
+</LinearLayout>

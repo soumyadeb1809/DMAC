@@ -1,27 +1,31 @@
-package in.teamconsultants.dmac.network;
+package in.teamconsultants.dmac.network.api;
 
 
 import java.util.List;
 import java.util.Map;
 
-import in.teamconsultants.dmac.model.AccountCountResponse;
-import in.teamconsultants.dmac.model.AccountDetailResponse;
-import in.teamconsultants.dmac.model.AccountSearchResult;
-import in.teamconsultants.dmac.model.CityResponse;
-import in.teamconsultants.dmac.model.CreateAccountResponse;
-import in.teamconsultants.dmac.model.CreateJobResponse;
-import in.teamconsultants.dmac.model.CreateReportResponse;
-import in.teamconsultants.dmac.model.FileCategoryResponse;
-import in.teamconsultants.dmac.model.FileCountResponse;
-import in.teamconsultants.dmac.model.FileSearchResponse;
-import in.teamconsultants.dmac.model.FileTypeResponse;
-import in.teamconsultants.dmac.model.LoginResponse;
-import in.teamconsultants.dmac.model.QuickRegisterResponse;
-import in.teamconsultants.dmac.model.ReUploadFileResponse;
-import in.teamconsultants.dmac.model.ReportTypeResponse;
-import in.teamconsultants.dmac.model.ReportsResponse;
-import in.teamconsultants.dmac.model.StateResponse;
-import in.teamconsultants.dmac.model.StatusResponse;
+import in.teamconsultants.dmac.network.dto.AccountCountResponse;
+import in.teamconsultants.dmac.network.dto.AccountDetailResponse;
+import in.teamconsultants.dmac.network.dto.AccountSearchResponse;
+import in.teamconsultants.dmac.network.dto.CityResponse;
+import in.teamconsultants.dmac.network.dto.CreateAccountResponse;
+import in.teamconsultants.dmac.network.dto.CreateJobResponse;
+import in.teamconsultants.dmac.network.dto.CreateReportResponse;
+import in.teamconsultants.dmac.network.dto.FileCategoryResponse;
+import in.teamconsultants.dmac.network.dto.FileCategoryWiseCountResponse;
+import in.teamconsultants.dmac.network.dto.FileCountResponse;
+import in.teamconsultants.dmac.network.dto.FileSearchResponse;
+import in.teamconsultants.dmac.network.dto.FileTypeResponse;
+import in.teamconsultants.dmac.network.dto.LoginResponse;
+import in.teamconsultants.dmac.network.dto.NotificationCountResponse;
+import in.teamconsultants.dmac.network.dto.NotificationTypeResponse;
+import in.teamconsultants.dmac.network.dto.NotificationsResponse;
+import in.teamconsultants.dmac.network.dto.QuickRegisterResponse;
+import in.teamconsultants.dmac.network.dto.ReUploadFileResponse;
+import in.teamconsultants.dmac.network.dto.ReportTypeResponse;
+import in.teamconsultants.dmac.network.dto.ReportsResponse;
+import in.teamconsultants.dmac.network.dto.StateResponse;
+import in.teamconsultants.dmac.network.dto.StatusResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -76,7 +80,7 @@ public interface ApiInterface {
     );
 
     @GET("get_accountList")
-    Call<AccountSearchResult> doAccountSearch(
+    Call<AccountSearchResponse> doAccountSearch(
             @HeaderMap Map<String, String> headers
     );
 
@@ -150,6 +154,7 @@ public interface ApiInterface {
             @Header("TOKEN") String token
     );
 
+
     @POST("create_report_request")
     @FormUrlEncoded
     Call<CreateReportResponse> doCreateReportRequest (
@@ -157,6 +162,30 @@ public interface ApiInterface {
             @FieldMap Map<String, String> fieldMap
     );
 
+
+    @GET("get_file_count_category_wise")
+    Call<FileCategoryWiseCountResponse> doGetFileCategoryCount (
+            @Header("TOKEN") String token
+    );
+
+
+    @GET("get_notification_type")
+    Call<NotificationTypeResponse> doGetNotificationsTypes (
+            @Header("TOKEN") String token
+    );
+
+
+    @GET("get_notification_count")
+    Call<NotificationCountResponse> doGetNotificationCount (
+            @Header("TOKEN") String token
+    );
+
+
+    @GET("get_notification_list")
+    Call<NotificationsResponse> doGetNotificationList (
+            @Header("TOKEN") String token,
+            @Query("notification_type_id") String notificationTypeId
+    );
 
 
 }

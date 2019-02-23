@@ -1,6 +1,8 @@
-package in.teamconsultants.dmac.model;
+package in.teamconsultants.dmac.network.dto;
 
 import java.util.ArrayList;
+
+import in.teamconsultants.dmac.model.StatusObj;
 
 public class StatusResponse {
 

@@ -1,4 +1,4 @@
-package in.teamconsultants.dmac.model;
+package in.teamconsultants.dmac.network.dto;
 
 public class CreateJobResponse {
     String Status;

@@ -16,18 +16,15 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.util.HashMap;
 
 import in.teamconsultants.dmac.R;
-import in.teamconsultants.dmac.model.FileTypeResponse;
-import in.teamconsultants.dmac.model.QuickRegisterResponse;
-import in.teamconsultants.dmac.network.ApiClient;
-import in.teamconsultants.dmac.network.ApiInterface;
+import in.teamconsultants.dmac.network.dto.QuickRegisterResponse;
+import in.teamconsultants.dmac.network.api.ApiClient;
+import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.ui.home.spinner.SimpleSpinnerAdapter;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;

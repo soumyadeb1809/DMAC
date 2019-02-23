@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.home.profile.ProfileFragment">
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -38,7 +38,7 @@
             />
 
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 
     <include layout="@layout/card_profile"/>

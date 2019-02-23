@@ -4,11 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,10 +26,9 @@ import java.util.Map;
 
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.model.CustomerJob;
-import in.teamconsultants.dmac.model.ReUploadFileResponse;
-import in.teamconsultants.dmac.network.ApiClient;
-import in.teamconsultants.dmac.network.ApiInterface;
-import in.teamconsultants.dmac.ui.registration.RegularRegistrationActivity;
+import in.teamconsultants.dmac.network.dto.ReUploadFileResponse;
+import in.teamconsultants.dmac.network.api.ApiClient;
+import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
 import okhttp3.MultipartBody;
@@ -66,6 +61,7 @@ public class FileReUploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_file_re_upload);
 
         toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

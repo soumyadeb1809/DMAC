@@ -1,7 +1,8 @@
-package in.teamconsultants.dmac.model;
+package in.teamconsultants.dmac.network.dto;
+
+import in.teamconsultants.dmac.model.UserData;
 
 public class LoginResponse {
-
     private String Status;
     private UserData UserData;
     private String TokenId;

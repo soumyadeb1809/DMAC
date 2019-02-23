@@ -1,12 +1,10 @@
 package in.teamconsultants.dmac.ui.home.jobs;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -27,19 +24,16 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import in.teamconsultants.dmac.R;
-import in.teamconsultants.dmac.model.CreateJobResponse;
 import in.teamconsultants.dmac.model.CustomerJob;
-import in.teamconsultants.dmac.model.FileSearchResponse;
-import in.teamconsultants.dmac.model.JobUploadFile;
+import in.teamconsultants.dmac.network.dto.FileSearchResponse;
 import in.teamconsultants.dmac.model.StatusObj;
-import in.teamconsultants.dmac.model.StatusResponse;
-import in.teamconsultants.dmac.network.ApiClient;
-import in.teamconsultants.dmac.network.ApiInterface;
+import in.teamconsultants.dmac.network.dto.StatusResponse;
+import in.teamconsultants.dmac.network.api.ApiClient;
+import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.ui.home.spinner.SimpleSpinnerAdapter;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;

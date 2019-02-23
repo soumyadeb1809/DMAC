@@ -1,6 +1,8 @@
-package in.teamconsultants.dmac.model;
+package in.teamconsultants.dmac.network.dto;
 
-public class BaseResponse {
+import java.io.Serializable;
+
+public class BaseResponse implements Serializable {
 
     private String Status;
     private String Message;

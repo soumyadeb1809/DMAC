@@ -3,7 +3,6 @@ package in.teamconsultants.dmac.ui.home.accounts;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,12 +19,12 @@ import java.util.HashMap;
 
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.model.Account;
-import in.teamconsultants.dmac.model.AccountSearchResult;
+import in.teamconsultants.dmac.network.dto.AccountSearchResponse;
 import in.teamconsultants.dmac.model.AccountSearchResultObj;
 import in.teamconsultants.dmac.model.StatusObj;
-import in.teamconsultants.dmac.model.StatusResponse;
-import in.teamconsultants.dmac.network.ApiClient;
-import in.teamconsultants.dmac.network.ApiInterface;
+import in.teamconsultants.dmac.network.dto.StatusResponse;
+import in.teamconsultants.dmac.network.api.ApiClient;
+import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
 import retrofit2.Call;
@@ -153,20 +152,20 @@ public class AccountsFragment extends Fragment {
         progress.setMessage("Loading accounts...");
         progress.setCancelable(false);
         progress.show();
-        Call<AccountSearchResult> accountSearchResultCall = apiInterface.doAccountSearch(Utility.getHeader(token));
+        Call<AccountSearchResponse> accountSearchResultCall = apiInterface.doAccountSearch(Utility.getHeader(token));
 
-        accountSearchResultCall.enqueue(new Callback<AccountSearchResult>() {
+        accountSearchResultCall.enqueue(new Callback<AccountSearchResponse>() {
             @Override
-            public void onResponse(Call<AccountSearchResult> call, Response<AccountSearchResult> response) {
-                AccountSearchResult accountSearchResult = response.body();
-                Log.d(AppConstants.LOG_TAG, "response-type: "+ gson.toJson(accountSearchResult));
-                accountSearchResultList = accountSearchResult.getSearchResultList();
+            public void onResponse(Call<AccountSearchResponse> call, Response<AccountSearchResponse> response) {
+                AccountSearchResponse accountSearchResponse = response.body();
+                Log.d(AppConstants.LOG_TAG, "response-type: "+ gson.toJson(accountSearchResponse));
+                accountSearchResultList = accountSearchResponse.getSearchResultList();
 
                 getAccountStatusList();
             }
 
             @Override
-            public void onFailure(Call<AccountSearchResult> call, Throwable t) {
+            public void onFailure(Call<AccountSearchResponse> call, Throwable t) {
                 progress.dismiss();
                 Log.d(AppConstants.LOG_TAG, "FAILED: "+t.getMessage());
             }

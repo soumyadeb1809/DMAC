@@ -8,8 +8,8 @@
     android:background="@color/colorLighterGray"
     tools:context=".ui.home.dashboard.customer.CustomerHomeActivity">
 
-<!--    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>-->
+   <include layout="@layout/toolbar_dash"
+        android:id="@+id/toolbar"/>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

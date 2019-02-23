@@ -1,4 +1,4 @@
-package in.teamconsultants.dmac.network;
+package in.teamconsultants.dmac.network.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

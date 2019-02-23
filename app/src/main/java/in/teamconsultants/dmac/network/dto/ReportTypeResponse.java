@@ -1,6 +1,8 @@
-package in.teamconsultants.dmac.model;
+package in.teamconsultants.dmac.network.dto;
 
 import java.util.List;
+
+import in.teamconsultants.dmac.model.ReportType;
 
 public class ReportTypeResponse extends BaseResponse {
 
