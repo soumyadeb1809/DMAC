@@ -1,15 +1,21 @@
 package in.teamconsultants.dmac.ui.home.reports;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,11 +25,13 @@ import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.model.Report;
 import in.teamconsultants.dmac.ui.home.jobs.JobDetailActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
+import in.teamconsultants.dmac.utils.DownloadUtils;
+import in.teamconsultants.dmac.utils.PermissionUtils;
 
 public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportsViewHolder> {
 
     private ArrayList<Report> reportsList;
-    private Context context;
+    private Activity activity;
 
     public class ReportsViewHolder extends RecyclerView.ViewHolder{
 
@@ -40,9 +48,9 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportsV
         }
     }
 
-    public ReportsAdapter(Context context, ArrayList<Report> reportsList) {
+    public ReportsAdapter(Activity activity, ArrayList<Report> reportsList) {
         this.reportsList = reportsList;
-        this.context = context;
+        this.activity = activity;
     }
 
     @NonNull
@@ -92,6 +100,29 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportsV
             }
 
             jobsViewHolder.tvDateRange.setText(finalDate);
+
+            final String fileTitle = report.getRt_name().replace(" ", "_") + "_"
+                    + report.getReport_id() + "_" + finalDate.replace(" ", "_");
+
+            String downloadPath = AppConstants.FILE_BASE_URL + report.getReport_path();
+            final Uri downloadUri = Uri.parse(downloadPath);
+
+            jobsViewHolder.grpDownload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(PermissionUtils.checkStoragePermissions(activity)) {
+                        if (null == report.getReport_path() || TextUtils.isEmpty(report.getReport_path()) || null == downloadUri) {
+                            Toast.makeText(activity, "No file available for download", Toast.LENGTH_SHORT).show();
+                        } else {
+                            DownloadUtils.downloadFile(activity, downloadUri, fileTitle);
+                        }
+                    }
+                    else {
+                        PermissionUtils.askForStoragePermissions(activity);
+                    }
+                }
+            });
+
 
         }
 

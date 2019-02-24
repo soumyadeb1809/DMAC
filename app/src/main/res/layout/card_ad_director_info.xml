@@ -20,7 +20,7 @@
             android:text="Full Name"
             android:textSize="12sp"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_director_full_name"
             />
@@ -33,7 +33,7 @@
             android:textSize="14sp"
             android:focusable="false"
             android:inputType="textPersonName"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_director_full_name"
             />
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:text="Email Address"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_director_email"
             />
@@ -67,7 +67,7 @@
             android:textSize="14sp"
             android:focusable="false"
             android:inputType="textEmailAddress"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_director_email"
             />
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:text="Phone Number"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_director_phone"
             />
@@ -101,7 +101,7 @@
             android:textSize="14sp"
             android:inputType="phone"
             android:focusable="false"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_director_phone"
             />
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:text="Aadhar Number"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             />
 
@@ -133,7 +133,7 @@
             android:textSize="14sp"
             android:inputType="phone"
             android:focusable="false"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_director_aadhar"
             />
@@ -155,7 +155,7 @@
             android:layout_height="wrap_content"
             android:text="PAN Number"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             />
 
@@ -166,7 +166,7 @@
             android:paddingEnd="16dp"
             android:textSize="14sp"
             android:inputType="phone"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_director_pan"
             />
@@ -194,7 +194,7 @@
                 android:layout_height="wrap_content"
                 android:text="Upload Aadhar Copy"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/label_aadhar_copy"
                 />
@@ -231,7 +231,7 @@
                 android:layout_height="wrap_content"
                 android:text="Upload PAN Copy"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/label_director_pan_copy"
                 />
@@ -286,7 +286,7 @@
                 android:layout_height="wrap_content"
                 android:text="Account Admin"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="2dp"
                 android:textColor="@color/colorBlack"

@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Business Details"
-        android:fontFamily="@font/montserrat_bold"
+        android:fontFamily="@font/ssp_bold"
         android:textColor="@color/colorBlack"
         android:textSize="20sp"
         android:layout_marginStart="20dp"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="Business Legal Name"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_business_name"
             />
@@ -50,7 +50,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_business_legal_name"
             />
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:text="Business Short Name"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_business_short_name"
             />
@@ -81,7 +81,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_business_short_name"
             />
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:text="Business Address"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_business_address"
             />
@@ -112,7 +112,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_business_address"
             android:maxLines="3"
@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:text="Select State"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/label_select_state"
                 />
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:text="Select City"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/label_select_city"
                 />
@@ -205,7 +205,7 @@
             android:layout_height="wrap_content"
             android:text="PIN Code"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_pin_code"
             />
@@ -217,7 +217,7 @@
             android:paddingEnd="16dp"
             android:textSize="14sp"
             android:inputType="number"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_pin_code"
             />
@@ -237,7 +237,7 @@
             android:layout_height="wrap_content"
             android:text="Business Entity Type"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_entity_type"
             />
@@ -269,7 +269,7 @@
             android:layout_height="wrap_content"
             android:text="Upload others copy"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_others_copy"
             />
@@ -308,7 +308,7 @@
                 android:layout_height="wrap_content"
                 android:text="Upload Partnership Deed Copy"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 />
             <LinearLayout
@@ -341,7 +341,7 @@
                 android:layout_height="wrap_content"
                 android:text="Upload Registration Certificate"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 />
             <LinearLayout
@@ -387,7 +387,7 @@
                     android:layout_height="wrap_content"
                     android:text="Upload MOA Copy"
                     android:textSize="12sp"
-                    android:fontFamily="@font/montserrat_regular"
+                    android:fontFamily="@font/ssp_regular"
                     android:layout_marginBottom="10dp"
                     />
                 <LinearLayout
@@ -420,7 +420,7 @@
                     android:layout_height="wrap_content"
                     android:text="Upload AOA Copy"
                     android:textSize="12sp"
-                    android:fontFamily="@font/montserrat_regular"
+                    android:fontFamily="@font/ssp_regular"
                     android:layout_marginBottom="10dp"
                     />
                 <LinearLayout
@@ -455,7 +455,7 @@
                 android:layout_height="wrap_content"
                 android:text="Upload Incorporation Certificate"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 />
             <LinearLayout
@@ -496,7 +496,7 @@
                 android:layout_height="wrap_content"
                 android:text="Do you need GST services?"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"/>
+                android:fontFamily="@font/ssp_regular"/>
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -510,7 +510,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes"
-                    android:fontFamily="@font/montserrat_regular"
+                    android:fontFamily="@font/ssp_regular"
                     android:id="@+id/rb_gst_yes"
                     android:layout_marginEnd="30dp"
                     />
@@ -552,7 +552,7 @@
                 android:layout_height="wrap_content"
                 android:text="Do you need Income Tax services?"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"/>
+                android:fontFamily="@font/ssp_regular"/>
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -566,7 +566,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yes"
-                    android:fontFamily="@font/montserrat_regular"
+                    android:fontFamily="@font/ssp_regular"
                     android:id="@+id/rb_it_yes"
                     android:layout_marginEnd="30dp"
                     />

@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Snap Image"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:textSize="18sp"
             android:textColor="@drawable/back_registration_alert"
             />
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Open Gallery"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:textColor="@drawable/back_registration_alert"
             android:textSize="18sp"
             />

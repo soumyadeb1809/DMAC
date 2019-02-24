@@ -38,7 +38,7 @@
                     android:text="Account Details"
                     android:textSize="24sp"
                     android:id="@+id/title_job_detail"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/ssp_bold"
                     android:textColor="@color/bannerFilter"
                     />
 

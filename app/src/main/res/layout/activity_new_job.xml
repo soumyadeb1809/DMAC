@@ -37,7 +37,7 @@
                     android:text="New File Upload"
                     android:textSize="24sp"
                     android:id="@+id/title_login"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/ssp_bold"
                     android:textColor="@color/bannerFilter"
                     />
 
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:text="Add File "
                     android:textColor="@color/colorBlack"
-                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:fontFamily="@font/ssp_semi_bold"
                     android:layout_marginStart="8dp"
                     />
 
@@ -110,7 +110,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/colorWhite"
                     android:text="Upload File"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/ssp_bold"
                     android:textStyle="bold"
                     />
             </LinearLayout>

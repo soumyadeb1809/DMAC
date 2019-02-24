@@ -20,6 +20,7 @@ import in.teamconsultants.dmac.model.User;
 import in.teamconsultants.dmac.model.UserData;
 import in.teamconsultants.dmac.ui.login.LoginActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
+import in.teamconsultants.dmac.utils.Utility;
 
 
 public class ProfileFragment extends Fragment {
@@ -66,7 +67,7 @@ public class ProfileFragment extends Fragment {
         tvAccountName = v.findViewById(R.id.txt_account_name);
         tvKeyUser = v.findViewById(R.id.txt_key_user);
 
-        grpLogout = v.findViewById(R.id.grp_logout);
+       /* grpLogout = v.findViewById(R.id.grp_logout);*/
 
         setOnClickListeners();
 
@@ -121,18 +122,23 @@ public class ProfileFragment extends Fragment {
 
     private void setOnClickListeners() {
 
+/*
         grpLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences.Editor editor = sp.edit();
+               */
+/* SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
                 editor.commit();
 
                 startActivity(new Intent(getActivity(), LoginActivity.class));
-                getActivity().finish();
+                getActivity().finish();*//*
+
+                Utility.logoutUser(getActivity());
             }
         });
+*/
 
     }
 

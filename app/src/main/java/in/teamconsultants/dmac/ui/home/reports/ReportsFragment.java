@@ -98,7 +98,7 @@ public class ReportsFragment extends Fragment {
 
     private void fetchReportTypes() {
 
-        progress.setMessage("Loading report types...");
+        progress.setMessage("Loading report...");
         progress.setCancelable(false);
         progress.show();
 
@@ -110,7 +110,7 @@ public class ReportsFragment extends Fragment {
                 ReportTypeResponse reportTypeResponse = response.body();
                 Log.d(AppConstants.LOG_TAG, "reportTypeResponse: " + gson.toJson(reportTypeResponse));
 
-                 reportTypeList = reportTypeResponse.getReport_type_list();
+                reportTypeList = reportTypeResponse.getReport_type_list();
                 reportTypesArr = new String[reportTypeList.size()];
                 reportTypeMap = new HashMap<>();
                 for(int i = 0; i < reportTypeList.size(); i++){
@@ -118,7 +118,7 @@ public class ReportsFragment extends Fragment {
                     reportTypeMap.put(reportTypeList.get(i).getRt_id(), reportTypeList.get(0).getRt_name());
                 }
 
-                progress.dismiss();
+                //progress.dismiss();
 
                 fetchReports();
 
@@ -136,10 +136,10 @@ public class ReportsFragment extends Fragment {
 
     private void fetchReports(){
 
-        progress.setMessage("Loading reports...");
+        /*progress.setMessage("Loading reports...");
         progress.setCancelable(false);
         progress.show();
-
+*/
         Call<ReportsResponse> reportsCall = apiInterface.doGetReportList(token);
         reportsCall.enqueue(new Callback<ReportsResponse>() {
             @Override
@@ -169,7 +169,7 @@ public class ReportsFragment extends Fragment {
 
         rvReports = v.findViewById(R.id.rv_reports);
 
-        ReportsAdapter reportsAdapter = new ReportsAdapter(getContext() , (ArrayList<Report>) reportList);
+        ReportsAdapter reportsAdapter = new ReportsAdapter(getActivity() , (ArrayList<Report>) reportList);
         rvReports.setLayoutManager(new LinearLayoutManager(getContext()));
         rvReports.setAdapter(reportsAdapter);
         rvReports.setNestedScrollingEnabled(false);

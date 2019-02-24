@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="File Category"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_file_category"
             />
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="File Type"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_file_type"
             />
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:text="Notes"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_pin_code"
             />
@@ -91,7 +91,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_notes"
             android:maxLength="100"
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:text="Attach a file below"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_attach_file"
             />
@@ -158,7 +158,7 @@
                     android:textSize="12sp"
                     android:id="@+id/btn_remove_director"
                     android:textColor="@color/colorWhite"
-                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:fontFamily="@font/ssp_semi_bold"
                     android:layout_marginStart="4dp"
                     />
 

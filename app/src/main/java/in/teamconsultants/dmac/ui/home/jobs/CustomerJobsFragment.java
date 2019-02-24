@@ -17,12 +17,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +54,8 @@ public class CustomerJobsFragment extends Fragment {
     private RelativeLayout grpNoResult;
     private Button btnClearSearch;
     private Button btnEditSearch;
+    private TextView tvMyFiles;
+    private LinearLayout grpBack;
 
     private ArrayList<CustomerJob> customerJobsList;
     private CustomerJobsAdapter customerJobsAdapter;
@@ -107,6 +111,15 @@ public class CustomerJobsFragment extends Fragment {
         btnClearSearch = v.findViewById(R.id.btn_clear_search);
         btnEditSearch = v.findViewById(R.id.btn_edit_search);
         grpNoResult = v.findViewById(R.id.grp_no_result);
+        tvMyFiles = v.findViewById(R.id.title_my_files);
+        grpBack = v.findViewById(R.id.grp_back);
+
+        if(FilesActivity.categoryName != null && !TextUtils.isEmpty(FilesActivity.categoryName)) {
+            tvMyFiles.setText(FilesActivity.categoryName);
+        }
+        else {
+            tvMyFiles.setText("My Files");
+        }
 
         setUpSearchAlert();
 
@@ -157,6 +170,13 @@ public class CustomerJobsFragment extends Fragment {
                 HashMap<String, Object> searchQuery = new HashMap<>();
                 searchFiles(searchQuery);
                 isSearched = false;
+            }
+        });
+
+        grpBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
             }
         });
 
@@ -299,11 +319,24 @@ public class CustomerJobsFragment extends Fragment {
         apiCall.enqueue(new Callback<FileSearchResponse>() {
             @Override
             public void onResponse(Call<FileSearchResponse> call, Response<FileSearchResponse> response) {
-                progress.dismiss();
+
                 Log.d(AppConstants.LOG_TAG, "response: "+ gson.toJson(response.body()));
                 FileSearchResponse fileSearchResponse = response.body();
 
-                customerJobsList = (ArrayList<CustomerJob>)fileSearchResponse.getSearchResultList();
+                ArrayList<CustomerJob> resultList = (ArrayList<CustomerJob>)fileSearchResponse.getSearchResultList();
+
+                customerJobsList = new ArrayList<>();
+
+                if(FilesActivity.categoryName != null && !TextUtils.isEmpty(FilesActivity.categoryName)) {
+                    for (CustomerJob customerJob : resultList) {
+                        if (customerJob.getFileCategory().equals(FilesActivity.categoryName)) {
+                            customerJobsList.add(customerJob);
+                        }
+                    }
+                }
+
+                progress.dismiss();
+
                 customerJobsAdapter = new CustomerJobsAdapter(getContext(), customerJobsList, statusMap);
 
                 rvCustomerJobs.setLayoutManager(new LinearLayoutManager(getContext()));

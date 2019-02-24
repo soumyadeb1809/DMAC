@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="Accounts"
             android:textSize="24sp"
-            android:fontFamily="@font/montserrat_bold"
+            android:fontFamily="@font/ssp_bold"
             android:textColor="@color/bannerFilter"
             />
 

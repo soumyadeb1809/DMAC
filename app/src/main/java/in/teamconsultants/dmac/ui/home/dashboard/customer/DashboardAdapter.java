@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.model.FileCategoryCount;
+import in.teamconsultants.dmac.ui.home.jobs.FilesActivity;
 import in.teamconsultants.dmac.ui.home.jobs.JobDetailActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
 
@@ -27,14 +29,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     public class DashboardViewHolder extends RecyclerView.ViewHolder{
         public TextView tvFileCategory, tvTotalCount, tvBillsEntered;
-        public View view;
+        public View extraSpace, view;
 
         public DashboardViewHolder(@NonNull View itemView) {
             super(itemView);
             tvFileCategory = itemView.findViewById(R.id.txt_file_category);
             tvTotalCount = itemView.findViewById(R.id.txt_total);
             tvBillsEntered = itemView.findViewById(R.id.txt_bills_entered);
-            view = itemView.findViewById(R.id.extra_space);
+            extraSpace = itemView.findViewById(R.id.extra_space);
+            view = itemView.findViewById(R.id.card_root);
         }
     }
 
@@ -51,10 +54,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DashboardViewHolder dashViewHolder, int position) {
+    public void onBindViewHolder(@NonNull DashboardViewHolder dashViewHolder, final int position) {
 
         if(null != fileCategoryCountList.get(position)) {
-            FileCategoryCount fileCategoryCount = fileCategoryCountList.get(position);
+            final FileCategoryCount fileCategoryCount = fileCategoryCountList.get(position);
 
             if(fileCategoryCount.getTotalCount() != null)
                 dashViewHolder.tvTotalCount.setText(fileCategoryCount.getTotalCount());
@@ -62,14 +65,26 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 dashViewHolder.tvTotalCount.setText("NA");
 
             dashViewHolder.tvFileCategory.setText(fileCategoryCount.getFileCategory());
+
+            dashViewHolder.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(AppConstants.LOG_TAG, "Clicked: " + position);
+                    Intent intent = new Intent(context, FilesActivity.class);
+                    intent.putExtra(AppConstants.INTENT_TAG.FILE_CATEGORY_ID, fileCategoryCount.getFileCategory());
+                    intent.putExtra(AppConstants.INTENT_TAG.FILE_CATEGORY_NAME, fileCategoryCount.getFileCategory());
+                    context.startActivity(intent);                }
+            });
         }
 
         if(position == (fileCategoryCountList.size() - 1)){
-            dashViewHolder.view.setVisibility(View.VISIBLE);
+            dashViewHolder.extraSpace.setVisibility(View.VISIBLE);
         }
         else {
-            dashViewHolder.view.setVisibility(View.GONE);
+            dashViewHolder.extraSpace.setVisibility(View.GONE);
         }
+
+
 
     }
 

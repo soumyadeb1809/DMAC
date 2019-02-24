@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text="NEW ACCOUNT"
                 android:textColor="@color/colorWhite"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/ssp_bold"
                 android:layout_marginStart="8dp"
                 />
 

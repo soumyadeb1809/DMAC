@@ -185,11 +185,17 @@ public class CustomerDashboardFragment extends Fragment {
             }
         });*/
 
+
+        progress.setMessage("Loading data...");
+        progress.setCancelable(false);
+        progress.show();
+
         Call<FileCategoryWiseCountResponse> categoryWiseCountCall = apiInterface.doGetFileCategoryCount(token);
 
         categoryWiseCountCall.enqueue(new Callback<FileCategoryWiseCountResponse>() {
             @Override
             public void onResponse(Call<FileCategoryWiseCountResponse> call, Response<FileCategoryWiseCountResponse> response) {
+                progress.dismiss();
                 FileCategoryWiseCountResponse fileCategoryWiseCountResponse = response.body();
                 fileCategoryCountList = fileCategoryWiseCountResponse.getFileCategoryCount();
                 initializeUi();
@@ -197,6 +203,7 @@ public class CustomerDashboardFragment extends Fragment {
 
             @Override
             public void onFailure(Call<FileCategoryWiseCountResponse> call, Throwable t) {
+                progress.dismiss();
                 Utility.showAlert(getActivity(), "Error", "An unknown error occurred, please try again");
                 Log.d(AppConstants.LOG_TAG, "FAILED: " + t.getMessage());
                 t.printStackTrace();

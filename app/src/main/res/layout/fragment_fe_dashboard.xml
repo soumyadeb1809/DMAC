@@ -27,7 +27,7 @@
                     android:text="Dashboard"
                     android:textSize="24sp"
                     android:id="@+id/title_login"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/ssp_bold"
                     android:textColor="@color/bannerFilter"
                     />
 
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="11"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/ssp_bold"
                 android:layout_marginTop="10dp"
                 android:textSize="36sp"
                 android:id="@+id/txt_total_accounts"
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:text="TOTAL ACCOUNTS"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 />
 
         </LinearLayout>
@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="76"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/ssp_bold"
                 android:layout_marginTop="10dp"
                 android:textSize="36sp"
                 android:id="@+id/txt_open_accounts"
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:text="OPEN ACCOUNTS"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 />
         </LinearLayout>
 

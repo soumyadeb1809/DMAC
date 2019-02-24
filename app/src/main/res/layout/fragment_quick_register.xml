@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:text="Quick Register"
                     android:textSize="24sp"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/ssp_bold"
                     android:textColor="@color/bannerFilter"
                     />
 
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="I agree with the DMAC Terms and Condictions"
                     android:textSize="12sp"
-                    android:fontFamily="@font/montserrat_regular"
+                    android:fontFamily="@font/ssp_regular"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="2dp"
                     android:textColor="@color/colorBlack"
@@ -94,7 +94,7 @@
                     android:textColor="@color/colorWhite"
                     android:text="Create Account"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/ssp_bold"
                     android:textStyle="bold"
                     />
             </LinearLayout>

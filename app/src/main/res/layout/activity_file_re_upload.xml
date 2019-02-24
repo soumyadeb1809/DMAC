@@ -25,7 +25,7 @@
             android:text="Re-Upload File"
             android:textSize="20sp"
             android:id="@+id/title_login"
-            android:fontFamily="@font/montserrat_bold"
+            android:fontFamily="@font/ssp_bold"
             android:textColor="@color/bannerFilter"
             />
 
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:text="File ID"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 />
 
@@ -70,7 +70,7 @@
                 android:paddingEnd="16dp"
                 android:textSize="14sp"
                 android:focusable="false"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:background="@drawable/back_et_form"
                 android:id="@+id/et_file_id"
                 />
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:text="File Name"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/label_business_name"
                 />
@@ -103,7 +103,7 @@
                 android:paddingEnd="16dp"
                 android:textSize="14sp"
                 android:focusable="false"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:background="@drawable/back_et_form"
                 android:id="@+id/et_file_name"
                 />
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:text="File Notes"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 />
 
@@ -134,7 +134,7 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:textSize="14sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:background="@drawable/back_et_form"
                 android:id="@+id/et_file_notes"
                 />
@@ -156,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:text="Choose new file"
                 android:textSize="12sp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/label_others_copy"
                 />
@@ -198,7 +198,7 @@
             android:text="Upload File"
             android:textSize="14sp"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/montserrat_bold"
+            android:fontFamily="@font/ssp_bold"
             android:layout_marginStart="16dp"
             />
 

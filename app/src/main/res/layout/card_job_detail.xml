@@ -29,7 +29,7 @@
             android:text="File Details"
             android:textSize="24sp"
             android:id="@+id/title_job_detail"
-            android:fontFamily="@font/montserrat_bold"
+            android:fontFamily="@font/ssp_bold"
             android:textColor="@color/bannerFilter"
             />
 
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="File Name"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:textSize="12sp"
             />
 
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NAME_OF_THE_JOB"
-            android:fontFamily="@font/montserrat_semi_bold"
+            android:fontFamily="@font/ssp_semi_bold"
             android:textSize="16sp"
             android:id="@+id/txt_file_name"
             android:textColor="@color/colorBlack"
@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="File Notes"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:textSize="12sp"
             />
 
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NOTES"
-            android:fontFamily="@font/montserrat_semi_bold"
+            android:fontFamily="@font/ssp_semi_bold"
             android:textSize="16sp"
             android:id="@+id/txt_file_notes"
             android:maxLines="2"
@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="File Category"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:textSize="12sp"
             />
 
@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="FILE_CATEGORY"
-            android:fontFamily="@font/montserrat_semi_bold"
+            android:fontFamily="@font/ssp_semi_bold"
             android:textSize="16sp"
             android:id="@+id/txt_file_category"
             android:textColor="@color/colorBlack"
@@ -133,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="File Type"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:textSize="12sp"
             />
 
@@ -141,7 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="FILE_TYPE"
-            android:fontFamily="@font/montserrat_semi_bold"
+            android:fontFamily="@font/ssp_semi_bold"
             android:textSize="16sp"
             android:id="@+id/txt_file_type"
             android:textColor="@color/colorBlack"
@@ -159,7 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Created On"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:textSize="12sp"
             />
 
@@ -167,7 +167,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DATE_CREATED_ON"
-            android:fontFamily="@font/montserrat_semi_bold"
+            android:fontFamily="@font/ssp_semi_bold"
             android:textSize="16sp"
             android:id="@+id/txt_created_on"
             android:textColor="@color/colorBlack"
@@ -186,7 +186,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Updated On"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:textSize="12sp"
             />
 
@@ -194,7 +194,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DATE_UPDATED_ON"
-            android:fontFamily="@font/montserrat_semi_bold"
+            android:fontFamily="@font/ssp_semi_bold"
             android:textSize="16sp"
             android:id="@+id/txt_updated_on"
             android:textColor="@color/colorBlack"
@@ -207,7 +207,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:text="Data Review in progress"
-        android:fontFamily="@font/montserrat_semi_bold"
+        android:fontFamily="@font/ssp_semi_bold"
         android:background="@drawable/back_blue_rounded"
         android:textColor="@color/colorWhite"
         android:paddingStart="10dp"
@@ -226,7 +226,7 @@
         android:background="@drawable/back_red"
         android:text="Re upload File"
         android:id="@+id/btn_re_upload_file"
-        android:fontFamily="@font/montserrat_bold"
+        android:fontFamily="@font/ssp_bold"
         android:textColor="@drawable/back_red"
         />
 

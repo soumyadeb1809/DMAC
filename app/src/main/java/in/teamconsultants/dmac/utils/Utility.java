@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
@@ -33,6 +35,7 @@ import java.util.regex.Pattern;
 
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.ui.home.jobs.NewJobActivity;
+import in.teamconsultants.dmac.ui.login.LoginActivity;
 import in.teamconsultants.dmac.ui.registration.RegisterActivity;
 import in.teamconsultants.dmac.ui.registration.RegularRegistrationActivity;
 import okhttp3.MediaType;
@@ -226,5 +229,26 @@ public class Utility {
     }
 
 
+    public static void logoutUser(final Activity activity){
+        SharedPreferences sp = activity.getSharedPreferences(AppConstants.SP.SP_USER_DATA, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sp.edit();
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activity);
+        alertBuilder.setTitle("Logout");
+        alertBuilder.setMessage("Are you sure you want to logout?");
+        alertBuilder.setPositiveButton("LOGOUT", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                editor.clear();
+                editor.commit();
+
+                activity.startActivity(new Intent(activity, LoginActivity.class));
+                activity.finish();
+            }
+        });
+        alertBuilder.setNegativeButton("CANCEL", null);
+        alertBuilder.show();
+
+    }
 
 }

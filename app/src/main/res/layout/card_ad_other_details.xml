@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Other Details"
-        android:fontFamily="@font/montserrat_bold"
+        android:fontFamily="@font/ssp_bold"
         android:textColor="@color/colorBlack"
         android:textSize="20sp"
         android:layout_marginStart="20dp"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="Previous year audited balance sheet"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_audited_balance_sheet"
             />

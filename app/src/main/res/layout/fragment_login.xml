@@ -6,6 +6,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.login.LoginFragment">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/accounting"
+        android:scaleType="centerCrop"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack"
+        android:alpha="0.7"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +29,7 @@
             android:layout_weight="2"
             >
 
-            <ImageView
+           <!-- <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/img_banner"
@@ -31,16 +44,17 @@
                 android:background="@color/bannerFilter"
                 android:alpha="0.55"
                 />
+-->
 
 
         </RelativeLayout>
 
-        <View
+      <!--  <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorWhite"
-            />
+            />-->
 
     </LinearLayout>
 
@@ -55,15 +69,30 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:gravity="center_vertical"
+
             >
+
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/dmac_logo_small"
+                android:layout_marginTop="40dp"
+                android:id="@+id/dmac_logo"
+                android:layout_marginStart="20dp"
+                />
+
+
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Welcome to "
                 android:id="@+id/txt_welcome_to"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:textSize="22sp"
+                android:layout_toEndOf="@id/dmac_logo"
                 android:textColor="@color/colorYellow"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="42dp"
@@ -76,7 +105,7 @@
                 android:layout_marginTop="42dp"
                 android:textSize="22sp"
                 android:text="DMAC"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/ssp_bold"
                 android:textColor="@color/colorYellow"
                 />
 
@@ -85,24 +114,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_welcome_to"
                 android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/dmac_logo"
                 android:text="Please login to continue"
                 android:layout_marginStart="24dp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:textColor="@color/colorYellow"
                 android:textSize="14sp"
                 />
-
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/dmac_logo_small"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="20dp"
-                    />
-
-
 
         </RelativeLayout>
 
@@ -123,8 +141,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="24dp"
                     android:minHeight="260dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="2dp">
+                    app:cardCornerRadius="10dp">
+                    <!--app:cardElevation="2dp"-->
 
                 </android.support.v7.widget.CardView>
 
@@ -132,11 +150,10 @@
                     android:layout_width="95dp"
                     android:layout_height="95dp"
                     android:background="@drawable/circle_white"
-                    android:elevation="2dp"
                     app:layout_anchor="@+id/cardView"
                     android:layout_marginBottom="10dp"
                     app:layout_anchorGravity="bottom|center" />
-
+                    <!--android:elevation="2dp"-->
 
             </android.support.design.widget.CoordinatorLayout>
 
@@ -168,7 +185,7 @@
                             android:text="Login"
                             android:textSize="24sp"
                             android:id="@+id/title_login"
-                            android:fontFamily="@font/montserrat_bold"
+                            android:fontFamily="@font/ssp_bold"
                             android:textColor="@color/bannerFilter"
                             />
 
@@ -198,7 +215,7 @@
                             android:background="@drawable/back_et_login"
                             android:drawableStart="@drawable/ic_username"
                             android:id="@+id/et_username"
-                            android:fontFamily="@font/montserrat_regular"
+                            android:fontFamily="@font/ssp_regular"
                             android:textSize="14sp"
                             android:textColorHint="@color/colorLightGray"
                             />
@@ -221,7 +238,7 @@
                             android:background="@drawable/back_et_login"
                             android:drawableStart="@drawable/ic_password"
                             android:id="@+id/et_password"
-                            android:fontFamily="@font/montserrat_regular"
+                            android:fontFamily="@font/ssp_regular"
                             android:textSize="14sp"
                             android:textColorHint="@color/colorLightGray"
                             />
@@ -251,7 +268,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Remember me"
                                     android:textSize="12sp"
-                                    android:fontFamily="@font/montserrat_regular"
+                                    android:fontFamily="@font/ssp_regular"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="2dp"
                                     android:textColor="@color/colorLightGray"
@@ -266,7 +283,7 @@
                                 android:textColor="@color/colorLightGray"
                                 android:textSize="12sp"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/montserrat_regular"
+                                android:fontFamily="@font/ssp_regular"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginEnd="4dp"
                                 android:layout_gravity="center_vertical"
@@ -288,8 +305,8 @@
                     >
 
                     <View
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="95dp"
+                        android:layout_height="95dp"
                         android:background="@drawable/circle_white"
                         android:elevation="0dp"
                         android:layout_marginBottom="10dp"
@@ -331,7 +348,7 @@
                 android:text="Don't have an account yet?"
                 android:textSize="12sp"
                 android:id="@+id/txt_create_account"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:textColor="@color/colorLightGray"
                 />
 
@@ -353,7 +370,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/colorWhite"
                     android:text="Create Account"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/ssp_bold"
                     android:textStyle="bold"
                     />
             </LinearLayout>
@@ -367,7 +384,7 @@
                 android:layout_marginTop="12dp"
                 android:textSize="12sp"
                 android:id="@+id/txt_privacy_policy"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:textColor="@color/colorLightGray"
                 />
 

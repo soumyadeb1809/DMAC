@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:text="PAN Number"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_pan_number"
             />
@@ -27,7 +27,7 @@
             android:paddingEnd="16dp"
             android:textSize="14sp"
             android:focusable="false"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_pan_number"
             />
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:text="Upload PAN Card Copy"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_pan_copy"
             />
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:text="TAN Number"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_tan_num"
             />
@@ -93,7 +93,7 @@
             android:paddingEnd="16dp"
             android:textSize="14sp"
             android:focusable="false"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_tan_num"
             />
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:text="ITR Password"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_itr_password"
             />
@@ -125,7 +125,7 @@
             android:paddingEnd="16dp"
             android:textSize="14sp"
             android:focusable="false"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_itr_password"
             />

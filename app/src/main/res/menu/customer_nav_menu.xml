@@ -16,7 +16,13 @@
         android:icon="@drawable/ic_jobs"/>
 
     <item
+        android:id="@+id/navigation_info"
+        android:title="Information"
+        android:icon="@drawable/ic_information"/>
+
+    <item
         android:id="@+id/navigation_profile"
         android:title="Profile"
         android:icon="@drawable/ic_user2"/>
+
 </menu>

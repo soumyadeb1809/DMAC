@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.registration.RegisterActivity"
             android:parentActivityName=".ui.login.LoginActivity"
@@ -47,17 +47,23 @@
         <activity
             android:name=".ui.home.jobs.NewJobActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".image.ImageDisplayActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.home.jobs.FileDetailsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.registration.RegularRegistrationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.home.jobs.FileReUploadActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.notification.NotificationActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".ui.home.dashboard.customer.CustomerHomeActivity"/>
+        <activity
+            android:name=".image.ImageDisplayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.home.jobs.FileDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.registration.RegularRegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.home.jobs.FileReUploadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.notification.NotificationActivity"
+            android:parentActivityName=".ui.home.dashboard.customer.CustomerHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.home.jobs.FilesActivity"></activity>
     </application>
 
 </manifest>

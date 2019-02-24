@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Business Legal Name"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:textSize="12sp"
                 />
 
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="BUSINESS_NAME"
-                android:fontFamily="@font/montserrat_semi_bold"
+                android:fontFamily="@font/ssp_semi_bold"
                 android:textSize="16sp"
                 android:maxLines="1"
                 android:id="@+id/txt_business_legal_name"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Business Short Name"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:textSize="12sp"
                 />
 
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="BUSINESS_NAME"
-                android:fontFamily="@font/montserrat_semi_bold"
+                android:fontFamily="@font/ssp_semi_bold"
                 android:textSize="16sp"
                 android:maxLines="1"
                 android:id="@+id/txt_business_short_name"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Customer Code"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:textSize="12sp"
                 />
 
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CUSTOMER_CODE"
-                android:fontFamily="@font/montserrat_semi_bold"
+                android:fontFamily="@font/ssp_semi_bold"
                 android:textSize="16sp"
                 android:maxLines="1"
                 android:id="@+id/txt_customer_code"
@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="City"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:textSize="12sp"
                 />
 
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GSTR_NUMBER"
-                android:fontFamily="@font/montserrat_semi_bold"
+                android:fontFamily="@font/ssp_semi_bold"
                 android:textSize="16sp"
                 android:maxLines="1"
                 android:id="@+id/txt_gstr_number"
@@ -126,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PAN Number"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:textSize="12sp"
                 />
 
@@ -134,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PAN_CARD_NUMBER"
-                android:fontFamily="@font/montserrat_semi_bold"
+                android:fontFamily="@font/ssp_semi_bold"
                 android:textSize="16sp"
                 android:maxLines="1"
                 android:id="@+id/txt_pan_number"
@@ -153,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Created On"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 android:textSize="12sp"
                 />
 
@@ -161,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4 Dec 2018"
-                android:fontFamily="@font/montserrat_semi_bold"
+                android:fontFamily="@font/ssp_semi_bold"
                 android:textSize="16sp"
                 android:maxLines="1"
                 android:id="@+id/txt_created_on"
@@ -175,7 +175,7 @@
             android:layout_height="wrap_content"
             android:text="NEW"
             android:textSize="10sp"
-            android:fontFamily="@font/montserrat_semi_bold"
+            android:fontFamily="@font/ssp_semi_bold"
             android:textColor="@color/colorWhite"
             android:background="@drawable/back_blue_rounded"
             android:paddingStart="10dp"

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLighterGray"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
     tools:context=".ui.home.profile.ProfileFragment">
 
@@ -22,7 +22,7 @@
             android:text="Profile"
             android:textSize="24sp"
             android:id="@+id/txt_profile"
-            android:fontFamily="@font/montserrat_bold"
+            android:fontFamily="@font/ssp_bold"
             android:textColor="@color/bannerFilter"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
@@ -43,7 +43,7 @@
 
     <include layout="@layout/card_profile"/>
 
-    <LinearLayout
+  <!--  <LinearLayout
         android:layout_width="274dp"
         android:layout_height="50dp"
         android:padding="12dp"
@@ -68,10 +68,10 @@
             android:text="Logout"
             android:textSize="14sp"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/montserrat_bold"
+            android:fontFamily="@font/ssp_bold"
             android:layout_marginStart="16dp"
             />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>

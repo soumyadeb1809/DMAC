@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:text="GSTR Number"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_gstr_number"
             />
@@ -26,7 +26,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_gstr_number"
             />
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:text="Upload GST Registration Copy"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_others_copy"
             />
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:text="GSTR Portal User ID"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_gstr_user_id"
             />
@@ -90,7 +90,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_gstr_user_id"
             />
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:text="GSTR Portal Password"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:layout_marginBottom="10dp"
             android:id="@+id/label_gstr_password"
             />
@@ -121,7 +121,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textSize="14sp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_gstr_password"
             />

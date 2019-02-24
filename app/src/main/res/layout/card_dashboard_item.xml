@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/back_white_accent_rounded"
+    android:id="@+id/card_root"
     android:clickable="true"
     android:focusable="true"
     >
@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
+        android:background="@drawable/back_white_accent_rounded"
         android:orientation="horizontal">
 
         <TextView
@@ -23,7 +24,7 @@
             android:paddingStart="20dp"
             android:layout_weight="1"
             android:id="@+id/txt_file_category"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/ssp_regular"
             />
 
 
@@ -47,14 +48,14 @@
                     android:id="@+id/txt_total"
                     android:text="10"
                     android:textSize="28sp"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/ssp_bold"
                     android:textColor="@color/colorBlack"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total Files"
+                    android:text="Total Bills"
                     android:textSize="10sp"
                     />
 
@@ -74,7 +75,7 @@
                     android:id="@+id/txt_bills_entered"
                     android:text="10"
                     android:textSize="28sp"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/ssp_bold"
                     android:textColor="@color/colorBlack"
                     />
 

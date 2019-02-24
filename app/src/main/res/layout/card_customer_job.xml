@@ -35,7 +35,7 @@
                     android:text="FILE_NAME_GOES_HERE"
                     android:textSize="16sp"
                     android:textColor="@color/colorBlack"
-                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:fontFamily="@font/ssp_semi_bold"
                     android:id="@+id/txt_file_name"
                     android:maxLines="2"
                     />
@@ -50,7 +50,7 @@
                     android:layout_marginTop="4dp"
                     android:textSize="24sp"
                     android:textColor="@color/colorBlack"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/ssp_bold"
                     android:id="@+id/txt_file_id"
                     android:maxLines="2"
                     />
@@ -67,7 +67,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="@font/montserrat_regular"
+                android:fontFamily="@font/ssp_regular"
                 />
 
             <LinearLayout
@@ -84,7 +84,7 @@
                     android:id="@+id/txt_date"
                     android:textSize="10sp"
                     android:layout_marginTop="6dp"
-                    android:fontFamily="@font/montserrat_regular"
+                    android:fontFamily="@font/ssp_regular"
                     />
 
                 <View
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:text="Data Review In Progress"
                     android:textSize="10sp"
-                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:fontFamily="@font/ssp_semi_bold"
                     android:textColor="@color/colorWhite"
                     android:background="@drawable/back_blue_rounded"
                     android:paddingStart="10dp"

@@ -1,71 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorLighterGray"
     tools:context=".ui.home.dashboard.customer.CustomerHomeActivity">
 
-   <include layout="@layout/toolbar_dash"
+
+    <include layout="@layout/toolbar_dash"
         android:id="@+id/toolbar"/>
 
-    <android.support.design.widget.CoordinatorLayout
+
+    <android.support.v4.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_below="@id/toolbar"
+        android:id="@+id/drawer">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/container"/>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            android:paddingTop="11dp"
-            android:paddingBottom="11dp"
-            android:clickable="true"
-            android:id="@+id/grp_new_job"
-            android:background="@drawable/back_new_job"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="20dp"
-            android:elevation="4dp"
+            android:layout_below="@+id/toolbar"
             >
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="28dp"
-                android:src="@drawable/ic_add_white"
-                />
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/navigation"
+                >
 
-            <TextView
-                android:layout_width="wrap_content"
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/container"/>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:paddingTop="11dp"
+                    android:paddingBottom="11dp"
+                    android:clickable="true"
+                    android:id="@+id/grp_new_job"
+                    android:background="@drawable/back_new_job"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="20dp"
+                    android:elevation="4dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_add_white"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NEW FILE"
+                        android:textColor="@color/colorWhite"
+                        android:fontFamily="@font/ssp_bold"
+                        android:layout_marginStart="8dp"
+                        />
+
+
+                </LinearLayout>
+            </android.support.design.widget.CoordinatorLayout>
+
+
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/navigation"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NEW FILE"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/montserrat_bold"
-                android:layout_marginStart="8dp"
+                android:layout_gravity="bottom"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white"
+                app:menu="@menu/customer_nav_menu"
                 />
 
 
-        </LinearLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
+        </RelativeLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@android:color/white"
-        app:menu="@menu/customer_nav_menu"
-        />
+        <android.support.design.widget.NavigationView
+            app:headerLayout="@layout/nav_drawer_header"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/navigation_view"
+            android:background="@color/colorWhite"
+            app:itemTextColor="@color/colorGray900"
+            app:itemIconTint="@color/colorGray900"
+            android:layout_gravity="start"
+            app:menu="@menu/customer_nav_drawer_menu"
+            >
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_gravity="bottom"
+                android:id="@+id/grp_logout"
+                android:layout_margin="20dp"
+                android:background="@drawable/back_remove"
+
+                >
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_logout"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorWhite"
+                    android:fontFamily="@font/ssp_bold"
+                    android:layout_marginStart="16dp"
+                    />
+
+            </LinearLayout>
+
+        </android.support.design.widget.NavigationView>
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+
+</RelativeLayout>
