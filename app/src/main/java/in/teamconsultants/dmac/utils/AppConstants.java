@@ -27,6 +27,10 @@ public class AppConstants {
         public static final String CAMSCANNER_INTENT_URI = "com.intsig.camscanner";
         public static final String FILE_CATEGORY_NAME = "file_category_name";
         public static final String FILE_CATEGORY_ID = "file_category_id";
+
+        public static final String INVOICE_NAME = "invoice_name";
+        public static final String INVOICE_AMOUNT = "invoice_amount";
+        public static final String INVOICE_ID = "invoice_id";
     }
 
     public static final String LOG_TAG = "DMAC_LOG";

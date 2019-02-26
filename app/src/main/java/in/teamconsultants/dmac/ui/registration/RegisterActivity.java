@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity implements QuickRegister
         }
         else {
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new QuickRegisterFragment()).commit();
-            getSupportActionBar().setTitle("Quick Registration");
+            //getSupportActionBar().setTitle("Quick Registration");
         }
 
     }

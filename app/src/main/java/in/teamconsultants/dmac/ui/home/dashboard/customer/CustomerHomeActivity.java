@@ -18,14 +18,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.teamconsultants.dmac.model.UserData;
-import in.teamconsultants.dmac.ui.home.InformationFragment;
-import in.teamconsultants.dmac.ui.home.dashboard.customer.CustomerDashboardFragment;
+import in.teamconsultants.dmac.ui.home.information.InformationFragment;
 import in.teamconsultants.dmac.ui.home.jobs.CustomerJobsFragment;
 import in.teamconsultants.dmac.ui.home.jobs.NewJobActivity;
 import in.teamconsultants.dmac.ui.home.profile.ProfileFragment;

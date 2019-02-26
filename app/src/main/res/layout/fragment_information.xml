@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.home.InformationFragment">
+    tools:context=".ui.home.information.InformationFragment">
 
 
     <LinearLayout
@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1"
+        android:id="@+id/grp_subscriptions"
         android:background="@drawable/back_white_accent_rounded"
         android:clickable="true"
         android:focusable="true"
@@ -40,6 +41,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1"
+        android:id="@+id/grp_rate_us"
         android:background="@drawable/back_white_accent_rounded"
         android:clickable="true"
         android:focusable="true"
@@ -71,6 +73,7 @@
         android:background="@drawable/back_white_accent_rounded"
         android:clickable="true"
         android:focusable="true"
+        android:id="@+id/grp_faq"
         >
 
         <TextView
@@ -97,6 +100,7 @@
         android:orientation="vertical"
         android:layout_weight="1"
         android:background="@drawable/back_white_accent_rounded"
+        android:id="@+id/grp_req_callback"
         android:clickable="true"
         android:focusable="true"
         >

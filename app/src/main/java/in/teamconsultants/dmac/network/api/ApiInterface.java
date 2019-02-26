@@ -16,6 +16,7 @@ import in.teamconsultants.dmac.network.dto.FileCategoryWiseCountResponse;
 import in.teamconsultants.dmac.network.dto.FileCountResponse;
 import in.teamconsultants.dmac.network.dto.FileSearchResponse;
 import in.teamconsultants.dmac.network.dto.FileTypeResponse;
+import in.teamconsultants.dmac.network.dto.InvoiceResponse;
 import in.teamconsultants.dmac.network.dto.LoginResponse;
 import in.teamconsultants.dmac.network.dto.NotificationCountResponse;
 import in.teamconsultants.dmac.network.dto.NotificationTypeResponse;
@@ -26,6 +27,7 @@ import in.teamconsultants.dmac.network.dto.ReportTypeResponse;
 import in.teamconsultants.dmac.network.dto.ReportsResponse;
 import in.teamconsultants.dmac.network.dto.StateResponse;
 import in.teamconsultants.dmac.network.dto.StatusResponse;
+import in.teamconsultants.dmac.network.dto.UpdateInvoicePaymentResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -187,5 +189,19 @@ public interface ApiInterface {
             @Query("notification_type_id") String notificationTypeId
     );
 
+
+    @GET("get_invoice_list")
+    Call<InvoiceResponse> doGetInvoiceList (
+            @Header("TOKEN") String token,
+            @Query("StatusId") String statusId
+    );
+
+    @POST("update_invoice_payment")
+    @FormUrlEncoded
+    Call<UpdateInvoicePaymentResponse> doUpdateInvoicePayment (
+            @Header("TOKEN") String token,
+            @Field("razorpay_payment_id") String razorpayPaymentId,
+            @Field("invoice_id") String invoiceId
+    );
 
 }

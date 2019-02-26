@@ -61,25 +61,33 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportsV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReportsViewHolder jobsViewHolder, int position) {
+    public void onBindViewHolder(@NonNull ReportsViewHolder viewHolder, int position) {
 
         if(null != reportsList.get(position)) {
             final Report report = reportsList.get(position);
-            jobsViewHolder.tvReportType.setText(report.getRt_name());
-            jobsViewHolder.tvStatus.setText(report.getStatus());
+            viewHolder.tvReportType.setText(report.getRt_name());
+            viewHolder.tvStatus.setText(report.getStatus());
+
+            if(report.getStatus().equals("Uploaded")){
+                viewHolder.tvStatus.setBackgroundResource(R.drawable.back_green_rounded);
+            }
+            else {
+                viewHolder.tvStatus.setBackgroundResource(R.drawable.back_light_blue_rounded);
+            }
+            
             String statusId = report.getStatus_id();
 
            /* if(statusId.equals("1")){
-                jobsViewHolder.tvStatus.setBackgroundResource(R.drawable.back_light_blue_rounded);
+                viewHolder.tvStatus.setBackgroundResource(R.drawable.back_light_blue_rounded);
             }
             else if(statusId.equals("3") || statusId.equals("6") || statusId.equals("10") || statusId.equals("11")){
-                jobsViewHolder.tvStatus.setBackgroundResource(R.drawable.back_orange_rounded);
+                viewHolder.tvStatus.setBackgroundResource(R.drawable.back_orange_rounded);
             }
             else if(statusId.equals("4") || statusId.equals("7") || statusId.equals("9")){
-                jobsViewHolder.tvStatus.setBackgroundResource(R.drawable.back_green_rounded);
+                viewHolder.tvStatus.setBackgroundResource(R.drawable.back_green_rounded);
             }
             else {
-                jobsViewHolder.tvStatus.setBackgroundResource(R.drawable.back_blue_rounded);
+                viewHolder.tvStatus.setBackgroundResource(R.drawable.back_blue_rounded);
             }*/
            
             String startDate = report.getReport_from();
@@ -99,7 +107,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportsV
                 e.printStackTrace();
             }
 
-            jobsViewHolder.tvDateRange.setText(finalDate);
+            viewHolder.tvDateRange.setText(finalDate);
 
             final String fileTitle = report.getRt_name().replace(" ", "_") + "_"
                     + report.getReport_id() + "_" + finalDate.replace(" ", "_");
@@ -107,7 +115,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportsV
             String downloadPath = AppConstants.FILE_BASE_URL + report.getReport_path();
             final Uri downloadUri = Uri.parse(downloadPath);
 
-            jobsViewHolder.grpDownload.setOnClickListener(new View.OnClickListener() {
+            viewHolder.grpDownload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(PermissionUtils.checkStoragePermissions(activity)) {

@@ -20,7 +20,7 @@
                 android:background="@color/colorWhite"
                 android:paddingStart="20dp"
                 android:paddingBottom="12dp"
-                android:elevation="1dp"
+                android:elevation="0dp"
                 >
 
                 <TextView

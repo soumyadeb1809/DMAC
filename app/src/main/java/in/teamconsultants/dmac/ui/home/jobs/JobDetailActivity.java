@@ -104,6 +104,21 @@ public class JobDetailActivity extends AppCompatActivity {
 
         tvFileStatus.setText(fileStatusStr);
 
+        String statusId = customerJob.getStatusId();
+
+        if(statusId.equals("1")){
+            tvFileStatus.setBackgroundResource(R.drawable.back_light_blue_rounded);
+        }
+        else if(statusId.equals("3") || statusId.equals("6") || statusId.equals("10") || statusId.equals("11")){
+            tvFileStatus.setBackgroundResource(R.drawable.back_orange_rounded);
+        }
+        else if(statusId.equals("4") || statusId.equals("7") || statusId.equals("9")){
+            tvFileStatus.setBackgroundResource(R.drawable.back_green_rounded);
+        }
+        else {
+            tvFileStatus.setBackgroundResource(R.drawable.back_blue_rounded);
+        }
+
         tvCreatedOn.setText(Utility.getFormattedDate(customerJob.getCreatedAt()));
         tvUpdatedOn.setText(Utility.getFormattedDate(customerJob.getUpdatedAt()));
 

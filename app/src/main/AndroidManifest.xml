@@ -11,10 +11,10 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/dmac_logo_small"
+        android:icon="@drawable/dmac_round"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@drawable/dmac_logo_small"
+        android:roundIcon="@drawable/dmac_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".splash.SplashActivity">
@@ -63,7 +63,15 @@
             android:name=".ui.notification.NotificationActivity"
             android:parentActivityName=".ui.home.dashboard.customer.CustomerHomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.home.jobs.FilesActivity"></activity>
+        <activity android:name=".ui.home.jobs.FilesActivity" />
+        <activity android:name=".ui.home.invoices.InvoicesActivity" />
+
+        <!-- Razor Pay API Key -->
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_live_bJFGaaJZC94Dz9" />
+
+        <activity android:name=".ui.payment.PaymentActivity"></activity>
     </application>
 
 </manifest>
