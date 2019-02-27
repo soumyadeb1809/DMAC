@@ -7,6 +7,11 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.razorpay.Checkout;
@@ -40,10 +45,27 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     private String currency;
     private String invoiceId;
 
+    private Toolbar toolbar;
+    private LinearLayout grpStatus, grpAction;
+    private TextView tvStatus, tvAction, tvInvoiceName, tvInvoiceAmount, tvInvoiceTitle, tvAmountTitle;
+    private ImageView imgStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         progress = new ProgressDialog(this);
 
@@ -64,7 +86,34 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         invoiceId = intent.getStringExtra(AppConstants.INTENT_TAG.INVOICE_ID);
         currency = "INR";
 
+        initializeUi();
+
         startPayment();
+
+    }
+
+    private void initializeUi() {
+
+        tvStatus = findViewById(R.id.txt_payment_status);
+        tvAction = findViewById(R.id.txt_action);
+        grpStatus = findViewById(R.id.grp_status);
+        imgStatus = findViewById(R.id.img_status);
+        grpAction = findViewById(R.id.grp_action);
+        tvInvoiceName = findViewById(R.id.txt_invoice_name);
+        tvInvoiceAmount = findViewById(R.id.txt_invoice_amount);
+        tvAmountTitle = findViewById(R.id.title_invoice_paid);
+        tvInvoiceTitle = findViewById(R.id.title_invoice_name);
+
+        grpAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+        grpStatus.setVisibility(View.GONE);
+        grpAction.setVisibility(View.GONE);
 
     }
 
@@ -121,7 +170,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             double invoiceAmountDbl = (double) Math.round(Double.parseDouble(invoiceAmount) * 100d) / 100d;
             Log.d(AppConstants.LOG_TAG, "Invoice amount in Rs:: " + String.valueOf(invoiceAmountDbl));
             double amountInPaise = invoiceAmountDbl * 100;
-            Log.d(AppConstants.LOG_TAG, "Invoice amount in Rs:: " + String.valueOf(amountInPaise));
+            Log.d(AppConstants.LOG_TAG, "Invoice amount in Paise:: " + String.valueOf(amountInPaise));
 
             options.put("amount", String.valueOf(amountInPaise));
 
@@ -145,7 +194,17 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     @Override
     public void onPaymentError(int errorCode, String response) {
         progress.dismiss();
-        Utility.showAlert(this, "Payment Failed", "Payment failed, reason: " + response );
+        //Utility.showAlert(this, "Payment Failed", "Payment failed, reason: " + response );
+
+        tvStatus.setText("Payment Failed");
+        tvAction.setText("Go Back");
+        tvInvoiceName.setText("Reason: " + response);
+        imgStatus.setImageResource(R.drawable.ic_failed);
+        tvAmountTitle.setVisibility(View.GONE);
+        tvInvoiceTitle.setVisibility(View.GONE);
+        tvInvoiceAmount.setVisibility(View.GONE);
+        grpAction.setVisibility(View.VISIBLE);
+        grpStatus.setVisibility(View.VISIBLE);
         Log.d(AppConstants.LOG_TAG, "RazorPay error code: " + errorCode);
         Log.d(AppConstants.LOG_TAG, "RazorPay error response: " + response);
     }
@@ -165,14 +224,33 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             public void onResponse(Call<UpdateInvoicePaymentResponse> call, Response<UpdateInvoicePaymentResponse> response) {
                 progress.dismiss();
                 UpdateInvoicePaymentResponse updateInvoicePaymentResponse = response.body();
-                if(!updateInvoicePaymentResponse.getStatus().equals(AppConstants.RESPONSE.FAILED)){
+                if(null != updateInvoicePaymentResponse.getStatus() && updateInvoicePaymentResponse.getStatus().equals(AppConstants.RESPONSE.FAILED)){
+                    /*Utility.showAlert(PaymentActivity.this, "Error",
+                            "Something went wrong while saving your data. Please contact DMAC support and share your payment ID: " + razorpayPaymentID);*/
 
-                    Utility.showAlert(PaymentActivity.this, "Payment Success: " + razorpayPaymentID, "Payment for invoice " + invoiceName + " was successful" );
+
+                    tvStatus.setText("Payment Failed");
+                    tvAction.setText("Go Back");
+                    tvInvoiceName.setText("Reason: " + "Failed to save payment details.\nPlease contact DMAC support and share your payment ID: " + razorpayPaymentID );
+                    imgStatus.setImageResource(R.drawable.ic_failed);
+                    tvAmountTitle.setVisibility(View.GONE);
+                    tvInvoiceTitle.setVisibility(View.GONE);
+                    tvInvoiceAmount.setVisibility(View.GONE);
+                    grpAction.setVisibility(View.VISIBLE);
+                    grpStatus.setVisibility(View.VISIBLE);
 
                 }
                 else {
-                    Utility.showAlert(PaymentActivity.this, "Error",
-                            "Something went wrong while saving your data. Please contact DMAC support and share your payment ID: " + razorpayPaymentID);
+                    //Utility.showAlert(PaymentActivity.this, "Payment Success: " + razorpayPaymentID, "Payment for invoice " + invoiceName + " was successful" );
+                    tvStatus.setText("Payment Successful");
+                    tvAction.setText("Finish");
+                    tvInvoiceAmount.setText("₹" +invoiceAmount);
+                    tvInvoiceName.setText(invoiceName);
+                    tvAmountTitle.setVisibility(View.VISIBLE);
+                    tvInvoiceTitle.setVisibility(View.VISIBLE);
+                    imgStatus.setImageResource(R.drawable.ic_checked);
+                    grpAction.setVisibility(View.VISIBLE);
+                    grpStatus.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -180,8 +258,18 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             public void onFailure(Call<UpdateInvoicePaymentResponse> call, Throwable t) {
                 progress.dismiss();
                 t.printStackTrace();
-                Utility.showAlert(PaymentActivity.this, "Error",
-                        "Something went wrong while saving your data. Please contact DMAC support and share your payment ID: " + razorpayPaymentID);
+                /*Utility.showAlert(PaymentActivity.this, "Error",
+                        "Something went wrong while saving your data. Please contact DMAC support and share your payment ID: " + razorpayPaymentID);*/
+
+                tvStatus.setText("Payment Failed");
+                tvAction.setText("Go  Back");
+                tvInvoiceName.setText("Reason: " + "Failed to save payment details.\nPlease contact DMAC support and share your payment ID: " + razorpayPaymentID );
+                imgStatus.setImageResource(R.drawable.ic_failed);
+                tvAmountTitle.setVisibility(View.GONE);
+                tvInvoiceTitle.setVisibility(View.GONE);
+                tvInvoiceAmount.setVisibility(View.GONE);
+                grpAction.setVisibility(View.VISIBLE);
+                grpStatus.setVisibility(View.VISIBLE);
             }
         });
 

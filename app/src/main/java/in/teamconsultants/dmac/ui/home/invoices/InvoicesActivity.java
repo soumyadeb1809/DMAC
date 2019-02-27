@@ -167,6 +167,8 @@ public class InvoicesActivity extends AppCompatActivity implements InvoiceAdapte
 
         invoiceAdapter = new InvoiceAdapter(InvoicesActivity.this, invoiceList);
         rvInvoices.setAdapter(invoiceAdapter);
+        selectedInvoice = null;
+        updatePayButtonVisibility(false);
 
     }
 

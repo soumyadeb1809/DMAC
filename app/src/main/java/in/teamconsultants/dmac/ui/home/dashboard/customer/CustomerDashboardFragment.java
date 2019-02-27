@@ -186,7 +186,7 @@ public class CustomerDashboardFragment extends Fragment {
         });*/
 
 
-        progress.setMessage("Loading data...");
+        progress.setMessage("Loading bills data...");
         progress.setCancelable(false);
         progress.show();
 

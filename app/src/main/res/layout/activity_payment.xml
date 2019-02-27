@@ -1,9 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.payment.PaymentActivity">
+    tools:context=".ui.payment.PaymentActivity"
+    android:background="@color/colorWhite">
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/toolbar_transparent_light"
+        android:id="@+id/toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/grp_status"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/img_status"
+            android:src="@drawable/ic_checked"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payment Successful"
+            android:textColor="@color/colorGray900"
+            android:fontFamily="@font/ssp_bold"
+            android:textSize="24dp"
+            android:layout_gravity="center"
+            android:id="@+id/txt_payment_status"
+            android:layout_marginTop="30dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invoice Name"
+            android:id="@+id/title_invoice_name"
+            android:fontFamily="@font/ssp_regular"
+            android:layout_marginTop="20dp"
+            android:textSize="12sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INVOICE NAME"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/ssp_regular"
+            android:id="@+id/txt_invoice_name"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount Paid"
+            android:fontFamily="@font/ssp_regular"
+            android:id="@+id/title_invoice_paid"
+            android:layout_marginTop="20dp"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AMOUNT PAID"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/ssp_regular"
+            android:id="@+id/txt_invoice_amount"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="274dp"
+        android:layout_height="50dp"
+        android:background="@drawable/back_create_account"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/grp_status"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="60dp"
+        android:orientation="horizontal"
+        android:id="@+id/grp_action"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/colorWhite"
+            android:text="Finish"
+            android:id="@+id/txt_action"
+            android:fontFamily="@font/ssp_bold"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+
+
+</RelativeLayout>
