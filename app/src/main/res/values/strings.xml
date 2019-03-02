@@ -7,4 +7,93 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
+
+    <!-- FAQ Questions -->
+    <string name="faq_q_1">What will be the charges per month? </string>
+    <string name="faq_q_2">Do I need to upload the documents daily?</string>
+    <string name="faq_q_3">Can I do it monthly once? </string>
+    <string name="faq_q_4">What all are the other services that you provide?</string>
+    <string name="faq_q_5">Will the GSTR return filing be done by you? </string>
+    <string name="faq_q_6">Is our data secure with you? </string>
+    <string name="faq_q_7">If I want to terminate this membership at any point of time will you give back our data? </string>
+    <string name="faq_q_8">What are the softwares on which you maintain our accounts? </string>
+    <string name="faq_q_9">Shall I have to obtain NOC from our auditor? </string>
+    <string name="faq_q_10">Will you file it returns also for us? </string>
+    <string name="faq_q_11">Will you get the accounts audited for us? </string>
+    <string name="faq_q_12">Is it necessary to change the auditor? </string>
+    <string name="faq_q_13">If I decide to terminate the contract with you, will you charge anything extra for giving back our data? </string>
+    <string name="faq_q_14">Will you provide the printed books for us? </string>
+    <string name="faq_q_15">How to contact your executive? </string>
+    <string name="faq_q_16">How many times your executive will support us? </string>
+    <string name="faq_q_17">Will your executive come and collect data from our house regularly? </string>
+    <string name="faq_q_18">Whether same executive will assist regularly to us? </string>
+    <string name="faq_q_19">What are the reports that you would provide to us? </string>
+    <string name="faq_q_20">Whether any reports would come through email? </string>
+    <string name="faq_q_21">Can I share the reports to my auditor? </string>
+    <string name="faq_q_22">How many times will you share the reports with us? </string>
+    <string name="faq_q_23"> In what format the reports are given? (pdf form or word or excel) </string>
+    <string name="faq_q_24">Can I pay your fees in cash to your executive? </string>
+    <string name="faq_q_25">If I forget to pay your fees in time, whether the data entered up to that date will be with you or will it be deleted? </string>
+    <string name="faq_q_26">If I don’t have data for 2 months in between shall I have to pay your monthly fees? </string>
+    <string name="faq_q_27">I have two proprietary firms, should I have to register separately for both?</string>
+    <string name="faq_q_28">I have two partnership firms, should I to register separately with you?</string>
+    <string name="faq_q_29">I have private limited company will you maintain roc books?</string>
+    <string name="faq_q_30">Will you assist with the MCA filings?</string>
+    <string name="faq_q_31">Will you support in getting way bills? </string>
+    <string name="faq_q_32">Are there any extra charges if the fees are not paid on time? </string>
+    <string name="faq_q_33">What would happen if I don’t pay the fees on time? </string>
+    <string name="faq_q_34">What are these categories given in this application? Can you elaborate on this? </string>
+    <string name="faq_q_35">Will the TDS return filing be done by you? </string>
+    <string name="faq_q_36">How do I rectify if there is a mistake in the entries you have done? </string>
+    <string name="faq_q_37">How do I send a request to get reports if I prefer to use offline reports? Are there any intervals or can I get it whenever I want? </string>
+    <string name="faq_q_38">How do I send a request to get reports if I prefer to use offline reports? Are there any intervals or can I get it whenever I want? </string>
+    <string name="faq_q_39">If I give my bank account details, are they safe with you? </string>
+    <string name="faq_q_40">Will you do bank reconciliation for us? </string>
+    <string name="faq_q_41">If the pre-dated bills are given today, will you charge it today or on the month of the bills? </string>
+
+
+    <!-- FAQ Answers -->
+    <string name="faq_a_1">Check in the fees structure explanation.</string>
+    <string name="faq_a_2">Depending on the number of vouchers you receive you can enter every day or every two days or every week or every month.</string>
+    <string name="faq_a_3">Depending on the number of vouchers you receive you can enter every day or every two days or every week or every month.</string>
+    <string name="faq_a_4">Depending on the number of vouchers you receive you can enter every day or every two days or every week or every month.</string>
+    <string name="faq_a_5">Explain the deliverables to the customer.</string>
+    <string name="faq_a_6"> Yes, it GSTR return filing is done by us.</string>
+    <string name="faq_a_7">Yes, it is encrypted and secure.</string>
+    <string name="faq_a_8">We will charge the fees for that month’s entries and we will give back all the reports we have prepared under your alias.</string>
+    <string name="faq_a_9">We maintain it on two platforms Tally and QuickBooks. The customer can choose as per his convenience. </string>
+    <string name="faq_a_10">NOC is not required from your auditor.</string>
+    <string name="faq_a_11">No, but we are expanding our portfolio of services and pretty soon will be able to assist you.</string>
+    <string name="faq_a_12">No, but we are expanding our portfolio of services and pretty soon will be able to assist you.</string>
+    <string name="faq_a_13">No, it is not necessary to change the auditor.</string>
+    <string name="faq_a_14">No, nothing extra will be charged. Only the entries made until that date will be calculated and after being paid for, we will give you back your data.</string>
+    <string name="faq_a_15">Yes, with an extra cost of printing and postal charges, we will provide you the printed books.</string>
+    <string name="faq_a_16">Give us your contact details and our nearest executive will assist you.</string>
+    <string name="faq_a_17">Our executive will support you during the registration only. He will give you a full walkthrough at that time itself.</string>
+    <string name="faq_a_18">No, he will not. You have to send pictures to us through the app.</string>
+    <string name="faq_a_19">No, the same executive will not assist you regularly.</string>
+    <string name="faq_a_20">Explain the deliverables.</string>
+    <string name="faq_a_21">Yes, if opted for offline reports, the reports would come through e-mail.</string>
+    <string name="faq_a_22">Yes, you can share your reports with your auditor. </string>
+    <string name="faq_a_23">Monthly reports will be sent to you. In case you need a report as on that date, as per your email request we will send you the report as on that date. </string>
+    <string name="faq_a_24">It would be sent to you in pdf format. </string>
+    <string name="faq_a_25">No, every payment is to be done online. No cash payments are encouraged.</string>
+    <string name="faq_a_26">No, the data will be secure. If you fail to pay the fees, we would terminate your registration and you have to re-register with us. All the reports as on the previous month would be given back to the customer after the payments as on that date are done. </string>
+    <string name="faq_a_27">No, you don’t need to pay for those two months. You pay based on the entries we do monthly. </string>
+    <string name="faq_a_28">You can maintain two companies in one single account and need not maintain two accounts. </string>
+    <string name="faq_a_29">You can maintain two companies in one single account and need not maintain two accounts. </string>
+    <string name="faq_a_30">No, but we are expanding our portfolio of services and pretty soon will be able to assist you. </string>
+    <string name="faq_a_31">No, but we are expanding our portfolio of services and pretty soon will be able to assist you.</string>
+    <string name="faq_a_32">No, but we are expanding our portfolio of services and pretty soon will be able to assist you. </string>
+    <string name="faq_a_33">The registrations gets cancelled and you will have to re-register. </string>
+    <string name="faq_a_34">The registrations gets cancelled and you will have to re-register. </string>
+    <string name="faq_a_35">Explain the types of vouchers and which all bills come under what.</string>
+    <string name="faq_a_36"> Yes, TDS return filing will be done by us.</string>
+    <string name="faq_a_37">You send us a mail regarding the mistake you think has happened and we will review it again. Our executives will call you and explain why we entered it that way or he will rectify it if the fault is on our side and inform you about the same.</string>
+    <string name="faq_a_38">Yes, you can send an email to us and we will give you the reports for that date. </string>
+    <string name="faq_a_39">Yes, all the details are encrypted and secure.</string>
+    <string name="faq_a_40">No, but we are expanding our portfolio of services and pretty soon will be able to assist you.</string>
+    <string name="faq_a_41">All the bills are charged as per the number of entries made in that month, even if the voucher is pre-dated or post-dated, it will be included in this month and charged accordingly.</string>
+
+
 </resources>

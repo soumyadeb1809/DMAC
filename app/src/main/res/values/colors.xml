@@ -6,6 +6,7 @@
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="bannerFilter">#1A237E</color>
+<!--    <color name="bannerFilter">#02314a</color>-->
     <color name="colorYellow">#FFD600</color>
     <color name="colorOrange">#FE6D23</color>
     <color name="colorLightGray">#ADADAD</color>

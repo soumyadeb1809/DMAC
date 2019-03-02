@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.teamconsultants.dmac.model.UserData;
+import in.teamconsultants.dmac.ui.home.about.AboutUsActivity;
 import in.teamconsultants.dmac.ui.home.information.InformationFragment;
 import in.teamconsultants.dmac.ui.home.jobs.CustomerJobsFragment;
 import in.teamconsultants.dmac.ui.home.jobs.NewJobActivity;
@@ -267,6 +268,10 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
 
             case R.id.navigation_notifications:
                 startActivity(new Intent(CustomerHomeActivity.this, NotificationActivity.class));
+                break;
+
+            case R.id.navigation_about_us:
+                startActivity(new Intent(CustomerHomeActivity.this, AboutUsActivity.class));
                 break;
         }
 

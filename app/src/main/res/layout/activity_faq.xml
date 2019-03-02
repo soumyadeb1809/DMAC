@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.faq.FAQActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingEnd="20dp"
+        android:elevation="2dp"
+        android:id="@+id/grp_topbar"
+        android:paddingStart="8dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:padding="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/grp_back"
+            android:background="@drawable/back_white_accent_rounded"
+            >
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/img_toggle"
+                android:src="@drawable/ic_back"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FAQs"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/grp_back"
+            android:textSize="24sp"
+            android:id="@+id/title_my_files"
+            android:fontFamily="@font/ssp_bold"
+            android:textColor="@color/bannerFilter"
+            />
+
+
+        <View
+            android:layout_width="48dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/grp_back"
+            android:layout_below="@id/title_my_files"
+            android:background="@color/colorYellow"
+            android:layout_marginTop="6dp"
+            android:id="@+id/title_my_jobs"
+            />
+
+
+    </RelativeLayout>
+    
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/grp_topbar"
+        android:id="@+id/rv_faq"
+        />
+
+</RelativeLayout>

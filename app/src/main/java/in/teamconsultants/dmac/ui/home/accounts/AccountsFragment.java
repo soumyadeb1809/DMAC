@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -52,6 +53,10 @@ public class AccountsFragment extends Fragment {
 
     private HashMap<String, String> statusMap;
 
+    private View v;
+
+    private SwipeRefreshLayout swipeRefresh;
+
     public AccountsFragment() {
         // Required empty public constructor
     }
@@ -67,7 +72,7 @@ public class AccountsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_accounts, container, false);
+        v = inflater.inflate(R.layout.fragment_accounts, container, false);
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
@@ -81,11 +86,9 @@ public class AccountsFragment extends Fragment {
 
         token = sharedPreferences.getString(AppConstants.SP.TAG_TOKEN, "");
 
-        //initializeUi(v);
+        initializeUi();
 
         getSearchResults();
-
-        rvAccountsList = v.findViewById(R.id.rv_accounts_list);
 
         //populateUi();
 
@@ -94,12 +97,16 @@ public class AccountsFragment extends Fragment {
 
     private void initializeUi() {
 
-        accountsList = new ArrayList<>();
-        accountListAdapter = new AccountListAdapter(getContext(), accountSearchResultList, statusMap);
+        rvAccountsList = v.findViewById(R.id.rv_accounts_list);
+        swipeRefresh = v.findViewById(R.id.swipe_refresh);
 
-        rvAccountsList.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvAccountsList.setAdapter(accountListAdapter);
-
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefresh.setRefreshing(false);
+                getSearchResults();
+            }
+        });
     }
 
     private void populateUi() {
@@ -149,7 +156,7 @@ public class AccountsFragment extends Fragment {
     }
 
     private void getSearchResults() {
-        progress.setMessage("Loading accounts...");
+        progress.setMessage("Fetching accounts...");
         progress.setCancelable(false);
         progress.show();
         Call<AccountSearchResponse> accountSearchResultCall = apiInterface.doAccountSearch(Utility.getHeader(token));
@@ -188,7 +195,12 @@ public class AccountsFragment extends Fragment {
                 for (StatusObj statusObj : statusResponse.getStatusList()){
                     statusMap.put(statusObj.getSId(), statusObj.getShortName());
                 }
-                initializeUi();
+
+                accountsList = new ArrayList<>();
+                accountListAdapter = new AccountListAdapter(getContext(), accountSearchResultList, statusMap);
+
+                rvAccountsList.setLayoutManager(new LinearLayoutManager(getContext()));
+                rvAccountsList.setAdapter(accountListAdapter);
             }
 
             @Override

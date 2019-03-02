@@ -1,6 +1,13 @@
 package in.teamconsultants.dmac.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Invoice {
+
+    @SerializedName("ShortName")
+    @Expose
+    private String status;
 
     private String IId;
     private String AccountId;
@@ -23,7 +30,7 @@ public class Invoice {
     private String BusinessShortName;
     private String PANNo;
     private String FullName;
-    private String ShortName;
+
 
     public String getIId() {
         return IId;
@@ -193,11 +200,11 @@ public class Invoice {
         FullName = fullName;
     }
 
-    public String getShortName() {
-        return ShortName;
+    public String getStatus() {
+        return status;
     }
 
-    public void setShortName(String shortName) {
-        ShortName = shortName;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

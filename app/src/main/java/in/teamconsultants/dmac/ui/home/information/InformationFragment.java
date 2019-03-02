@@ -1,7 +1,9 @@
 package in.teamconsultants.dmac.ui.home.information;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,14 +12,16 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import in.teamconsultants.dmac.R;
+import in.teamconsultants.dmac.ui.home.faq.FAQActivity;
 import in.teamconsultants.dmac.ui.home.invoices.InvoicesActivity;
+import in.teamconsultants.dmac.utils.AppConstants;
 
 
 public class InformationFragment extends Fragment {
 
     private View v;
 
-    private LinearLayout grpSubscriptions, grpFAQ;
+    private LinearLayout grpSubscriptions, grpFAQ, grpDMACSupport, grpRateUs;
 
     public InformationFragment() {
         // Required empty public constructor
@@ -46,6 +50,9 @@ public class InformationFragment extends Fragment {
     private void initializeUi() {
 
         grpSubscriptions = v.findViewById(R.id.grp_subscriptions);
+        grpFAQ = v.findViewById(R.id.grp_faq);
+        grpDMACSupport = v.findViewById(R.id.grp_dmac_support);
+        grpRateUs = v.findViewById(R.id.grp_rate_us);
 
         grpSubscriptions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +61,54 @@ public class InformationFragment extends Fragment {
             }
         });
 
+        grpFAQ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), FAQActivity.class));
+            }
+        });
+
+        grpDMACSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendEmail();
+            }
+        });
+
+        grpRateUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendUserToPayStore();
+            }
+        });
+
+    }
+
+
+    private void sendEmail(){
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                "mailto",AppConstants.INFO.DMAC_SUPPORT_EMAIL, null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, AppConstants.INFO.DMAC_SUPPORT_SUB);
+        emailIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        startActivity(Intent.createChooser(emailIntent, "DMAC Support"));
+    }
+
+    private void sendUserToPayStore(){
+        Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        // To count with Play market backstack, After pressing back button,
+        // to taken back to our application, we need to add following flags to intent.
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + getContext().getPackageName())));
+        }
     }
 
 }

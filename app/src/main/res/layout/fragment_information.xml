@@ -128,6 +128,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1"
+        android:id="@+id/grp_dmac_support"
         android:background="@drawable/back_white_accent_rounded"
         android:clickable="true"
         android:focusable="true"

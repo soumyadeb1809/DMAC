@@ -112,4 +112,16 @@ public class AppConstants {
         public static final String NO = "0";
     }
 
+    public static final class INFO {
+        public static final String DMAC_SUPPORT_EMAIL = "support@dmac.com";
+        public static final String DMAC_SUPPORT_SUB = "Support Request - DMAC App";
+    }
+
+    public static final class INVOICE {
+        public static final String STATUS_PAID = "22";
+        public static final String STATUS_NEW = "21";
+    }
+
+    public static final String ABOUT_US_URL = "http://teamconsultants.in/profile.php";
+
 }

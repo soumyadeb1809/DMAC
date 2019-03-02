@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,6 +38,8 @@ public class CustomerDashboardFragment extends Fragment {
 
 
     private OnCustomerDashboardFragmentInteractionListener mListener;
+
+    private SwipeRefreshLayout swipeRefresh;
 
     private TextView tvTotalFiles, tvVerifiedFiles;
 
@@ -80,7 +83,7 @@ public class CustomerDashboardFragment extends Fragment {
 
         gson = new Gson();
 
-        //initializeUi(v);
+        initializeUi();
 
         loadData();
 
@@ -107,9 +110,17 @@ public class CustomerDashboardFragment extends Fragment {
             fileCategoryCountList = new ArrayList<>();
         }
 
-        dashboardAdapter = new DashboardAdapter(getContext(), fileCategoryCountList);
-        rvDashboard.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvDashboard.setAdapter(dashboardAdapter);
+
+
+        swipeRefresh = v.findViewById(R.id.swipe_refresh);
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+                swipeRefresh.setRefreshing(false);
+            }
+        });
 
     }
 
@@ -198,7 +209,9 @@ public class CustomerDashboardFragment extends Fragment {
                 progress.dismiss();
                 FileCategoryWiseCountResponse fileCategoryWiseCountResponse = response.body();
                 fileCategoryCountList = fileCategoryWiseCountResponse.getFileCategoryCount();
-                initializeUi();
+                dashboardAdapter = new DashboardAdapter(getContext(), fileCategoryCountList);
+                rvDashboard.setLayoutManager(new LinearLayoutManager(getContext()));
+                rvDashboard.setAdapter(dashboardAdapter);
             }
 
             @Override

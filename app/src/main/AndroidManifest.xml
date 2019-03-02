@@ -71,7 +71,9 @@
             android:name="com.razorpay.ApiKey"
             android:value="rzp_live_bJFGaaJZC94Dz9" />
 
-        <activity android:name=".ui.payment.PaymentActivity"></activity>
+        <activity android:name=".ui.payment.PaymentActivity" />
+        <activity android:name=".ui.home.faq.FAQActivity" />
+        <activity android:name=".ui.home.about.AboutUsActivity"></activity>
     </application>
 
 </manifest>

@@ -1,8 +1,6 @@
 package in.teamconsultants.dmac.ui.home.invoices;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,7 +16,6 @@ import java.util.List;
 
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.model.Invoice;
-import in.teamconsultants.dmac.ui.home.jobs.FilesActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
 
 public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder> {
@@ -98,9 +95,9 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
 
             viewHolder.tvDate.setText(finalDate);
 
-            viewHolder.tvStatus.setText(invoice.getShortName());
+            viewHolder.tvStatus.setText(invoice.getStatus());
 
-            if(invoice.getShortName().equals("Paid")){
+            if(invoice.getStatus().equals("Paid")){
                viewHolder.tvStatus.setBackgroundResource(R.drawable.back_green_rounded);
             }
             else {

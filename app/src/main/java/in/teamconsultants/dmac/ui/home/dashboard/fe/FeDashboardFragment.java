@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,8 @@ public class FeDashboardFragment extends Fragment {
     private Map<String, String> headerMap;
     private Gson gson;
     private ImageView btnHelp;
+
+    private SwipeRefreshLayout swipeRefresh;
 
 
     public FeDashboardFragment() {
@@ -82,11 +85,20 @@ public class FeDashboardFragment extends Fragment {
         tvOpenAccounts = v.findViewById(R.id.txt_open_accounts);
         tvTotalAccounts = v.findViewById(R.id.txt_total_accounts);
         btnHelp = v.findViewById(R.id.btn_help);
+        swipeRefresh = v.findViewById(R.id.swipe_refresh);
 
         btnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Utility.showAlert(getContext(), "Support", "You can contact us on\nPhone: 9876543210\nEmail: support@dmac.com");
+            }
+        });
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefresh.setRefreshing(false);
+                loadData();
             }
         });
 

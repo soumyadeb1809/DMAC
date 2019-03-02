@@ -131,6 +131,13 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportsV
                 }
             });
 
+            if(report.getStatus().equals("Uploaded")){
+                viewHolder.grpDownload.setVisibility(View.VISIBLE);
+            }
+            else{
+                viewHolder.grpDownload.setVisibility(View.GONE);
+            }
+
 
         }
 

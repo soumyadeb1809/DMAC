@@ -6,217 +6,221 @@
     android:orientation="vertical"
     android:background="@color/colorLighterGray"
     tools:context=".ui.home.reports.ReportsFragment">
-
-    <android.support.v4.widget.NestedScrollView
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:id="@+id/swipe_refresh">
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-               <!-- <LinearLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="6dp"
-                    android:layout_marginTop="20dp"
+                    android:background="@color/colorWhite"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
+
+                   <!-- <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Reports"
-                        android:textSize="24sp"
-                        android:id="@+id/title_login"
+                        android:layout_weight="1"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reports"
+                            android:textSize="24sp"
+                            android:id="@+id/title_login"
+                            android:fontFamily="@font/ssp_bold"
+                            android:textColor="@color/bannerFilter"
+                            />
+
+
+                        <View
+                            android:layout_width="48dp"
+                            android:layout_height="3dp"
+                            android:background="@color/colorYellow"
+                            android:layout_marginTop="6dp"
+                            android:id="@+id/title_dash_login"
+                            />
+                    </LinearLayout>-->
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Request a new report"
+                        android:textColor="@color/colorBlack"
                         android:fontFamily="@font/ssp_bold"
-                        android:textColor="@color/bannerFilter"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
                         />
-
-
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="3dp"
-                        android:background="@color/colorYellow"
-                        android:layout_marginTop="6dp"
-                        android:id="@+id/title_dash_login"
-                        />
-                </LinearLayout>-->
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Request a new report"
-                    android:textColor="@color/colorBlack"
-                    android:fontFamily="@font/ssp_bold"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:layout_marginTop="12dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="4dp"
-                        android:layout_weight="1">
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:layout_marginTop="12dp">
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Select report category"
-                            android:fontFamily="@font/ssp_regular"
-                            android:textSize="12sp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="4dp"
-                        android:gravity="center"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Select report date range"
-                            android:fontFamily="@font/ssp_regular"
-                            android:textSize="12sp"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:id="@+id/grp_req_report">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:layout_weight="1">
+                            android:layout_height="wrap_content" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/back_et_form"
-                            android:layout_marginEnd="16dp"
-                            >
-                            <Spinner
+                            android:paddingStart="4dp"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Select report category"
+                                android:fontFamily="@font/ssp_regular"
+                                android:textSize="12sp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="4dp"
+                            android:gravity="center"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Select report date range"
+                                android:fontFamily="@font/ssp_regular"
+                                android:textSize="12sp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:id="@+id/grp_req_report">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/back_et_form"
+                                android:layout_marginEnd="16dp"
+                                >
+                                <Spinner
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:id="@+id/spinner_req_report"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:layout_weight="1">
+
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
-                                android:id="@+id/spinner_req_report"
+                                android:text="Start Date"
+                                android:gravity="center"
+                                android:clickable="true"
+                                android:background="@drawable/back_et_form"
+                                android:layout_weight="1"
+                                android:id="@+id/txt_start_dt"
+                                android:layout_marginEnd="8dp"
                                 />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:text="End Date"
+                                android:gravity="center"
+                                android:clickable="true"
+                                android:layout_marginStart="8dp"
+                                android:background="@drawable/back_et_form"
+                                android:layout_weight="1"
+                                android:id="@+id/txt_end_dt"
+                                />
+
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/back_create_account"
+                        android:clickable="true"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:id="@+id/btn_req_report"
                         android:gravity="center"
-                        android:layout_weight="1">
-
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        >
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:text="Start Date"
-                            android:gravity="center"
-                            android:clickable="true"
-                            android:background="@drawable/back_et_form"
-                            android:layout_weight="1"
-                            android:id="@+id/txt_start_dt"
-                            android:layout_marginEnd="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorWhite"
+                            android:text="Request Report"
+                            android:fontFamily="@font/ssp_bold"
+                            android:textStyle="bold"
                             />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:text="End Date"
-                            android:gravity="center"
-                            android:clickable="true"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/back_et_form"
-                            android:layout_weight="1"
-                            android:id="@+id/txt_end_dt"
-                            />
-
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:background="@color/colorLighterGray"/>
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/back_create_account"
-                    android:clickable="true"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:id="@+id/btn_req_report"
-                    android:gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorWhite"
-                        android:text="Request Report"
-                        android:fontFamily="@font/ssp_bold"
-                        android:textStyle="bold"
-                        />
-                </LinearLayout>
-
-                <View
+                <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="1.5dp"
-                    android:background="@color/colorLighterGray"/>
+                    android:layout_height="match_parent"
+                    android:id="@+id/rv_reports"
+                    />
 
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/rv_reports"
-                />
-
-        </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

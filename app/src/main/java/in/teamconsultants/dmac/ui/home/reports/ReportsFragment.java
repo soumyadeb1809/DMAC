@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -61,6 +62,7 @@ public class ReportsFragment extends Fragment {
     private RecyclerView rvReports;
 
     private Spinner spinReportType;
+    private SwipeRefreshLayout swipeRefresh;
 
     private TextView tvStartDate, tvEndDate;
     private LinearLayout grpReqReport;
@@ -89,6 +91,8 @@ public class ReportsFragment extends Fragment {
         sharedPreferences = getContext().getSharedPreferences(AppConstants.SP.SP_USER_DATA, MODE_PRIVATE);
         token = sharedPreferences.getString(AppConstants.SP.TAG_TOKEN, "");
         progress = new ProgressDialog(getContext());
+
+        initializeUi();
 
         fetchReportTypes();
 
@@ -119,6 +123,8 @@ public class ReportsFragment extends Fragment {
                 }
 
                 //progress.dismiss();
+                SimpleSpinnerAdapter reportTypeAdapter = new SimpleSpinnerAdapter(getActivity(), R.layout.spinner_layout_small, reportTypesArr);
+                spinReportType.setAdapter(reportTypeAdapter);
 
                 fetchReports();
 
@@ -149,7 +155,11 @@ public class ReportsFragment extends Fragment {
                 ReportsResponse reportsResponse = response.body();
                 reportList = reportsResponse.getSearchResultList();
 
-                initializeUi();
+                ReportsAdapter reportsAdapter = new ReportsAdapter(getActivity() , (ArrayList<Report>) reportList);
+                rvReports.setLayoutManager(new LinearLayoutManager(getContext()));
+                rvReports.setAdapter(reportsAdapter);
+                rvReports.setNestedScrollingEnabled(false);
+
 
             }
 
@@ -164,19 +174,11 @@ public class ReportsFragment extends Fragment {
     private void initializeUi() {
 
         spinReportType = v.findViewById(R.id.spinner_req_report);
-        SimpleSpinnerAdapter reportTypeAdapter = new SimpleSpinnerAdapter(getActivity(), R.layout.spinner_layout_small, reportTypesArr);
-        spinReportType.setAdapter(reportTypeAdapter);
-
         rvReports = v.findViewById(R.id.rv_reports);
-
-        ReportsAdapter reportsAdapter = new ReportsAdapter(getActivity() , (ArrayList<Report>) reportList);
-        rvReports.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvReports.setAdapter(reportsAdapter);
-        rvReports.setNestedScrollingEnabled(false);
-
         tvStartDate = v.findViewById(R.id.txt_start_dt);
         tvEndDate = v.findViewById(R.id.txt_end_dt);
         grpReqReport = v.findViewById(R.id.btn_req_report);
+        swipeRefresh = v.findViewById(R.id.swipe_refresh);
 
         setOnClickListeners();
 
@@ -202,6 +204,14 @@ public class ReportsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 validateUserInput();
+            }
+        });
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefresh.setRefreshing(false);
+                fetchReportTypes();
             }
         });
 

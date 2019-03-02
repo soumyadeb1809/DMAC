@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -25,7 +26,9 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +59,7 @@ public class CustomerJobsFragment extends Fragment {
     private Button btnEditSearch;
     private TextView tvMyFiles;
     private LinearLayout grpBack;
+    private SwipeRefreshLayout swipeRefresh;
 
     private ArrayList<CustomerJob> customerJobsList;
     private CustomerJobsAdapter customerJobsAdapter;
@@ -74,6 +78,8 @@ public class CustomerJobsFragment extends Fragment {
 
     boolean isSearched = false;
 
+    private View v;
+
     public CustomerJobsFragment() {
         // Required empty public constructor
     }
@@ -87,7 +93,7 @@ public class CustomerJobsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_customer_jobs, container, false);
+        v = inflater.inflate(R.layout.fragment_customer_jobs, container, false);
 
         // Initialize API Interface:
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -97,14 +103,16 @@ public class CustomerJobsFragment extends Fragment {
         token = sharedPreferences.getString(AppConstants.SP.TAG_TOKEN, "");
         progress = new ProgressDialog(getContext());
 
-        getFileStatusList(v);
+        initializeViews();
+        getFileStatusList();
+
 
 
         return v;
     }
 
 
-    private void initializeViews(View v) {
+    private void initializeViews() {
 
         rvCustomerJobs = v.findViewById(R.id.rv_customer_jobs);
         btnSearch = v.findViewById(R.id.btn_search_file);
@@ -113,6 +121,15 @@ public class CustomerJobsFragment extends Fragment {
         grpNoResult = v.findViewById(R.id.grp_no_result);
         tvMyFiles = v.findViewById(R.id.title_my_files);
         grpBack = v.findViewById(R.id.grp_back);
+        swipeRefresh = v.findViewById(R.id.swipe_refresh);
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefresh.setRefreshing(false);
+                getFileStatusList();
+            }
+        });
 
         if(FilesActivity.categoryName != null && !TextUtils.isEmpty(FilesActivity.categoryName)) {
             tvMyFiles.setText(FilesActivity.categoryName);
@@ -121,7 +138,7 @@ public class CustomerJobsFragment extends Fragment {
             tvMyFiles.setText("My Files");
         }
 
-        setUpSearchAlert();
+        //setUpSearchAlert();
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,51 +247,69 @@ public class CustomerJobsFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                String fileCreatedFrom = fileCreatedStartDt.getText().toString();
-                String fileCreatedTo = fileCreatedEndDt.getText().toString();
-                String fileUpdatedFrom = lastUpdatedStartDt.getText().toString();
-                String fileUpdatedTo = lastUpdatedEndDt.getText().toString();
-                String fileName = etFileName.getText().toString();
+                try {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-                String statusSelection = fileStatusSpinner.getSelectedItem().toString();
-                int statusId = -1;
+                    Date fileCreatedFromObj = dateFormat.parse(fileCreatedStartDt.getText().toString());
+                    Date fileCreatedObj = dateFormat.parse(fileCreatedEndDt.getText().toString());
+                    Date fileUpdatedFromObj = dateFormat.parse(lastUpdatedStartDt.getText().toString());
+                    Date fileUpdatedToObj = dateFormat.parse(lastUpdatedEndDt.getText().toString());
 
-                for (String key : statusMap.keySet()) {
-                    if (statusSelection.equals(statusMap.get(key))) {
-                        statusId = Integer.parseInt(key);
+                    SimpleDateFormat formatToSend = new SimpleDateFormat("yyyy-MM-dd");
+
+
+
+                    String fileCreatedFrom =  formatToSend.format(fileCreatedFromObj);
+                    String fileCreatedTo = formatToSend.format(fileCreatedObj);
+                    String fileUpdatedFrom = formatToSend.format(fileUpdatedFromObj);
+                    String fileUpdatedTo = formatToSend.format(fileUpdatedToObj);
+
+                    String fileName = etFileName.getText().toString();
+
+                    String statusSelection = fileStatusSpinner.getSelectedItem().toString();
+                    int statusId = -1;
+
+                    for (String key : statusMap.keySet()) {
+                        if (statusSelection.equals(statusMap.get(key))) {
+                            statusId = Integer.parseInt(key);
+                        }
                     }
-                }
 
-                HashMap<String, Object> searchQuery = new HashMap<>();
+                    HashMap<String, Object> searchQuery = new HashMap<>();
 
-                if (!fileCreatedFrom.equals(AppConstants.FILE_SEARCH.INVALID_START_DATE)) {
-                    searchQuery.put("JobCreatedFrom", fileCreatedFrom);
-                }
-                if (!fileCreatedTo.equals(AppConstants.FILE_SEARCH.INVALID_END_DATE)) {
-                    searchQuery.put("JobCreatedTo", fileCreatedTo);
-                }
-                if (!fileUpdatedFrom.equals(AppConstants.FILE_SEARCH.INVALID_START_DATE)) {
-                    searchQuery.put("JobUpdatedFrom", fileUpdatedFrom);
-                }
-                if (!fileUpdatedTo.equals(AppConstants.FILE_SEARCH.INVALID_END_DATE)) {
-                    searchQuery.put("JobUpdatedTo", fileUpdatedTo);
-                }
-                if (!TextUtils.isEmpty(fileName)) {
-                    searchQuery.put("FileName", fileName);
-                }
-                if (statusId != -1) {
-                    searchQuery.put("StatusId", statusId);
-                }
+                    if (!fileCreatedFrom.equals(AppConstants.FILE_SEARCH.INVALID_START_DATE)) {
+                        searchQuery.put("JobCreatedFrom", fileCreatedFrom);
+                    }
+                    if (!fileCreatedTo.equals(AppConstants.FILE_SEARCH.INVALID_END_DATE)) {
+                        searchQuery.put("JobCreatedTo", fileCreatedTo);
+                    }
+                    if (!fileUpdatedFrom.equals(AppConstants.FILE_SEARCH.INVALID_START_DATE)) {
+                        searchQuery.put("JobUpdatedFrom", fileUpdatedFrom);
+                    }
+                    if (!fileUpdatedTo.equals(AppConstants.FILE_SEARCH.INVALID_END_DATE)) {
+                        searchQuery.put("JobUpdatedTo", fileUpdatedTo);
+                    }
+                    if (!TextUtils.isEmpty(fileName)) {
+                        searchQuery.put("FileName", fileName);
+                    }
+                    if (statusId != -1) {
+                        searchQuery.put("StatusId", statusId);
+                    }
 
-                Log.d(AppConstants.LOG_TAG, "query: " + gson.toJson(searchQuery));
+                    Log.d(AppConstants.LOG_TAG, "query: " + gson.toJson(searchQuery));
 
-                progress.setMessage("Searching files...");
-                progress.setCancelable(false);
-                progress.show();
+                    progress.setMessage("Searching files...");
+                    progress.setCancelable(false);
+                    progress.show();
 
-                searchFiles(searchQuery);
-                isSearched = true;
-
+                    searchFiles(searchQuery);
+                    isSearched = true;
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                    Utility.showAlert(getActivity(), "Info", "Invalid date input");
+                    return;
+                }
 
 
             }
@@ -322,31 +357,34 @@ public class CustomerJobsFragment extends Fragment {
 
                 Log.d(AppConstants.LOG_TAG, "response: "+ gson.toJson(response.body()));
                 FileSearchResponse fileSearchResponse = response.body();
+                if(fileSearchResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    ArrayList<CustomerJob> resultList = (ArrayList<CustomerJob>) fileSearchResponse.getSearchResultList();
 
-                ArrayList<CustomerJob> resultList = (ArrayList<CustomerJob>)fileSearchResponse.getSearchResultList();
+                    customerJobsList = new ArrayList<>();
 
-                customerJobsList = new ArrayList<>();
-
-                if(FilesActivity.categoryName != null && !TextUtils.isEmpty(FilesActivity.categoryName)) {
-                    for (CustomerJob customerJob : resultList) {
-                        if (customerJob.getFileCategory().equals(FilesActivity.categoryName)) {
-                            customerJobsList.add(customerJob);
+                    if (FilesActivity.categoryName != null && !TextUtils.isEmpty(FilesActivity.categoryName)) {
+                        for (CustomerJob customerJob : resultList) {
+                            if (customerJob.getFileCategory().equals(FilesActivity.categoryName)) {
+                                customerJobsList.add(customerJob);
+                            }
                         }
                     }
-                }
 
-                progress.dismiss();
+                    progress.dismiss();
 
-                customerJobsAdapter = new CustomerJobsAdapter(getContext(), customerJobsList, statusMap);
+                    customerJobsAdapter = new CustomerJobsAdapter(getContext(), customerJobsList, statusMap);
 
-                rvCustomerJobs.setLayoutManager(new LinearLayoutManager(getContext()));
-                rvCustomerJobs.setAdapter(customerJobsAdapter);
+                    rvCustomerJobs.setLayoutManager(new LinearLayoutManager(getContext()));
+                    rvCustomerJobs.setAdapter(customerJobsAdapter);
 
-                if(customerJobsList.size() == 0){
-                    grpNoResult.setVisibility(View.VISIBLE);
+                    if (customerJobsList.size() == 0) {
+                        grpNoResult.setVisibility(View.VISIBLE);
+                    } else {
+                        grpNoResult.setVisibility(View.GONE);
+                    }
                 }
                 else {
-                    grpNoResult.setVisibility(View.GONE);
+                    //TODO: Handle token invalid case
                 }
             }
 
@@ -361,7 +399,7 @@ public class CustomerJobsFragment extends Fragment {
     }
 
 
-    private void getFileStatusList(final View v) {
+    private void getFileStatusList() {
 
         progress.setMessage("Loading files...");
         progress.setCancelable(false);
@@ -382,7 +420,7 @@ public class CustomerJobsFragment extends Fragment {
                     statusMap.put(statusObj.getSId(), statusObj.getShortName());
                     fileStatusArr[i] = statusObj.getShortName();
                 }
-                initializeViews(v);
+                setUpSearchAlert();
                 searchFiles(new HashMap<String, Object>());
             }
 
