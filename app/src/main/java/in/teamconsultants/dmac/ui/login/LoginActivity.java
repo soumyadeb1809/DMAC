@@ -1,7 +1,7 @@
 package in.teamconsultants.dmac.ui.login;
 
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import in.teamconsultants.dmac.R;

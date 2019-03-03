@@ -6,9 +6,11 @@ android {
         applicationId "in.teamconsultants.dmac"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.2"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionCode 5
+        versionName "1.5"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -16,6 +18,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+
+
+
 }
 
 repositories {
@@ -24,10 +31,10 @@ repositories {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
+    implementation 'com.google.android.material:material:1.1.0-alpha04'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -38,7 +45,7 @@ dependencies {
     implementation 'com.razorpay:checkout:1.5.2'
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
     implementation project(':scanlibrary')
 }

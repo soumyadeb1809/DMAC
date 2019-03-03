@@ -129,13 +129,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="2.5"
             >
-            <android.support.design.widget.CoordinatorLayout
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 >
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                     app:cardCornerRadius="10dp">
                     <!--app:cardElevation="2dp"-->
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
                 <View
                     android:layout_width="95dp"
@@ -155,16 +155,16 @@
                     app:layout_anchorGravity="bottom|center" />
                     <!--android:elevation="2dp"-->
 
-            </android.support.design.widget.CoordinatorLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-            <android.support.design.widget.CoordinatorLayout
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 >
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cardView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -295,7 +295,7 @@
 
                     </RelativeLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -333,7 +333,7 @@
 
                 </RelativeLayout>
 
-            </android.support.design.widget.CoordinatorLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </RelativeLayout>
 
         <RelativeLayout

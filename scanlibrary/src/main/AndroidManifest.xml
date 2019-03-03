@@ -20,8 +20,8 @@
         </activity>
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.scanlibrary.provider"
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="in.teamconsultants.dmac.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

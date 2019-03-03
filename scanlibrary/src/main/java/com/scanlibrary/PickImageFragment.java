@@ -10,7 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -118,9 +118,15 @@ public class PickImageFragment extends Fragment {
         boolean isDirectoryCreated = file.getParentFile().mkdirs();
         Log.d("", "openCamera: isDirectoryCreated: " + isDirectoryCreated);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+
+
             Uri tempFileUri = FileProvider.getUriForFile(getActivity().getApplicationContext(),
-                    "com.scanlibrary.provider", // As defined in Manifest
+                    "in.teamconsultants.dmac.provider" , // As defined in Manifest
                     file);
+
+            Log.i(PickImageFragment.class.getName() , BuildConfig.APPLICATION_ID +" - provider");
+
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempFileUri);
         } else {
             Uri tempFileUri = Uri.fromFile(file);
