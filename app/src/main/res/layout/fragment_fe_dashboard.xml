@@ -13,6 +13,7 @@
             android:background="@color/colorWhite"
             android:padding="20dp"
             android:elevation="2dp"
+            android:visibility="gone"
             android:gravity="center_vertical"
             >
 

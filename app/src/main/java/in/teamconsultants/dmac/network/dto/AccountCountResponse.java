@@ -1,6 +1,6 @@
 package in.teamconsultants.dmac.network.dto;
 
-public class AccountCountResponse {
+public class AccountCountResponse extends BaseResponse {
     private String StatusId;
     private String UserId;
     private int AccountCount;

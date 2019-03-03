@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.ui.home.accounts.AccountsFragment;
@@ -20,6 +22,7 @@ import in.teamconsultants.dmac.ui.registration.RegisterActivity;
 import in.teamconsultants.dmac.ui.registration.RegularRegistrationActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.PermissionUtils;
+import in.teamconsultants.dmac.utils.Utility;
 
 public class FeHomeActivity extends AppCompatActivity implements FeDashboardFragment.OnFeDashboardInteractionListener,
 AccountsFragment.OnAccountsInteractionListener, ProfileFragment.OnProfileFragmentInteractionListener{
@@ -30,6 +33,10 @@ AccountsFragment.OnAccountsInteractionListener, ProfileFragment.OnProfileFragmen
     private FeDashboardFragment feDashboardFragment;
     private AccountsFragment accountsFragment;
     private ProfileFragment profileFragment;
+
+    private Toolbar toolbar;
+    private TextView toolbarTitle;
+    private LinearLayout grpLogout;
 
     private LinearLayout grpNewAccount;
 
@@ -49,16 +56,19 @@ AccountsFragment.OnAccountsInteractionListener, ProfileFragment.OnProfileFragmen
                     case R.id.navigation_dashboard:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, feDashboardFragment).commit();
                         grpNewAccount.setVisibility(View.VISIBLE);
+                        toolbarTitle.setText("Dashboard");
                         return true;
 
                     case R.id.navigation_account_list:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, accountsFragment).commit();
                         grpNewAccount.setVisibility(View.VISIBLE);
+                        toolbarTitle.setText("Accounts");
                         return true;
 
                     case R.id.navigation_profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
                         grpNewAccount.setVisibility(View.GONE);
+                        toolbarTitle.setText("Profile");
                         return true;
                 }
             }
@@ -71,6 +81,13 @@ AccountsFragment.OnAccountsInteractionListener, ProfileFragment.OnProfileFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fe_home);
+
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        toolbarTitle = toolbar.findViewById(R.id.tool_title);
+        grpLogout = toolbar.findViewById(R.id.grp_logout);
 
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -91,6 +108,13 @@ AccountsFragment.OnAccountsInteractionListener, ProfileFragment.OnProfileFragmen
                 intent.putExtra(AppConstants.INTENT_TAG.REG_TYPE, AppConstants.REGISTRATION.REGULAR);
                 intent.putExtra(AppConstants.INTENT_TAG.REG_INITIATOR, AppConstants.REGISTRATION.INITIATOR.FE);
                 startActivity(intent);
+            }
+        });
+
+        grpLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utility.logoutUser(FeHomeActivity.this);
             }
         });
     }

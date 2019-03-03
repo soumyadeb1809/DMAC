@@ -132,7 +132,7 @@ public class ProfileFragment extends Fragment {
             role = "Customer";
         }
         tvRole.setText(role);
-        tvAccountName.setText(userData.getAccountId());
+        tvAccountName.setText(userData.getLogedInAccount());
         if(userData.getKeyUser().equals("1")) {
             tvKeyUser.setText("Yes");
         }

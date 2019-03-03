@@ -260,7 +260,7 @@ public class Utility {
         alertBuilder.setTitle("Session Expired");
         alertBuilder.setMessage("Your session has expired, please login again");
         alertBuilder.setCancelable(false);
-        alertBuilder.setPositiveButton("LOGIN", new DialogInterface.OnClickListener() {
+        alertBuilder.setPositiveButton("LOGIN AGAIN", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 editor.clear();

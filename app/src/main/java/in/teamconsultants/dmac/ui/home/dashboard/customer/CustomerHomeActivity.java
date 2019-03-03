@@ -122,12 +122,6 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
                         toolbarTitle.setText("Dashboard");
                         selectedFragment = customerDashboardFragment;
                         return true;
-/*
-                    case R.id.navigation_my_jobs:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, customerJobsFragment).commit();
-                        grpNewJob.setVisibility(View.VISIBLE);
-                        return true;
-*/
 
                     case R.id.navigation_profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();

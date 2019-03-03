@@ -135,10 +135,14 @@ public class FeDashboardFragment extends Fragment {
             public void onResponse(Call<AccountCountResponse> call, Response<AccountCountResponse> response) {
                 Log.d(AppConstants.LOG_TAG, "accountCountResponseCall: "+gson.toJson(response.body()));
                 AccountCountResponse accountCountResponse = response.body();
-
-                tvTotalAccounts.setText(String.valueOf(accountCountResponse.getAccountCount()));
-                spEditor.putString(AppConstants.SP.TAG_TOTAL_ACCOUNTS, String.valueOf(accountCountResponse.getAccountCount()));
-                spEditor.commit();
+                if (accountCountResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    tvTotalAccounts.setText(String.valueOf(accountCountResponse.getAccountCount()));
+                    spEditor.putString(AppConstants.SP.TAG_TOTAL_ACCOUNTS, String.valueOf(accountCountResponse.getAccountCount()));
+                    spEditor.commit();
+                }
+                else {
+                    Utility.forceLogoutUser(getActivity());
+                }
 
             }
 
@@ -161,10 +165,15 @@ public class FeDashboardFragment extends Fragment {
                 Log.d(AppConstants.LOG_TAG, "accountCountResponseCall: "+gson.toJson(response.body()));
                 AccountCountResponse accountCountResponse = response.body();
 
-                tvOpenAccounts.setText(String.valueOf(accountCountResponse.getAccountCount()));
-                spEditor.putString(AppConstants.SP.TAG_OPEN_ACCOUNTS, String.valueOf(accountCountResponse.getAccountCount()));
-                spEditor.commit();
-                progress.dismiss();
+                if(accountCountResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    tvOpenAccounts.setText(String.valueOf(accountCountResponse.getAccountCount()));
+                    spEditor.putString(AppConstants.SP.TAG_OPEN_ACCOUNTS, String.valueOf(accountCountResponse.getAccountCount()));
+                    spEditor.commit();
+                    progress.dismiss();
+                }
+                else {
+                    Utility.forceLogoutUser(getActivity());
+                }
             }
 
             @Override
