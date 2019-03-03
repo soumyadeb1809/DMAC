@@ -63,17 +63,28 @@
             android:name=".ui.notification.NotificationActivity"
             android:parentActivityName=".ui.home.dashboard.customer.CustomerHomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.home.jobs.FilesActivity" />
-        <activity android:name=".ui.home.invoices.InvoicesActivity" />
+        <activity android:name=".ui.home.jobs.FilesActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.home.invoices.InvoicesActivity"
+            android:screenOrientation="portrait"/>
 
         <!-- Razor Pay API Key -->
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_live_bJFGaaJZC94Dz9" />
 
-        <activity android:name=".ui.payment.PaymentActivity" />
-        <activity android:name=".ui.home.faq.FAQActivity" />
-        <activity android:name=".ui.home.about.AboutUsActivity"></activity>
+        <activity android:name=".ui.payment.PaymentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.home.faq.FAQActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.home.about.AboutUsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.home.accounts.ChangeAccountActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"
+            />
     </application>
 
 </manifest>

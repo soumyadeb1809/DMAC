@@ -251,4 +251,27 @@ public class Utility {
 
     }
 
+
+    public static void forceLogoutUser(final Activity activity){
+        SharedPreferences sp = activity.getSharedPreferences(AppConstants.SP.SP_USER_DATA, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sp.edit();
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activity);
+        alertBuilder.setTitle("Session Expired");
+        alertBuilder.setMessage("Your session has expired, please login again");
+        alertBuilder.setCancelable(false);
+        alertBuilder.setPositiveButton("LOGIN", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                editor.clear();
+                editor.commit();
+
+                activity.startActivity(new Intent(activity, LoginActivity.class));
+                activity.finish();
+            }
+        });
+        alertBuilder.show();
+
+    }
+
 }

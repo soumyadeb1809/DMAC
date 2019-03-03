@@ -384,7 +384,7 @@ public class CustomerJobsFragment extends Fragment {
                     }
                 }
                 else {
-                    //TODO: Handle token invalid case
+                    Utility.forceLogoutUser(getActivity());
                 }
             }
 
@@ -412,16 +412,21 @@ public class CustomerJobsFragment extends Fragment {
             @Override
             public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
                 StatusResponse statusResponse = response.body();
-                Log.d(AppConstants.LOG_TAG, "response-type: "+ gson.toJson(statusResponse));
-                statusMap = new HashMap<>();
-                fileStatusArr = new String[statusResponse.getStatusList().size()];
-                for (int i = 0; i < statusResponse.getStatusList().size(); i++) {
-                    StatusObj statusObj = statusResponse.getStatusList().get(i);
-                    statusMap.put(statusObj.getSId(), statusObj.getShortName());
-                    fileStatusArr[i] = statusObj.getShortName();
+                if(statusResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    Log.d(AppConstants.LOG_TAG, "response-type: " + gson.toJson(statusResponse));
+                    statusMap = new HashMap<>();
+                    fileStatusArr = new String[statusResponse.getStatusList().size()];
+                    for (int i = 0; i < statusResponse.getStatusList().size(); i++) {
+                        StatusObj statusObj = statusResponse.getStatusList().get(i);
+                        statusMap.put(statusObj.getSId(), statusObj.getShortName());
+                        fileStatusArr[i] = statusObj.getShortName();
+                    }
+                    setUpSearchAlert();
+                    searchFiles(new HashMap<String, Object>());
                 }
-                setUpSearchAlert();
-                searchFiles(new HashMap<String, Object>());
+                else {
+                    Utility.forceLogoutUser(getActivity());
+                }
             }
 
             @Override

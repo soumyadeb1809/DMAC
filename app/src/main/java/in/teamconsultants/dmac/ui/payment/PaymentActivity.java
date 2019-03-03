@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.network.api.ApiClient;
 import in.teamconsultants.dmac.network.api.ApiInterface;
+import in.teamconsultants.dmac.network.dto.TokenValidationResponse;
 import in.teamconsultants.dmac.network.dto.UpdateInvoicePaymentResponse;
 import in.teamconsultants.dmac.ui.home.invoices.InvoicesActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
@@ -88,7 +89,40 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
         initializeUi();
 
-        startPayment();
+        checkTokenValidity();
+
+
+    }
+
+    private void checkTokenValidity() {
+
+        progress.setMessage("Validating session...");
+        progress.setCancelable(false);
+        progress.show();
+
+        Call<TokenValidationResponse> tokenValidationCall = apiInterface.doCheckTokenValidity(token);
+
+        tokenValidationCall.enqueue(new Callback<TokenValidationResponse>() {
+            @Override
+            public void onResponse(Call<TokenValidationResponse> call, Response<TokenValidationResponse> response) {
+
+                TokenValidationResponse tokenValidationResponse = response.body();
+
+                if(tokenValidationResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
+                    startPayment();
+                }
+                else {
+                    Utility.forceLogoutUser(PaymentActivity.this);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TokenValidationResponse> call, Throwable t) {
+                progress.dismiss();
+                t.printStackTrace();
+                Utility.showAlert(PaymentActivity.this, "Error", "Something went wrong. Please try again");
+            }
+        });
 
     }
 
@@ -224,10 +258,21 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             public void onResponse(Call<UpdateInvoicePaymentResponse> call, Response<UpdateInvoicePaymentResponse> response) {
                 progress.dismiss();
                 UpdateInvoicePaymentResponse updateInvoicePaymentResponse = response.body();
-                if(null != updateInvoicePaymentResponse.getStatus() && updateInvoicePaymentResponse.getStatus().equals(AppConstants.RESPONSE.FAILED)){
-                    /*Utility.showAlert(PaymentActivity.this, "Error",
-                            "Something went wrong while saving your data. Please contact DMAC support and share your payment ID: " + razorpayPaymentID);*/
 
+                if(updateInvoicePaymentResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
+
+                    tvStatus.setText("Payment Successful");
+                    tvAction.setText("Finish");
+                    tvInvoiceAmount.setText("₹" +invoiceAmount);
+                    tvInvoiceName.setText(invoiceName);
+                    tvAmountTitle.setVisibility(View.VISIBLE);
+                    tvInvoiceTitle.setVisibility(View.VISIBLE);
+                    imgStatus.setImageResource(R.drawable.ic_checked);
+                    grpAction.setVisibility(View.VISIBLE);
+                    grpStatus.setVisibility(View.VISIBLE);
+
+                }
+                else {
 
                     tvStatus.setText("Payment Failed");
                     tvAction.setText("Go Back");
@@ -239,18 +284,6 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                     grpAction.setVisibility(View.VISIBLE);
                     grpStatus.setVisibility(View.VISIBLE);
 
-                }
-                else {
-                    //Utility.showAlert(PaymentActivity.this, "Payment Success: " + razorpayPaymentID, "Payment for invoice " + invoiceName + " was successful" );
-                    tvStatus.setText("Payment Successful");
-                    tvAction.setText("Finish");
-                    tvInvoiceAmount.setText("₹" +invoiceAmount);
-                    tvInvoiceName.setText(invoiceName);
-                    tvAmountTitle.setVisibility(View.VISIBLE);
-                    tvInvoiceTitle.setVisibility(View.VISIBLE);
-                    imgStatus.setImageResource(R.drawable.ic_checked);
-                    grpAction.setVisibility(View.VISIBLE);
-                    grpStatus.setVisibility(View.VISIBLE);
                 }
             }
 

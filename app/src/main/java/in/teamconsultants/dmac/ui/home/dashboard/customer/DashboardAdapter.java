@@ -75,6 +75,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     intent.putExtra(AppConstants.INTENT_TAG.FILE_CATEGORY_NAME, fileCategoryCount.getFileCategory());
                     context.startActivity(intent);                }
             });
+
+            if(fileCategoryCount.getValidatedFile() != null){
+                dashViewHolder.tvBillsEntered.setText(fileCategoryCount.getValidatedFile());
+            }
+            else {
+                dashViewHolder.tvBillsEntered.setText("NA");
+            }
         }
 
         if(position == (fileCategoryCountList.size() - 1)){

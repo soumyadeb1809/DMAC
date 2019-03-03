@@ -254,15 +254,7 @@ public class NewJobActivity extends AppCompatActivity {
     private void selectImage(int cardPosition) {
         Log.d(AppConstants.LOG_TAG, "Permission: " + Utility.isPermissionsGranted(NewJobActivity.this));
         if(Utility.isPermissionsGranted(NewJobActivity.this)) {
-            /*Intent intent = new Intent();
-            intent.putExtra("position", cardPosition);
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent, cardPosition);*/
-           /* int preference = ScanConstants.OPEN_MEDIA;
-            Intent intent = new Intent(NewJobActivity.this, ScanActivity.class);
-            intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
-            startActivityForResult(intent, cardPosition);*/
+
             Utility.showImageSelectionDialog(this, cardPosition);
 
         } else {
@@ -304,7 +296,7 @@ public class NewJobActivity extends AppCompatActivity {
                 }
                 else {
                     progress.dismiss();
-                    Log.d(AppConstants.LOG_TAG, "TOKEN EXPIRED!");
+                    Utility.forceLogoutUser(NewJobActivity.this);
                 }
 
             }
@@ -331,30 +323,32 @@ public class NewJobActivity extends AppCompatActivity {
 
     private void loadTypeSpinnerData() {
 
-       /* final Map<String, String> headers = new HashMap<>();
-        headers.put("TOKEN", "800c47de571bf0f49c80369ba34c520a");*/
-
         Call<FileTypeResponse> fileTypeResponseCall = apiInterface.doGetFileType(Utility.getHeader(token), "");
         fileTypeResponseCall.enqueue(new Callback<FileTypeResponse>() {
             @Override
             public void onResponse(Call<FileTypeResponse> call, Response<FileTypeResponse> response) {
 
                 FileTypeResponse fileTypeResponse = response.body();
-                Log.d(AppConstants.LOG_TAG, "response-type: "+ gson.toJson(fileTypeResponse));
-                if(fileTypeResponse.getFileTypeList() != null) {
-                    fileTypeList = fileTypeResponse.getFileTypeList();
+                Log.d(AppConstants.LOG_TAG, "response-type: " + gson.toJson(fileTypeResponse));
 
-                    fileTypeIdMap = new HashMap<>();
-                    for(FileTypeObj fileTypeObj: fileTypeList){
-                        fileTypeIdMap.put(fileTypeObj.getFileName(), fileTypeObj.getFTId());
+                if (fileTypeResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    if (fileTypeResponse.getFileTypeList() != null) {
+                        fileTypeList = fileTypeResponse.getFileTypeList();
+
+                        fileTypeIdMap = new HashMap<>();
+                        for (FileTypeObj fileTypeObj : fileTypeList) {
+                            fileTypeIdMap.put(fileTypeObj.getFileName(), fileTypeObj.getFTId());
+                        }
+
+                        initializeUi();
+                    } else {
+                        Log.d(AppConstants.LOG_TAG, "TOKEN EXPIRED!");
                     }
-
-                    initializeUi();
+                    progress.dismiss();
                 }
                 else {
-                    Log.d(AppConstants.LOG_TAG, "TOKEN EXPIRED!");
+                    Utility.forceLogoutUser(NewJobActivity.this);
                 }
-                progress.dismiss();
             }
 
             @Override
@@ -377,30 +371,8 @@ public class NewJobActivity extends AppCompatActivity {
             //Uri path = data.getData();
             Uri path = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
 
-            /*String wholeID = DocumentsContract.getDocumentId(path);
+            String filePath = Utility.getRealPathFromUri(this, path);
 
-            // Split at colon, use second item in the array
-            String id = wholeID.split(":")[1];
-
-            String[] column = { MediaStore.Images.Media.DATA };
-
-            // where id is equal to
-            String sel = MediaStore.Images.Media._ID + "=?";
-
-            Cursor cursor = getContentResolver().
-                    query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            column, sel, new String[]{ id }, null);*/
-
-            String filePath = "";
-
-            filePath = Utility.getRealPathFromUri(this, path);
-
-            /*int columnIndex = cursor.getColumnIndex(column[0]);
-
-            if (cursor.moveToFirst()) {
-                filePath = cursor.getString(columnIndex);
-            }
-*/
             Log.d(AppConstants.LOG_TAG, "Media Path Received: "+filePath);
 
             jobFileUriMap.put(requestCode, filePath);
@@ -510,7 +482,8 @@ public class NewJobActivity extends AppCompatActivity {
 
                 }
                 else {
-                    Utility.showAlert(NewJobActivity.this, "Error", "Something went wrong, please try again");
+                    //Utility.showAlert(NewJobActivity.this, "Error", "Something went wrong, please try again");
+                    Utility.forceLogoutUser(NewJobActivity.this);
                 }
             }
 

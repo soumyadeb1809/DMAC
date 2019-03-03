@@ -21,4 +21,5 @@
 
     <color name="colorGray900">#212121</color>
     <color name="colorLightBlue">#00B0FF</color>
+    <color name="colorTransGray">#99686868</color>
 </resources>

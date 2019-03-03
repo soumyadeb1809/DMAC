@@ -178,7 +178,12 @@ public class AccountDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<AccountDetailResponse> call, Response<AccountDetailResponse> response) {
                 accountDetails = response.body();
-                getCityData();
+                if(accountDetails.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    getCityData();
+                }
+                else {
+                    Utility.forceLogoutUser(AccountDetailActivity.this);
+                }
             }
 
             @Override

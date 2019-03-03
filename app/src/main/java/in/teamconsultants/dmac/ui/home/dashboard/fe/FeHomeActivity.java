@@ -1,6 +1,7 @@
 package in.teamconsultants.dmac.ui.home.dashboard.fe;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.fragment.app.Fragment;
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.ui.home.accounts.AccountsFragment;
 import in.teamconsultants.dmac.ui.home.jobs.CustomerJobsFragment;
@@ -17,10 +19,12 @@ import in.teamconsultants.dmac.ui.home.profile.ProfileFragment;
 import in.teamconsultants.dmac.ui.registration.RegisterActivity;
 import in.teamconsultants.dmac.ui.registration.RegularRegistrationActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
+import in.teamconsultants.dmac.utils.PermissionUtils;
 
 public class FeHomeActivity extends AppCompatActivity implements FeDashboardFragment.OnFeDashboardInteractionListener,
 AccountsFragment.OnAccountsInteractionListener, ProfileFragment.OnProfileFragmentInteractionListener{
 
+    private static final int PROFILE_PIC_REQ = 112;
     private BottomNavigationView navigation;
 
     private FeDashboardFragment feDashboardFragment;
@@ -97,7 +101,30 @@ AccountsFragment.OnAccountsInteractionListener, ProfileFragment.OnProfileFragmen
 
 
     @Override
-    public void onProfileFragmentInteraction(Uri uri) {
+    public void askForPermission(Fragment fragment) {
+        PermissionUtils.askForStoragePermissions(this, PROFILE_PIC_REQ);
+    }
+
+    @Override
+    public void updateNavigationProfileImg(String filePath) {
+        // Do nothing
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == PROFILE_PIC_REQ){
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
+
+            } else {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
+            }
+        }
 
     }
+
 }

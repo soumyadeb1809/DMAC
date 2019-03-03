@@ -24,9 +24,9 @@ public class PermissionUtils {
     }
 
 
-    public static void askForStoragePermissions(Activity activity){
+    public static void askForStoragePermissions(Activity activity, int requestCode){
         ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, }, 0);
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, }, requestCode);
 
         Toast.makeText(activity, "Please grant the requested permissions and try again", Toast.LENGTH_SHORT).show();
 

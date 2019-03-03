@@ -59,6 +59,9 @@ public class AppConstants {
         public static final String IS_USER_LOGGED_IN = "user_logged_in";
         public static final String TAG_USER_EMAIL = "email";
         public static final String TAG_USER_PASSWORD = "password";
+
+        public static final String TAG_USER_ACCOUNT_LIST = "account_list";
+
     }
 
     public static final class USER_ROLE {
@@ -70,7 +73,7 @@ public class AppConstants {
         public static final String INVALID_START_DATE = "Start Date";
         public static final String INVALID_END_DATE = "End Date";
         public static final int INVALID_STATUS = -1;
-        public static final String FAILED_STATUS_ID = "11";
+        public static final String FAILED_STATUS_ID = "10";
     }
 
     public static final String FILE_BASE_URL = "https://staging.teamconsultants.in/upload/";

@@ -169,24 +169,27 @@ public class FileReUploadActivity extends AppCompatActivity {
             public void onResponse(Call<ReUploadFileResponse> call, Response<ReUploadFileResponse> response) {
                 progress.dismiss();
                 ReUploadFileResponse reUploadFileResponse = response.body();
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(FileReUploadActivity.this);
-                if(reUploadFileResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
-                    builder.setMessage("File re-uploaded successfully");
-                    builder.setTitle("Success");
-                    builder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
+                if(reUploadFileResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(FileReUploadActivity.this);
+                    if (reUploadFileResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                        builder.setMessage("File re-uploaded successfully");
+                        builder.setTitle("Success");
+                        builder.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                        builder.setCancelable(false);
+                        builder.show();
+                    } else {
+                        if (reUploadFileResponse.getMessage().toLowerCase().contains("token expired")) {
+                            Utility.showAlert(FileReUploadActivity.this, "Failed", "Token expired");
                         }
-                    });
-                    builder.setCancelable(false);
-                    builder.show();
+                    }
                 }
                 else {
-                    if(reUploadFileResponse.getMessage().toLowerCase().contains("token expired")){
-                        Utility.showAlert(FileReUploadActivity.this, "Failed", "Token expired");
-                    }
+                    Utility.forceLogoutUser(FileReUploadActivity.this);
                 }
             }
 
@@ -206,11 +209,6 @@ public class FileReUploadActivity extends AppCompatActivity {
     // Select an image from gallery for the given image position:
     private void selectImage() {
         if(Utility.isPermissionsGranted(FileReUploadActivity.this)) {
-           /* Intent intent = new Intent();
-            intent.putExtra("position", IMG_REQUEST_CODE);
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent, IMG_REQUEST_CODE);*/
            Utility.showImageSelectionDialog(this, IMG_REQUEST_CODE);
         }
         else {
@@ -234,43 +232,15 @@ public class FileReUploadActivity extends AppCompatActivity {
 
         if(resultCode == RESULT_OK && data != null){
 
-            //Uri path = data.getData();
-
             Uri path = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
 
-           /* String wholeID = DocumentsContract.getDocumentId(path);
 
-            // Split at colon, use second item in the array
-            String id = wholeID.split(":")[1];
-
-            String[] column = { MediaStore.Images.Media.DATA };
-
-            // where id is equal to
-            String sel = MediaStore.Images.Media._ID + "=?";
-
-            Cursor cursor = getContentResolver().
-                    query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            column, sel, new String[]{ id }, null);*/
-
-            String filePath = "";
-
-            filePath = Utility.getRealPathFromUri(this, path);
-
-            /*int columnIndex = cursor.getColumnIndex(column[0]);
-
-            if (cursor.moveToFirst()) {
-                filePath = cursor.getString(columnIndex);
-            }*/
+            String filePath = Utility.getRealPathFromUri(this, path);
 
             Log.d(AppConstants.LOG_TAG, "Media Path Received: "+filePath);
 
-            //jobFileUriMap.put(requestCode, filePath);
-
             try {
 
-                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
-
-                //imgNewFile.setImageBitmap(bitmap);
                 Picasso.get().load(path).resize(0, 500).into(imgNewFile);
                 newFilePath = filePath;
 

@@ -166,9 +166,15 @@ public class AccountsFragment extends Fragment {
             public void onResponse(Call<AccountSearchResponse> call, Response<AccountSearchResponse> response) {
                 AccountSearchResponse accountSearchResponse = response.body();
                 Log.d(AppConstants.LOG_TAG, "response-type: "+ gson.toJson(accountSearchResponse));
-                accountSearchResultList = accountSearchResponse.getSearchResultList();
 
-                getAccountStatusList();
+                if(accountSearchResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    accountSearchResultList = accountSearchResponse.getSearchResultList();
+
+                    getAccountStatusList();
+                }
+                else {
+                    Utility.forceLogoutUser(getActivity());
+                }
             }
 
             @Override
@@ -191,16 +197,21 @@ public class AccountsFragment extends Fragment {
                 progress.dismiss();
                 StatusResponse statusResponse = response.body();
                 Log.d(AppConstants.LOG_TAG, "response-type: "+ gson.toJson(statusResponse));
-                statusMap = new HashMap<>();
-                for (StatusObj statusObj : statusResponse.getStatusList()){
-                    statusMap.put(statusObj.getSId(), statusObj.getShortName());
+                if(statusResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    statusMap = new HashMap<>();
+                    for (StatusObj statusObj : statusResponse.getStatusList()) {
+                        statusMap.put(statusObj.getSId(), statusObj.getShortName());
+                    }
+
+                    accountsList = new ArrayList<>();
+                    accountListAdapter = new AccountListAdapter(getContext(), accountSearchResultList, statusMap);
+
+                    rvAccountsList.setLayoutManager(new LinearLayoutManager(getContext()));
+                    rvAccountsList.setAdapter(accountListAdapter);
                 }
-
-                accountsList = new ArrayList<>();
-                accountListAdapter = new AccountListAdapter(getContext(), accountSearchResultList, statusMap);
-
-                rvAccountsList.setLayoutManager(new LinearLayoutManager(getContext()));
-                rvAccountsList.setAdapter(accountListAdapter);
+                else {
+                    Utility.forceLogoutUser(getActivity());
+                }
             }
 
             @Override

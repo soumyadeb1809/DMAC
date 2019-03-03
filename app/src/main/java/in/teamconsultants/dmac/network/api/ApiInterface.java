@@ -7,10 +7,12 @@ import java.util.Map;
 import in.teamconsultants.dmac.network.dto.AccountCountResponse;
 import in.teamconsultants.dmac.network.dto.AccountDetailResponse;
 import in.teamconsultants.dmac.network.dto.AccountSearchResponse;
+import in.teamconsultants.dmac.network.dto.BaseResponse;
 import in.teamconsultants.dmac.network.dto.CityResponse;
 import in.teamconsultants.dmac.network.dto.CreateAccountResponse;
 import in.teamconsultants.dmac.network.dto.CreateJobResponse;
 import in.teamconsultants.dmac.network.dto.CreateReportResponse;
+import in.teamconsultants.dmac.network.dto.CustomerAccountsResponse;
 import in.teamconsultants.dmac.network.dto.FileCategoryResponse;
 import in.teamconsultants.dmac.network.dto.FileCategoryWiseCountResponse;
 import in.teamconsultants.dmac.network.dto.FileCountResponse;
@@ -21,12 +23,15 @@ import in.teamconsultants.dmac.network.dto.LoginResponse;
 import in.teamconsultants.dmac.network.dto.NotificationCountResponse;
 import in.teamconsultants.dmac.network.dto.NotificationTypeResponse;
 import in.teamconsultants.dmac.network.dto.NotificationsResponse;
+import in.teamconsultants.dmac.network.dto.ProfileImageUploadResponse;
 import in.teamconsultants.dmac.network.dto.QuickRegisterResponse;
 import in.teamconsultants.dmac.network.dto.ReUploadFileResponse;
 import in.teamconsultants.dmac.network.dto.ReportTypeResponse;
 import in.teamconsultants.dmac.network.dto.ReportsResponse;
 import in.teamconsultants.dmac.network.dto.StateResponse;
 import in.teamconsultants.dmac.network.dto.StatusResponse;
+import in.teamconsultants.dmac.network.dto.SwitchAccountResponse;
+import in.teamconsultants.dmac.network.dto.TokenValidationResponse;
 import in.teamconsultants.dmac.network.dto.UpdateInvoicePaymentResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -196,6 +201,7 @@ public interface ApiInterface {
             @Query("StatusId") String statusId
     );
 
+
     @POST("update_invoice_payment")
     @FormUrlEncoded
     Call<UpdateInvoicePaymentResponse> doUpdateInvoicePayment (
@@ -203,5 +209,34 @@ public interface ApiInterface {
             @Field("razorpay_payment_id") String razorpayPaymentId,
             @Field("invoice_id") String invoiceId
     );
+
+
+    @POST("upload_profile_pic")
+    @Multipart
+    Call<ProfileImageUploadResponse> doUploadProfilePic(
+            @Header("TOKEN") String token,
+            @Part MultipartBody.Part profileImage
+    );
+
+
+    @GET("get_account_list_for_customer_admin")
+    Call<CustomerAccountsResponse> doGetCustomerAccountList (
+            @Header("TOKEN") String token
+    );
+
+
+    @GET("validate_token")
+    Call<TokenValidationResponse> doCheckTokenValidity (
+            @Header("TOKEN") String token
+    );
+
+
+    @POST("switch_account")
+    @FormUrlEncoded
+    Call<SwitchAccountResponse> doSwitchCustomerAccount (
+            @Header("TOKEN") String token,
+            @Field("AccountId") String accountId
+    );
+
 
 }

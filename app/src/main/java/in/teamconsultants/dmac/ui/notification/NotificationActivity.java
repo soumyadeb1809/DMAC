@@ -115,7 +115,8 @@ public class NotificationActivity extends AppCompatActivity {
                     
                 }
                 else {
-                    Utility.showAlert(NotificationActivity.this, "Failed", "Something went wrong, please try again");
+                    //Utility.showAlert(NotificationActivity.this, "Failed", "Something went wrong, please try again");
+                    Utility.forceLogoutUser(NotificationActivity.this);
                 }
             }
 
@@ -171,7 +172,8 @@ public class NotificationActivity extends AppCompatActivity {
                     setUpNotificationsList();
                 }
                 else {
-                    Utility.showAlert(NotificationActivity.this, "Failed", "Something went wrong, please try again");
+                    //Utility.showAlert(NotificationActivity.this, "Failed", "Something went wrong, please try again");
+                    Utility.forceLogoutUser(NotificationActivity.this);
                 }
 
             }

@@ -6,41 +6,10 @@ import in.teamconsultants.dmac.model.AccountDataObj;
 import in.teamconsultants.dmac.model.DirectorDataObj;
 import in.teamconsultants.dmac.model.KeyUserDataObj;
 
-public class AccountDetailResponse {
-
-    private String Status;
-    private String Message;
+public class AccountDetailResponse extends BaseResponse {
     private AccountDataObj AccountData;
     private List<DirectorDataObj> DirectorData;
     private KeyUserDataObj KeyUserData;
-
-    public AccountDetailResponse() {
-    }
-
-    public AccountDetailResponse(String status, String message, AccountDataObj accountData,
-                                 List<DirectorDataObj> directorData, KeyUserDataObj keyUserData) {
-        Status = status;
-        Message = message;
-        AccountData = accountData;
-        DirectorData = directorData;
-        KeyUserData = keyUserData;
-    }
-
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String status) {
-        Status = status;
-    }
-
-    public String getMessage() {
-        return Message;
-    }
-
-    public void setMessage(String message) {
-        Message = message;
-    }
 
     public AccountDataObj getAccountData() {
         return AccountData;

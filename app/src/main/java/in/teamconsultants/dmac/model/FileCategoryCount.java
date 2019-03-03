@@ -4,6 +4,7 @@ public class FileCategoryCount {
 
     private String TotalCount;
     private String FileCategory;
+    private String ValidatedFile;
 
     public FileCategoryCount() {
     }
@@ -28,4 +29,13 @@ public class FileCategoryCount {
     public void setFileCategory(String fileCategory) {
         FileCategory = fileCategory;
     }
+
+    public String getValidatedFile() {
+        return ValidatedFile;
+    }
+
+    public void setValidatedFile(String validatedFile) {
+        ValidatedFile = validatedFile;
+    }
+
 }

@@ -126,7 +126,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportsV
                         }
                     }
                     else {
-                        PermissionUtils.askForStoragePermissions(activity);
+                        PermissionUtils.askForStoragePermissions(activity, 0);
                     }
                 }
             });

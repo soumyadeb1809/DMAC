@@ -114,19 +114,24 @@ public class ReportsFragment extends Fragment {
                 ReportTypeResponse reportTypeResponse = response.body();
                 Log.d(AppConstants.LOG_TAG, "reportTypeResponse: " + gson.toJson(reportTypeResponse));
 
-                reportTypeList = reportTypeResponse.getReport_type_list();
-                reportTypesArr = new String[reportTypeList.size()];
-                reportTypeMap = new HashMap<>();
-                for(int i = 0; i < reportTypeList.size(); i++){
-                    reportTypesArr[i] = reportTypeList.get(i).getRt_name();
-                    reportTypeMap.put(reportTypeList.get(i).getRt_id(), reportTypeList.get(0).getRt_name());
+                if(reportTypeResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    reportTypeList = reportTypeResponse.getReport_type_list();
+                    reportTypesArr = new String[reportTypeList.size()];
+                    reportTypeMap = new HashMap<>();
+                    for (int i = 0; i < reportTypeList.size(); i++) {
+                        reportTypesArr[i] = reportTypeList.get(i).getRt_name();
+                        reportTypeMap.put(reportTypeList.get(i).getRt_id(), reportTypeList.get(0).getRt_name());
+                    }
+
+                    //progress.dismiss();
+                    SimpleSpinnerAdapter reportTypeAdapter = new SimpleSpinnerAdapter(getActivity(), R.layout.spinner_layout_small, reportTypesArr);
+                    spinReportType.setAdapter(reportTypeAdapter);
+
+                    fetchReports();
                 }
-
-                //progress.dismiss();
-                SimpleSpinnerAdapter reportTypeAdapter = new SimpleSpinnerAdapter(getActivity(), R.layout.spinner_layout_small, reportTypesArr);
-                spinReportType.setAdapter(reportTypeAdapter);
-
-                fetchReports();
+                else {
+                    Utility.forceLogoutUser(getActivity());
+                }
 
             }
 
@@ -153,12 +158,18 @@ public class ReportsFragment extends Fragment {
 
                 progress.dismiss();
                 ReportsResponse reportsResponse = response.body();
-                reportList = reportsResponse.getSearchResultList();
 
-                ReportsAdapter reportsAdapter = new ReportsAdapter(getActivity() , (ArrayList<Report>) reportList);
-                rvReports.setLayoutManager(new LinearLayoutManager(getContext()));
-                rvReports.setAdapter(reportsAdapter);
-                rvReports.setNestedScrollingEnabled(false);
+                if(reportsResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    reportList = reportsResponse.getSearchResultList();
+
+                    ReportsAdapter reportsAdapter = new ReportsAdapter(getActivity(), (ArrayList<Report>) reportList);
+                    rvReports.setLayoutManager(new LinearLayoutManager(getContext()));
+                    rvReports.setAdapter(reportsAdapter);
+                    rvReports.setNestedScrollingEnabled(false);
+                }
+                else {
+                    Utility.forceLogoutUser(getActivity());
+                }
 
 
             }
@@ -275,7 +286,8 @@ public class ReportsFragment extends Fragment {
                     Utility.showAlert(getActivity(), "Success", "Request for report has been submitted successfully.");
                 }
                 else {
-                    Utility.showAlert(getActivity(), "Failed", "Something went wrong, please try again");
+                    //Utility.showAlert(getActivity(), "Failed", "Something went wrong, please try again");
+                    Utility.forceLogoutUser(getActivity());
                 }
 
             }

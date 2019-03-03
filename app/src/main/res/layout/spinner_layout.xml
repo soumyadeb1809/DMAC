@@ -6,6 +6,7 @@
     android:id="@+id/text1"
     android:paddingStart="8dp"
     android:paddingEnd="8dp"
+    android:fontFamily="@font/ssp_regular"
     android:gravity="center_vertical"
     android:textColor="@android:color/black"
     />

@@ -104,8 +104,9 @@ public class InvoicesActivity extends AppCompatActivity implements InvoiceAdapte
 
                 }
                 else {
-                    Utility.showAlert(InvoicesActivity.this, "Info", "Something went wrong, please try again");
+                    //Utility.showAlert(InvoicesActivity.this, "Info", "Something went wrong, please try again");
                     Log.d(AppConstants.LOG_TAG, "InvoiceResponse:: " + gson.toJson(invoiceResponse));
+                    Utility.forceLogoutUser(InvoicesActivity.this);
                 }
 
             }

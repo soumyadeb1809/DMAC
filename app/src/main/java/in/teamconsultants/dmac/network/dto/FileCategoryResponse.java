@@ -10,15 +10,6 @@ public class FileCategoryResponse {
     private String Message;
     private ArrayList<FileCategoryObj> FileCategoryList;
 
-    public FileCategoryResponse() {
-    }
-
-    public FileCategoryResponse(String status, String message, ArrayList<FileCategoryObj> fileCategoryList) {
-        Status = status;
-        Message = message;
-        FileCategoryList = fileCategoryList;
-    }
-
     public String getStatus() {
         return Status;
     }

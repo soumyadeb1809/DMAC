@@ -7,71 +7,8 @@
     android:orientation="vertical"
     tools:context=".ui.home.profile.ProfileFragment">
 
-   <!-- <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorWhite"
-        android:elevation="2dp"
-        android:paddingBottom="20dp"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            android:textSize="24sp"
-            android:id="@+id/txt_profile"
-            android:fontFamily="@font/ssp_bold"
-            android:textColor="@color/bannerFilter"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            />
-
-        <View
-            android:layout_width="48dp"
-            android:layout_height="3dp"
-            android:background="@color/colorYellow"
-            android:layout_marginTop="6dp"
-            android:id="@+id/title_profile"
-            android:layout_marginStart="20dp"
-            />
-
-
-    </LinearLayout>-->
-
 
     <include layout="@layout/card_profile"/>
 
-  <!--  <LinearLayout
-        android:layout_width="274dp"
-        android:layout_height="50dp"
-        android:padding="12dp"
-        android:gravity="center"
-        android:clickable="true"
-        android:layout_gravity="center"
-        android:id="@+id/grp_logout"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/back_remove"
-
-        >
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_logout"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:textSize="14sp"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/ssp_bold"
-            android:layout_marginStart="16dp"
-            />
-
-    </LinearLayout>-->
 
 </LinearLayout>

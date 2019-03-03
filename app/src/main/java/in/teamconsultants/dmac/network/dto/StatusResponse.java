@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 import in.teamconsultants.dmac.model.StatusObj;
 
-public class StatusResponse {
+public class StatusResponse extends BaseResponse {
 
     private ArrayList<StatusObj> StatusList;
-
-    public StatusResponse() {
-    }
 
     public StatusResponse(ArrayList<StatusObj> statusList) {
         StatusList = statusList;

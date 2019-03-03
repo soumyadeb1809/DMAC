@@ -89,6 +89,7 @@
                     android:orientation="horizontal"
                     android:gravity="center"
                     android:padding="20dp"
+                    android:background="@color/colorWhite"
                     >
 
                     <TextView

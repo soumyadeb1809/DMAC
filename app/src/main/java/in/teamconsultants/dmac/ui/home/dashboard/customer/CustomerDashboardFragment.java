@@ -126,76 +126,6 @@ public class CustomerDashboardFragment extends Fragment {
 
 
     private void loadData() {
-/*
-        String totalFiles = spUserData.getString(AppConstants.SP.TAG_TOTAL_FILES, null);
-        String verifiedFiles = spUserData.getString(AppConstants.SP.TAG_VERIFIED_FILES, null);
-
-        final SharedPreferences.Editor spEditor = spUserData.edit();
-
-        if(null == totalFiles || null == verifiedFiles){
-            progress.setMessage("Loading data...");
-            progress.setCancelable(false);
-            progress.show();
-
-            tvVerifiedFiles.setText("NA");
-            tvTotalFiles.setText("NA");
-        }
-        else {
-
-            tvTotalFiles.setText(totalFiles);
-            tvVerifiedFiles.setText(verifiedFiles);
-
-        }*/
-
-  /*      Map<String, String> queries = new HashMap<>();
-
-        Call<FileCountResponse> fileCountResponseCall = apiInterface.doGetFileCount(headerMap, queries);
-        fileCountResponseCall.enqueue(new Callback<FileCountResponse>() {
-            @Override
-            public void onResponse(Call<FileCountResponse> call, Response<FileCountResponse> response) {
-                Log.d(AppConstants.LOG_TAG, "fileCountResponseCall: "+gson.toJson(response.body()));
-                FileCountResponse fileCountResponse = response.body();
-
-                tvTotalFiles.setText(String.valueOf(fileCountResponse.getFileCount()));
-                spEditor.putString(AppConstants.SP.TAG_TOTAL_FILES, String.valueOf(fileCountResponse.getFileCount()));
-                spEditor.commit();
-
-            }
-
-            @Override
-            public void onFailure(Call<FileCountResponse> call, Throwable t) {
-                progress.dismiss();
-                Utility.showAlert(getActivity(), "Error", "An unknown error occurred, please try again");
-                Log.d(AppConstants.LOG_TAG, "FAILED: " + t.getMessage());
-                t.printStackTrace();
-            }
-        });
-
-        queries.clear();
-
-        queries.put("StatusId", "9");
-        Call<FileCountResponse> verifiedFilesResponseCall = apiInterface.doGetFileCount(headerMap, queries);
-        verifiedFilesResponseCall.enqueue(new Callback<FileCountResponse>() {
-            @Override
-            public void onResponse(Call<FileCountResponse> call, Response<FileCountResponse> response) {
-                Log.d(AppConstants.LOG_TAG, "fileCountResponseCall: "+gson.toJson(response.body()));
-                FileCountResponse fileCountResponse = response.body();
-
-                tvVerifiedFiles.setText(String.valueOf(fileCountResponse.getFileCount()));
-                spEditor.putString(AppConstants.SP.TAG_VERIFIED_FILES, String.valueOf(fileCountResponse.getFileCount()));
-                spEditor.commit();
-                progress.dismiss();
-            }
-
-            @Override
-            public void onFailure(Call<FileCountResponse> call, Throwable t) {
-                progress.dismiss();
-                Utility.showAlert(getActivity(), "Error", "An unknown error occurred, please try again");
-                Log.d(AppConstants.LOG_TAG, "FAILED: " + t.getMessage());
-                t.printStackTrace();
-            }
-        });*/
-
 
         progress.setMessage("Loading bills data...");
         progress.setCancelable(false);
@@ -208,10 +138,15 @@ public class CustomerDashboardFragment extends Fragment {
             public void onResponse(Call<FileCategoryWiseCountResponse> call, Response<FileCategoryWiseCountResponse> response) {
                 progress.dismiss();
                 FileCategoryWiseCountResponse fileCategoryWiseCountResponse = response.body();
-                fileCategoryCountList = fileCategoryWiseCountResponse.getFileCategoryCount();
-                dashboardAdapter = new DashboardAdapter(getContext(), fileCategoryCountList);
-                rvDashboard.setLayoutManager(new LinearLayoutManager(getContext()));
-                rvDashboard.setAdapter(dashboardAdapter);
+                if(fileCategoryWiseCountResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
+                    fileCategoryCountList = fileCategoryWiseCountResponse.getFileCategoryCount();
+                    dashboardAdapter = new DashboardAdapter(getContext(), fileCategoryCountList);
+                    rvDashboard.setLayoutManager(new LinearLayoutManager(getContext()));
+                    rvDashboard.setAdapter(dashboardAdapter);
+                }
+                else {
+                    Utility.forceLogoutUser(getActivity());
+                }
             }
 
             @Override

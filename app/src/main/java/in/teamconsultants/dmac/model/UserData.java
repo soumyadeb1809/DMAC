@@ -15,26 +15,8 @@ public class UserData {
     private String UpdatedBy;
     private String UpdatedAt;
     private String EmailVerified;
-
-    public UserData() {
-    }
-
-    public UserData(String UId, String fullName, String email, String phone, String keyUser,
-                    String accountId, String statusId, String roleId, String createdBy, String createdAt, String updatedBy, String updatedAt, String emailVerified) {
-        this.UId = UId;
-        FullName = fullName;
-        Email = email;
-        Phone = phone;
-        KeyUser = keyUser;
-        AccountId = accountId;
-        StatusId = statusId;
-        RoleId = roleId;
-        CreatedBy = createdBy;
-        CreatedAt = createdAt;
-        UpdatedBy = updatedBy;
-        UpdatedAt = updatedAt;
-        EmailVerified = emailVerified;
-    }
+    private String ProfilePic;
+    private String LogedInAccount;
 
     public String getUId() {
         return UId;
@@ -138,5 +120,22 @@ public class UserData {
 
     public void setEmailVerified(String emailVerified) {
         EmailVerified = emailVerified;
+    }
+
+
+    public String getProfilePic() {
+        return ProfilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        ProfilePic = profilePic;
+    }
+
+    public String getLogedInAccount() {
+        return LogedInAccount;
+    }
+
+    public void setLogedInAccount(String logedInAccount) {
+        LogedInAccount = logedInAccount;
     }
 }
