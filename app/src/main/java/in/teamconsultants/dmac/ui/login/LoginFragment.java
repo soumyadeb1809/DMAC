@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -42,6 +43,7 @@ public class LoginFragment extends Fragment {
     private EditText etUsername, etPassword;
     private LinearLayout btnCreateAccount, btnLogin;
     private CheckBox cbRememberMe;
+    private TextView tvForgotPassword, tvRememberme, tvPrivacyPolicy;
 
     private SharedPreferences spRememUser;
 
@@ -65,6 +67,9 @@ public class LoginFragment extends Fragment {
         btnLogin = v.findViewById(R.id.grp_login);
         btnCreateAccount = v.findViewById(R.id.grp_create_account);
         cbRememberMe = v.findViewById(R.id.cb_remember_me);
+        tvRememberme = v.findViewById(R.id.txt_remember_me);
+        tvForgotPassword = v.findViewById(R.id.txt_forgot_password);
+        tvPrivacyPolicy = v.findViewById(R.id.txt_privacy_policy);
 
         spRememUser = getContext().getSharedPreferences(AppConstants.SP.SP_REMEM_USER, Context.MODE_PRIVATE);
 
@@ -109,6 +114,37 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        tvRememberme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleRememberMeCheckBox();
+            }
+        });
+
+        tvPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPrivacyPolicyPageInBrowser();
+            }
+        });
+
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ForgotPasswordActivity.class));
+            }
+        });
+
+    }
+
+    private void openPrivacyPolicyPageInBrowser() {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(AppConstants.PRIVACY_POLICY_URL));
+        startActivity(i);
+    }
+
+    private void toggleRememberMeCheckBox() {
+        cbRememberMe.setChecked(!cbRememberMe.isChecked());
     }
 
     private void validateUser(final String email, final String password) {

@@ -50,6 +50,7 @@ public class ProfileFragment extends Fragment {
     private OnProfileFragmentInteractionListener mListener;
 
     private TextView tvName, tvEmail, tvPhone, tvRole, tvAccountName, tvKeyUser;
+    private LinearLayout grpEditProfile;
 
 
     private ImageButton btnUploadPhoto;
@@ -105,6 +106,7 @@ public class ProfileFragment extends Fragment {
         tvKeyUser = v.findViewById(R.id.txt_key_user);
         btnUploadPhoto = v.findViewById(R.id.upload_photo);
         imgProfile = v.findViewById(R.id.img_profile_pic);
+        grpEditProfile = v.findViewById(R.id.grp_edit_profile);
 
         setOnClickListeners();
 
@@ -166,6 +168,16 @@ public class ProfileFragment extends Fragment {
                    mListener.askForPermission(ProfileFragment.this);
                 }
 
+            }
+        });
+
+        grpEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), EditProfileActivity.class);
+                intent.putExtra(AppConstants.INTENT_TAG.USER_FULL_NAME, userData.getFullName());
+                intent.putExtra(AppConstants.INTENT_TAG.USER_PHONE, userData.getPhone());
+                startActivity(intent);
             }
         });
 

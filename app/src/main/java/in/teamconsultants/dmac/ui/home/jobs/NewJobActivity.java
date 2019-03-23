@@ -5,11 +5,18 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.net.Uri;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,18 +27,29 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.scanlibrary.ScanConstants;
 import com.squareup.picasso.Picasso;
 
+import org.beyka.tiffbitmapfactory.CompressionScheme;
+import org.beyka.tiffbitmapfactory.Orientation;
+import org.beyka.tiffbitmapfactory.TiffSaver;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import in.teamconsultants.dmac.R;
+import in.teamconsultants.dmac.model.FileImages;
 import in.teamconsultants.dmac.network.dto.CreateJobResponse;
 import in.teamconsultants.dmac.model.FileCategoryObj;
 import in.teamconsultants.dmac.network.dto.FileCategoryResponse;
@@ -49,8 +67,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static in.teamconsultants.dmac.utils.AppConstants.INTENT_TAG.CAMSCANNER_INTENT_URI;
-
 public class NewJobActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -61,6 +77,8 @@ public class NewJobActivity extends AppCompatActivity {
 
     private ArrayList<LinearLayout> jobsGrpList;
     private Map<Integer, String> jobFileUriMap;
+
+    private Map<Integer, FileImages> fileImagesUriMap;
 
     private ApiInterface apiInterface;
     private Gson gson;
@@ -129,15 +147,9 @@ public class NewJobActivity extends AppCompatActivity {
 
         setListenerForNewJobLayout(grpDefaultJob);
 
-        if(Utility.appInstalledOrNot(this, CAMSCANNER_INTENT_URI)){
-            Log.d(AppConstants.LOG_TAG, "CamScanner Installed");
-        }
-        else {
-            Log.d(AppConstants.LOG_TAG, "CamScanner NOT Installed");
-        }
-
 
         jobFileUriMap = new HashMap<>();
+        fileImagesUriMap = new HashMap<>();
 
         setOnClickListeners();
 
@@ -377,11 +389,28 @@ public class NewJobActivity extends AppCompatActivity {
 
             jobFileUriMap.put(requestCode, filePath);
 
+            FileImages fileImages = fileImagesUriMap.get(requestCode);
+
+            if(fileImages == null)
+                fileImages = new FileImages();
+
+
+            ArrayList<String> fileImageUrls = fileImages.getImageUrls();
+            if(fileImageUrls == null)
+                fileImageUrls = new ArrayList<>();
+
+            fileImageUrls.add(filePath);
+
+            fileImages.setImageUrls(fileImageUrls);
+
+            fileImagesUriMap.put(requestCode, fileImages);
+
+
             try {
 
                 //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
 
-                setBitmapToImgAttachFile(requestCode, path);
+                setBitmapToImgAttachFile(requestCode, path, filePath);
 
             }
             catch (Exception e){
@@ -393,20 +422,31 @@ public class NewJobActivity extends AppCompatActivity {
 
     }
 
-    private void setBitmapToImgAttachFile(int position, Uri filepath) {
+    private void setBitmapToImgAttachFile(int position, Uri path, String filePath) {
 
         LinearLayout grpNewJob = jobsGrpList.get(position);
 
-        ImageView imgAttachFile = grpNewJob.findViewById(R.id.img_attach_file);
+        //ImageView imgAttachFile = grpNewJob.findViewById(R.id.img_attach_file);
+
+        LinearLayout grpImageContainer = grpNewJob.findViewById(R.id.grp_files_container);
+
+        LayoutInflater inflater = getLayoutInflater();
+        LinearLayout newFileImage = (LinearLayout) inflater.inflate(R.layout.card_file_image, null);
+
+        ImageView imgFile = newFileImage.findViewById(R.id.img_file);
+        TextView tvFilePath = newFileImage.findViewById(R.id.file_name);
+
+        tvFilePath.setText(filePath);
 
         //Picasso.get().load(Uri.parse(filepath)).resize(0, 500).into(imgAttachFile);
-        Picasso.get().load(filepath).resize(0, 500).into(imgAttachFile);
+        Picasso.get().load(path).resize(0, 300).into(imgFile);
         //imgAttachFile.setImageBitmap(bitmap);
+
+        grpImageContainer.addView(newFileImage);
 
     }
 
     private void startUpload(View v) {
-
 
         HashMap<String, RequestBody> partMap = new HashMap<>();
 
@@ -419,10 +459,10 @@ public class NewJobActivity extends AppCompatActivity {
             EditText etNotes = newJob.findViewById(R.id.et_notes);
             String jobNotes = etNotes.getText().toString();
 
-            if(TextUtils.isEmpty(jobNotes)){
+            /*if(TextUtils.isEmpty(jobNotes)){
                 Utility.showAlert(NewJobActivity.this, "Info", "Please enter notes for all Files");
                 return;
-            }
+            }*/
 
             partMap.put("Notes["+i+"]", getTextRequestBody(jobNotes));
 
@@ -434,30 +474,69 @@ public class NewJobActivity extends AppCompatActivity {
             String fileCategory = fileCategorySpinner.getSelectedItem().toString();
             partMap.put("FileCategory["+i+"]", getTextRequestBody(fileCategory));
 
+            progress.setMessage("Uploading files...");
+            progress.setCancelable(false);
+            progress.show();
 
             String filePath = jobFileUriMap.get(i);
-            //Log.d(AppConstants.LOG_TAG, "File Uri: "+filePath);
+
+            FileImages fileImages = fileImagesUriMap.get(i);
+
+            ArrayList<String> fileImagesPathList = fileImages.getImageUrls();
+
+            Bitmap[] bitmapParts = new Bitmap[fileImagesPathList.size()];
+
+            for(int j = 0; j < fileImagesPathList.size(); j++){
+                String fileImagePath = fileImagesPathList.get(j);
+                bitmapParts[j] = BitmapFactory.decodeFile(fileImagePath);
+            }
+
+            Bitmap finalBitmap = bitmapParts[0];
+
+            TiffSaver.SaveOptions options = new TiffSaver.SaveOptions();
+
+            options.compressionScheme = CompressionScheme.JPEG;
+            //By default orientation is top left
+            options.orientation = Orientation.LEFT_TOP;
+            //Add author tag to output file
+            options.author = "beyka";
+            //Add copyright tag to output file
+            options.copyright = "Some copyright";
+            //Save image as tif. If image saved succesfull true will be returned
+
+            Date date = new Date();
+
+            String fileName = String.valueOf(Calendar.getInstance().getTimeInMillis());
+
+            //String destinationPath = "/sdcard/"+fileName+".tif";
+            String destinationPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/dmac/files/";
+            File js = new File(destinationPath);
+            if(!js.exists()){
+                    js.mkdirs();
+            }
+
+            destinationPath = destinationPath +fileName+".tif";
+
+            boolean saved = TiffSaver.saveBitmap(destinationPath, bitmapParts[0], options);
+
+            if(bitmapParts.length > 1) {
+
+                for (int k = 1; k < bitmapParts.length; k++) {
+                    TiffSaver.appendBitmap(destinationPath, bitmapParts[k], options);
+                }
+            }
+
             Log.d(AppConstants.LOG_TAG, "File Path: " + filePath);
             if (filePath != null) {
-                File file = new File(filePath);
-                Log.d(AppConstants.LOG_TAG, "Filename " + file.getName());
-                //RequestBody mFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                File file = new File(destinationPath);
+
                 RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), file);
                 MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("JobFile["+i+"]", file.getName(), mFile);
                 fileMPList.add(fileToUpload);
-                //multipartBodyMap.put("JobFile[]", fileToUpload);
 
             }
 
         }
-
-        progress.setMessage("Uploading job...");
-        progress.setCancelable(false);
-        progress.show();
-
-      /*  final Map<String, String> headers = new HashMap<>();
-        headers.put("TOKEN", "2e98b6149d2bc958410f017ca036c81e");*/
-
 
         Call<CreateJobResponse> apiCall = apiInterface.doCreateJob(Utility.getHeader(token), partMap, fileMPList);
 
@@ -482,7 +561,6 @@ public class NewJobActivity extends AppCompatActivity {
 
                 }
                 else {
-                    //Utility.showAlert(NewJobActivity.this, "Error", "Something went wrong, please try again");
                     Utility.forceLogoutUser(NewJobActivity.this);
                 }
             }
@@ -505,6 +583,13 @@ public class NewJobActivity extends AppCompatActivity {
         return RequestBody.create(MediaType.parse("text/plain"), text);
     }
 
+    public static Bitmap overlay(Bitmap bmp1, Bitmap bmp2) {
+        Bitmap bmOverlay = Bitmap.createBitmap(bmp1.getWidth(), bmp1.getHeight(), bmp1.getConfig());
+        Canvas canvas = new Canvas(bmOverlay);
+        canvas.drawBitmap(bmp1, new Matrix(), null);
+        canvas.drawBitmap(bmp2, 0, 0, null);
+        return bmOverlay;
+    }
 
 
 }

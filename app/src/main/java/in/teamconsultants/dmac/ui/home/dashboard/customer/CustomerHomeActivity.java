@@ -22,6 +22,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.widget.Toolbar;
+
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -37,6 +39,7 @@ import in.teamconsultants.dmac.model.UserData;
 import in.teamconsultants.dmac.network.api.ApiClient;
 import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.network.dto.CustomerAccountsResponse;
+import in.teamconsultants.dmac.network.dto.NotificationCountResponse;
 import in.teamconsultants.dmac.ui.home.about.AboutUsActivity;
 import in.teamconsultants.dmac.ui.home.accounts.ChangeAccountActivity;
 import in.teamconsultants.dmac.ui.home.information.InformationFragment;
@@ -68,7 +71,9 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
-    private LinearLayout grpNotifications;
+    private LinearLayout grpNotificationCount;
+    private RelativeLayout grpNotifications;
+    private TextView tvNotificationCount;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -181,6 +186,8 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
         grpNotifications = toolbar.findViewById(R.id.grp_notification);
         grpNavToggle = toolbar.findViewById(R.id.grp_nav_toggle);
         imgToggle = toolbar.findViewById(R.id.img_toggle);
+        grpNotificationCount = toolbar.findViewById(R.id.grp_notification_count);
+        tvNotificationCount = toolbar.findViewById(R.id.txt_notification_count);
 
         refreshDrawerToggle();
 
@@ -201,7 +208,6 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
                 refreshDrawerToggle();
             }
         });
-        //actionBarDrawerToggle.syncState();
 
         navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -211,7 +217,6 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
         tvName = navigationView.getHeaderView(0).findViewById(R.id.txt_name);
         tvEmail = navigationView.getHeaderView(0).findViewById(R.id.txt_email);
 
-        /*getSupportActionBar().setTitle("DMAC");*/
 
         initializeUi();
 
@@ -223,6 +228,7 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
     @Override
     protected void onResume() {
         super.onResume();
+        getNewNotificationCount();
 
     }
 
@@ -282,12 +288,9 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
             public void onClick(View v) {
                 if(isDrawerOpen){
                     drawerLayout.closeDrawer(Gravity.LEFT);
-                    //refreshDrawerToggle();
-                    //isDrawerOpen = false;
                 }
                 else {
                     drawerLayout.openDrawer(Gravity.LEFT);
-                    //refreshDrawerToggle();
                 }
             }
         });
@@ -354,6 +357,7 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
 
                     }
 
+                    getNewNotificationCount();
                     showSelectedFragment();
 
                 }
@@ -373,6 +377,41 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
         });
 
 
+
+    }
+
+    private void getNewNotificationCount() {
+
+        final Call<NotificationCountResponse> notificationCountCall = apiInterface.doGetNotificationCount(token);
+
+        notificationCountCall.enqueue(new Callback<NotificationCountResponse>() {
+            @Override
+            public void onResponse(Call<NotificationCountResponse> call, Response<NotificationCountResponse> response) {
+
+                NotificationCountResponse notificationCountResponse = response.body();
+
+                if(notificationCountResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
+                    String newNotificationCount = notificationCountResponse.getTotalUnreadNotification();
+                    tvNotificationCount.setText(newNotificationCount);
+
+                    if(!newNotificationCount.equals("0")) {
+                        grpNotificationCount.setVisibility(View.VISIBLE);
+                    }
+                    else  {
+                        grpNotificationCount.setVisibility(View.GONE);
+                    }
+                }
+                else {
+                    //Utility.forceLogoutUser(CustomerHomeActivity.this);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<NotificationCountResponse> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
     }
 
@@ -435,4 +474,5 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
         }
 
     }
+
 }

@@ -46,6 +46,7 @@ import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.ui.home.spinner.SimpleSpinnerAdapter;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
+import in.teamconsultants.dmac.utils.ValidationUtils;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -590,37 +591,15 @@ public class RegularRegistrationActivity extends AppCompatActivity {
 
         if(resultCode == RESULT_OK && data != null){
 
-            //Uri path = data.getData();
-
             Uri path = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
-
-            /*String wholeID = DocumentsContract.getDocumentId(path);
-
-            // Split at colon, use second item in the array
-            String id = wholeID.split(":")[1];
-
-            String[] column = { MediaStore.Images.Media.DATA };
-
-            // where id is equal to
-            String sel = MediaStore.Images.Media._ID + "=?";
-
-            Cursor cursor = getContentResolver().
-                    query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            column, sel, new String[]{ id }, null);*/
 
             String filePath = "";
 
             filePath = Utility.getRealPathFromUri(this, path);
 
-           /* int columnIndex = cursor.getColumnIndex(column[0]);
-
-            if (cursor.moveToFirst()) {
-                filePath = cursor.getString(columnIndex);
-            }*/
 
             Log.d(AppConstants.LOG_TAG, "Media Path Received: "+filePath);
 
-            //jobFileUriMap.put(requestCode, filePath);
 
             try {
 
@@ -826,6 +805,11 @@ public class RegularRegistrationActivity extends AppCompatActivity {
         gstrUserId = etGstrUserId.getText().toString();
         gstrPassword = etGstrPassword.getText().toString();
 
+        if(!ValidationUtils.isValidGSTIN(gstrNum)){
+            Utility.showAlert(this, "Info", "Please enter a valid GSTIN Number");
+            return;
+        }
+
         if(rgGstServices.getCheckedRadioButtonId() == R.id.rb_gst_yes){
             if(TextUtils.isEmpty(gstrNum) || TextUtils.isEmpty(gstrUserId) || TextUtils.isEmpty(gstrPassword)){
                 Utility.showAlert(this, "Info", "Please fill in all the GST details");
@@ -841,6 +825,12 @@ public class RegularRegistrationActivity extends AppCompatActivity {
         panNumber = etPAN.getText().toString();
         tanNumber = etTAN.getText().toString();
         itrPassword = etItrPassword.getText().toString();
+
+
+        if(!ValidationUtils.isValidPAN(panNumber)){
+            Utility.showAlert(this, "Info", "Please enter a valid PAN Number");
+            return;
+        }
 
         if(rgITServices.getCheckedRadioButtonId() == R.id.rb_it_yes){
             if(TextUtils.isEmpty(panNumber) || TextUtils.isEmpty(tanNumber) || TextUtils.isEmpty(itrPassword)){

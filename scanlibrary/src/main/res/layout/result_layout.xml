@@ -9,6 +9,8 @@
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:layout_gravity="center_vertical">
 
         <Button
@@ -19,6 +21,7 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_image"
             android:text="Original"
+            android:textAllCaps="false"
             android:textColor="@android:color/white" />
 
         <Button
@@ -29,7 +32,8 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_enhamce_image"
             android:singleLine="true"
-            android:text="Magic color"
+            android:text="Magic Color"
+            android:textAllCaps="false"
             android:textColor="@android:color/white" />
 
         <Button
@@ -41,6 +45,7 @@
             android:drawableTop="@drawable/ic_gray"
             android:singleLine="true"
             android:text="Gray Mode"
+            android:textAllCaps="false"
             android:textColor="@android:color/white" />
 
         <Button
@@ -52,6 +57,7 @@
             android:drawableTop="@drawable/ic_black_and_white"
             android:singleLine="true"
             android:text="B and W"
+            android:textAllCaps="false"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
@@ -60,9 +66,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/bottom_background_color"
+        android:background="@color/colorBlue"
         android:orientation="horizontal"
         android:padding="@dimen/bottom_bar_padding"
+        android:textColor="@android:color/white"
+        android:textAllCaps="false"
         android:text="@string/done" />
 
 

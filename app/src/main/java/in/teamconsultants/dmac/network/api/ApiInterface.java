@@ -13,11 +13,13 @@ import in.teamconsultants.dmac.network.dto.CreateAccountResponse;
 import in.teamconsultants.dmac.network.dto.CreateJobResponse;
 import in.teamconsultants.dmac.network.dto.CreateReportResponse;
 import in.teamconsultants.dmac.network.dto.CustomerAccountsResponse;
+import in.teamconsultants.dmac.network.dto.EditProfileResponse;
 import in.teamconsultants.dmac.network.dto.FileCategoryResponse;
 import in.teamconsultants.dmac.network.dto.FileCategoryWiseCountResponse;
 import in.teamconsultants.dmac.network.dto.FileCountResponse;
 import in.teamconsultants.dmac.network.dto.FileSearchResponse;
 import in.teamconsultants.dmac.network.dto.FileTypeResponse;
+import in.teamconsultants.dmac.network.dto.ForgotPasswordResponse;
 import in.teamconsultants.dmac.network.dto.InvoiceResponse;
 import in.teamconsultants.dmac.network.dto.LoginResponse;
 import in.teamconsultants.dmac.network.dto.NotificationCountResponse;
@@ -238,5 +240,20 @@ public interface ApiInterface {
             @Field("AccountId") String accountId
     );
 
+
+    @GET("forgot_password")
+    Call<ForgotPasswordResponse> doForgotPassword (
+            @Query("email") String email
+    );
+
+
+    @POST("update_profile")
+    @FormUrlEncoded
+    Call<EditProfileResponse> doUpdateProfile (
+            @Header("TOKEN") String token,
+            @Field("FullName") String fullName,
+            @Field("Phone") String phone,
+            @Field("Password") String password
+    );
 
 }

@@ -1,7 +1,5 @@
 package in.teamconsultants.dmac.utils;
 
-import java.util.ArrayList;
-
 public class AppConstants {
 
     public static class REGISTRATION {
@@ -24,13 +22,15 @@ public class AppConstants {
         public static final String IMG_URI = "image_uri";
         public static final String IMG_BITMAP = "image_bitmap";
 
-        public static final String CAMSCANNER_INTENT_URI = "com.intsig.camscanner";
         public static final String FILE_CATEGORY_NAME = "file_category_name";
         public static final String FILE_CATEGORY_ID = "file_category_id";
 
         public static final String INVOICE_NAME = "invoice_name";
         public static final String INVOICE_AMOUNT = "invoice_amount";
         public static final String INVOICE_ID = "invoice_id";
+
+        public static final String USER_FULL_NAME = "fullName";
+        public static final String USER_PHONE = "phone";
     }
 
     public static final String LOG_TAG = "DMAC_LOG";
@@ -76,7 +76,6 @@ public class AppConstants {
         public static final String FAILED_STATUS_ID = "10";
     }
 
-    public static final String FILE_BASE_URL = "https://staging.teamconsultants.in/upload/";
 
     public static final class IMAGE_SOURCE {
         public static final String BITMAP = "bitmap";
@@ -125,6 +124,9 @@ public class AppConstants {
         public static final String STATUS_NEW = "21";
     }
 
+
+    public static final String FILE_BASE_URL = "https://staging.teamconsultants.in/upload/";
+    public static final String PRIVACY_POLICY_URL = "https://teamconsultants.in/privacy-policy.php";
     public static final String ABOUT_US_URL = "http://teamconsultants.in/profile.php";
 
 }

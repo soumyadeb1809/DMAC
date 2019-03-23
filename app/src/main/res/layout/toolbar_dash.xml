@@ -55,24 +55,52 @@
                 />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="26dp"
+            android:layout_height="26dp"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
-            android:padding="4dp"
             android:clickable="true"
             android:focusable="true"
             android:id="@+id/grp_notification"
             android:background="@drawable/back_white_accent_rounded"
             >
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_margin="4dp"
                 android:src="@drawable/ic_notifications"
                 android:id="@+id/btn_notifications"/>
-        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:background="@drawable/back_red_rounded"
+                android:id="@+id/grp_notification_count"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    android:id="@+id/txt_notification_count"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:fontFamily="@font/ssp_regular"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
 
 
     </RelativeLayout>
