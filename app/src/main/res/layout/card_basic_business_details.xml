@@ -217,6 +217,7 @@
             android:paddingEnd="16dp"
             android:textSize="14sp"
             android:inputType="number"
+            android:maxLength="6"
             android:fontFamily="@font/ssp_regular"
             android:background="@drawable/back_et_form"
             android:id="@+id/et_pin_code"

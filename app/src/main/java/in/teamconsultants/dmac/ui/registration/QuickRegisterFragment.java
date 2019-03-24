@@ -28,6 +28,7 @@ import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.ui.home.spinner.SimpleSpinnerAdapter;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
+import in.teamconsultants.dmac.utils.ValidationUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -154,16 +155,22 @@ public class QuickRegisterFragment extends Fragment {
         if(TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)
                 ||  TextUtils.isEmpty(businessLegalName) || TextUtils.isEmpty(businessShortName) || TextUtils.isEmpty(businessAddress)
                 || TextUtils.isEmpty(pinCode)) {
-            Utility.showAlert(getContext(), "Info", "All fields are mandatory. Please make sure you've filled them all");
+            Utility.showAlert(getContext(), "Info", "All fields are mandatory. Please make sure you've filled them all.");
         }
-        else if(!cbTc.isChecked()){
-            Utility.showAlert(getContext(), "Info", "Please agree to DMAC T&C to continue");
+        else if(!ValidationUtils.isValidEmail(email)){
+            Utility.showAlert(getContext(), "Info", "Please enter a valid email address.");
         }
         else if(phone.length() < 10){
-            Utility.showAlert(getContext(), "Info", "Please enter an valid phone number");
+            Utility.showAlert(getContext(), "Info", "Please enter an valid phone number.");
         }
         else if(password.length() < 6) {
-            Utility.showAlert(getContext(), "Info", "Password must be at least 6 characters long");
+            Utility.showAlert(getContext(), "Info", "Password must be at least 6 characters long.");
+        }
+        else if(pinCode.length() != 6) {
+            Utility.showAlert(getContext(), "Info", "Please enter a valid 6-digit pincode.");
+        }
+        else if(!cbTc.isChecked()){
+            Utility.showAlert(getContext(), "Info", "Please agree to DMAC T&C to continue.");
         }
         else {
             quickRegister(fullName, email, phone, password,businessLegalName, businessShortName, businessAddress, pinCode);

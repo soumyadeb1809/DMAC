@@ -755,7 +755,7 @@ public class RegularRegistrationActivity extends AppCompatActivity {
             Utility.showAlert(this, "Info", "Please enter valid user information");
             return;
         }
-        else if(!Utility.isValidEmail(email)){
+        else if(!ValidationUtils.isValidEmail(email)){
             Utility.showAlert(this, "Info", "Please enter valid user email");
             return;
         }
@@ -776,7 +776,12 @@ public class RegularRegistrationActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(businessLegalName) || TextUtils.isEmpty(businessShortName)
                 || TextUtils.isEmpty(businessAddress) || TextUtils.isEmpty(pinCode)){
-            Utility.showAlert(this, "Info", "Business details can't be left empty");
+            Utility.showAlert(this, "Info", "Business details can't be left empty.");
+            return;
+        }
+
+        if(pinCode.length() != 6){
+            Utility.showAlert(this, "Info", "Please enter a valid 6-digit pincode.");
             return;
         }
 
@@ -860,7 +865,7 @@ public class RegularRegistrationActivity extends AppCompatActivity {
             Utility.showAlert(this, "Info", "Please fill all the details of CA");
             return;
         }
-        else if(!Utility.isValidEmail(caEmail)) {
+        else if(!ValidationUtils.isValidEmail(caEmail)) {
             Utility.showAlert(this, "Info","Please enter a valid CA Email Address");
         }
 
@@ -887,6 +892,24 @@ public class RegularRegistrationActivity extends AppCompatActivity {
             if(TextUtils.isEmpty(directorFullName) || TextUtils.isEmpty(directorEmail) || TextUtils.isEmpty(directorPhone)
                     || TextUtils.isEmpty(directorAadhar) || TextUtils.isEmpty(directorPAN)){
                 Utility.showAlert(this, "Info", "Please fill in all the details");
+                isValidDirectorData = false;
+                break;
+            }
+
+            if(directorAadhar.length() != 12){
+                Utility.showAlert(this, "Info", "Please enter a valid 12-digit AADHAR number for all directors.");
+                isValidDirectorData = false;
+                break;
+            }
+
+            if(!ValidationUtils.isValidEmail(directorEmail)){
+                Utility.showAlert(this, "Info", "Please enter a valid email for all directors.");
+                isValidDirectorData = false;
+                break;
+            }
+
+            if(!ValidationUtils.isValidPAN(directorPAN)){
+                Utility.showAlert(this, "Info", "Please enter a valid PAN number for all directors.");
                 isValidDirectorData = false;
                 break;
             }
