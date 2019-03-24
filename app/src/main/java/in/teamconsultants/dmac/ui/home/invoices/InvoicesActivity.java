@@ -61,7 +61,7 @@ public class InvoicesActivity extends AppCompatActivity implements InvoiceAdapte
 
     private Invoice selectedInvoice = null;
 
-    private String[] paymentStatusArr = {"All Invoices", "Paid Invoices"};
+    private String[] paymentStatusArr = {"All Invoices", "Paid Invoices", "Due Invoices"};
     private Spinner spinInvoiceSataus;
 
     @Override
@@ -134,6 +134,10 @@ public class InvoicesActivity extends AppCompatActivity implements InvoiceAdapte
         for(Invoice invoice : invoiceList){
             if(selectedStatusPos == 1) {
                 if (invoice.getStatus().equals("Paid")){
+                    invoiceListToShow.add(invoice);
+                }
+            } else if(selectedStatusPos == 2){
+                if (!invoice.getStatus().equals("Paid")){
                     invoiceListToShow.add(invoice);
                 }
             }

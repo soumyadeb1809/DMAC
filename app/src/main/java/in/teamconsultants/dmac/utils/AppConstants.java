@@ -131,4 +131,23 @@ public class AppConstants {
     public static final String APP_MARKET_BASE_URL = "market://details?id=";
     public static final String PLAY_STORE_BASE_URL = "http://play.google.com/store/apps/details?id=";
 
+    public static final class VALIDATION_ERROR {
+        public static final String EMAIL = "Please enter a valid email";
+        public static final String PASSWORD = "Please enter a valid password";
+        public static final String PAN = "Please enter a valid PAN";
+        public static final String GSTIN = "Please enter a valid GSTIN number";
+        public static final String PIN = "Please enter a valid pincode";
+        public static final String PHONE = "Please enter an valid phone number";
+        public static final String NAME = "Please enter a valid name";
+        public static final String BUSINESS_NAME = "Please enter a valid business name";
+        public static final String BUSINESS_SHORT_NAME = "Please enter a valid name";
+        public static final String ADDRESS = "Please enter a valid address";
+        public static final String AADHAR = "Please enter a valid AADHAR number";
+        public static final String INVALID = "Invalid Input";
+        public static final String ITR_PASSWORD = "Please enter valid ITR password";
+        public static final String TAN = "Please enter a valid TAN number";
+        public static final String GSTR_PASSWORD = "Please enter a valid GSTR password";
+        public static final String GSTR_USER_ID = "Please enter a valid GSTR user ID";
+    }
+
 }

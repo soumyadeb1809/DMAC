@@ -159,15 +159,19 @@ public class QuickRegisterFragment extends Fragment {
         }
         else if(!ValidationUtils.isValidEmail(email)){
             Utility.showAlert(getContext(), "Info", "Please enter a valid email address.");
+            etEmail.setError(AppConstants.VALIDATION_ERROR.EMAIL);
         }
         else if(phone.length() < 10){
             Utility.showAlert(getContext(), "Info", "Please enter an valid phone number.");
+            etPhone.setError(AppConstants.VALIDATION_ERROR.PHONE);
         }
         else if(password.length() < 6) {
             Utility.showAlert(getContext(), "Info", "Password must be at least 6 characters long.");
+            etPassword.setError(AppConstants.VALIDATION_ERROR.PASSWORD);
         }
         else if(pinCode.length() != 6) {
             Utility.showAlert(getContext(), "Info", "Please enter a valid 6-digit pincode.");
+            etPinCode.setError(AppConstants.VALIDATION_ERROR.PIN);
         }
         else if(!cbTc.isChecked()){
             Utility.showAlert(getContext(), "Info", "Please agree to DMAC T&C to continue.");

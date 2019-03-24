@@ -72,6 +72,7 @@ import android.widget.LinearLayout;
 
         if(!ValidationUtils.isValidEmail(email)){
             Utility.showAlert(this, "Info", "Please enter a valid email address.");
+            etEmail.setError(AppConstants.VALIDATION_ERROR.EMAIL);
             return;
         }
 

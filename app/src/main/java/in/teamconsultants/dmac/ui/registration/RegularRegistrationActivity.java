@@ -751,20 +751,24 @@ public class RegularRegistrationActivity extends AppCompatActivity {
         password = etPassword.getText().toString();
 
         // Validate User Info:
-        if(TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phoneNum) || TextUtils.isEmpty(password)){
-            Utility.showAlert(this, "Info", "Please enter valid user information");
+        if(TextUtils.isEmpty(fullName)){
+            Utility.showAlert(this, "Info", "Please enter valid name for user.");
+            etFullName.setError(AppConstants.VALIDATION_ERROR.NAME);
             return;
         }
-        else if(!ValidationUtils.isValidEmail(email)){
-            Utility.showAlert(this, "Info", "Please enter valid user email");
+        else if(TextUtils.isEmpty(email) || !ValidationUtils.isValidEmail(email)){
+            Utility.showAlert(this, "Info", "Please enter valid user email.");
+            etEmail.setError(AppConstants.VALIDATION_ERROR.EMAIL);
             return;
         }
         else if(phoneNum.length() < 10){
-            Utility.showAlert(this, "Info", "Please enter a valid user phone number");
+            Utility.showAlert(this, "Info", "Please enter a valid user phone number.");
+            etPhone.setError(AppConstants.VALIDATION_ERROR.PHONE);
             return;
         }
         else if(password.length() < 6){
-            Utility.showAlert(this, "Info", "Password length must be more than or equal to 6 characters");
+            Utility.showAlert(this, "Info", "Password length must be more than or equal to 6 characters.");
+            etPassword.setError(AppConstants.VALIDATION_ERROR.PASSWORD);
             return;
         }
 
@@ -774,14 +778,27 @@ public class RegularRegistrationActivity extends AppCompatActivity {
         businessAddress = etBusinessAddress.getText().toString();
         pinCode = etPinCode.getText().toString();
 
-        if(TextUtils.isEmpty(businessLegalName) || TextUtils.isEmpty(businessShortName)
-                || TextUtils.isEmpty(businessAddress) || TextUtils.isEmpty(pinCode)){
-            Utility.showAlert(this, "Info", "Business details can't be left empty.");
+        if(TextUtils.isEmpty(businessLegalName)){
+            Utility.showAlert(this, "Info", "Business legal name can't be left empty.");
+            etBusinessLegalName.setError(AppConstants.VALIDATION_ERROR.BUSINESS_NAME);
+            return;
+        }
+
+        if(TextUtils.isEmpty(businessShortName)){
+            Utility.showAlert(this, "Info", "Business short name can't be left empty.");
+            etBusinessShortName.setError(AppConstants.VALIDATION_ERROR.BUSINESS_SHORT_NAME);
+            return;
+        }
+
+        if(TextUtils.isEmpty(businessAddress)){
+            Utility.showAlert(this, "Info", "Business address can't be left empty.");
+            etBusinessAddress.setError(AppConstants.VALIDATION_ERROR.ADDRESS);
             return;
         }
 
         if(pinCode.length() != 6){
             Utility.showAlert(this, "Info", "Please enter a valid 6-digit pincode.");
+            etPinCode.setError(AppConstants.VALIDATION_ERROR.PIN);
             return;
         }
 
@@ -814,14 +831,22 @@ public class RegularRegistrationActivity extends AppCompatActivity {
         gstrUserId = etGstrUserId.getText().toString();
         gstrPassword = etGstrPassword.getText().toString();
 
-        if(!ValidationUtils.isValidGSTIN(gstrNum)){
-            Utility.showAlert(this, "Info", "Please enter a valid GSTIN Number");
-            return;
-        }
-
         if(rgGstServices.getCheckedRadioButtonId() == R.id.rb_gst_yes){
-            if(TextUtils.isEmpty(gstrNum) || TextUtils.isEmpty(gstrUserId) || TextUtils.isEmpty(gstrPassword)){
-                Utility.showAlert(this, "Info", "Please fill in all the GST details");
+            if(ValidationUtils.isValidGSTIN(gstrNum)){
+                Utility.showAlert(this, "Info", "Please enter a valid GSTIN Number");
+                etGstrNum.setError(AppConstants.VALIDATION_ERROR.GSTIN);
+                return;
+            }
+
+            if( TextUtils.isEmpty(gstrUserId)){
+                Utility.showAlert(this, "Info", "Please enter a valid GSTR user ID");
+                etGstrUserId.setError(AppConstants.VALIDATION_ERROR.GSTR_USER_ID);
+                return;
+            }
+
+            if(TextUtils.isEmpty(gstrPassword)){
+                Utility.showAlert(this, "Info", "Please enter a valid GSTR password");
+                etGstrPassword.setError(AppConstants.VALIDATION_ERROR.GSTR_PASSWORD);
                 return;
             }
 
@@ -838,12 +863,27 @@ public class RegularRegistrationActivity extends AppCompatActivity {
 
         if(!ValidationUtils.isValidPAN(panNumber)){
             Utility.showAlert(this, "Info", "Please enter a valid PAN Number");
+            etPAN.setError(AppConstants.VALIDATION_ERROR.PAN);
             return;
         }
 
         if(rgITServices.getCheckedRadioButtonId() == R.id.rb_it_yes){
-            if(TextUtils.isEmpty(panNumber) || TextUtils.isEmpty(tanNumber) || TextUtils.isEmpty(itrPassword)){
-                Utility.showAlert(this, "Info", "Please fill in all the Income Tax details");
+
+            if(!ValidationUtils.isValidPAN(panNumber)){
+                Utility.showAlert(this, "Info", "Please enter a valid PAN Number");
+                etPAN.setError(AppConstants.VALIDATION_ERROR.PAN);
+                return;
+            }
+
+            if(TextUtils.isEmpty(tanNumber)){
+                Utility.showAlert(this, "Info", "Please enter a valid TAN number");
+                etTAN.setError(AppConstants.VALIDATION_ERROR.TAN);
+                return;
+            }
+
+            if(TextUtils.isEmpty(itrPassword)){
+                Utility.showAlert(this, "Info", "Please enter valid ITR password");
+                etItrPassword.setError(AppConstants.VALIDATION_ERROR.ITR_PASSWORD);
                 return;
             }
 
@@ -860,13 +900,28 @@ public class RegularRegistrationActivity extends AppCompatActivity {
         caPhone = etCAPhone.getText().toString();
         caAddress = etCAAddress.getText().toString();
 
-        if(TextUtils.isEmpty(caName) || TextUtils.isEmpty(caEmail) || TextUtils.isEmpty(caPhone)
-                || TextUtils.isEmpty(caAddress)){
-            Utility.showAlert(this, "Info", "Please fill all the details of CA");
+        if(TextUtils.isEmpty(caName)){
+            Utility.showAlert(this, "Info", "Please enter a valid CA name.");
+            etCAName.setError(AppConstants.VALIDATION_ERROR.NAME);
             return;
         }
+
+        if(caPhone.length() < 10){
+            Utility.showAlert(this, "Info", "Please enter a valid CA phone.");
+            etCAPhone.setError(AppConstants.VALIDATION_ERROR.PHONE);
+            return;
+        }
+
+        if(TextUtils.isEmpty(caAddress)){
+            Utility.showAlert(this, "Info", "Please a valid CA Address.");
+            etCAAddress.setError(AppConstants.VALIDATION_ERROR.ADDRESS);
+            return;
+        }
+
         else if(!ValidationUtils.isValidEmail(caEmail)) {
             Utility.showAlert(this, "Info","Please enter a valid CA Email Address");
+            etCAEmail.setError(AppConstants.VALIDATION_ERROR.EMAIL);
+            return;
         }
 
 
@@ -889,27 +944,37 @@ public class RegularRegistrationActivity extends AppCompatActivity {
             String directorAadhar = etDirectorAadhar.getText().toString();
             String directorPAN = etDirectorPAN.getText().toString();
 
-            if(TextUtils.isEmpty(directorFullName) || TextUtils.isEmpty(directorEmail) || TextUtils.isEmpty(directorPhone)
-                    || TextUtils.isEmpty(directorAadhar) || TextUtils.isEmpty(directorPAN)){
-                Utility.showAlert(this, "Info", "Please fill in all the details");
+            if(TextUtils.isEmpty(directorFullName)){
+                Utility.showAlert(this, "Info", "Please enter a valid director name.");
+                etDirectorFullName.setError(AppConstants.VALIDATION_ERROR.NAME);
                 isValidDirectorData = false;
                 break;
             }
 
             if(directorAadhar.length() != 12){
                 Utility.showAlert(this, "Info", "Please enter a valid 12-digit AADHAR number for all directors.");
+                etDirectorAadhar.setError(AppConstants.VALIDATION_ERROR.AADHAR);
                 isValidDirectorData = false;
                 break;
             }
 
             if(!ValidationUtils.isValidEmail(directorEmail)){
                 Utility.showAlert(this, "Info", "Please enter a valid email for all directors.");
+                etDirectorEmail.setError(AppConstants.VALIDATION_ERROR.EMAIL);
                 isValidDirectorData = false;
                 break;
             }
 
             if(!ValidationUtils.isValidPAN(directorPAN)){
                 Utility.showAlert(this, "Info", "Please enter a valid PAN number for all directors.");
+                etDirectorPAN.setError(AppConstants.VALIDATION_ERROR.PAN);
+                isValidDirectorData = false;
+                break;
+            }
+
+            if(directorPhone.length() < 10){
+                Utility.showAlert(this, "Info", "Please enter a valid phone number for all directors.");
+                etDirectorPhone.setError(AppConstants.VALIDATION_ERROR.PHONE);
                 isValidDirectorData = false;
                 break;
             }

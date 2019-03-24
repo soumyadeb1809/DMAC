@@ -31,6 +31,7 @@ import in.teamconsultants.dmac.ui.registration.RegisterActivity;
 import in.teamconsultants.dmac.ui.registration.RegularRegistrationActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
+import in.teamconsultants.dmac.utils.ValidationUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -101,11 +102,13 @@ public class LoginFragment extends Fragment {
                 String email = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
-                if(TextUtils.isEmpty(email)){
+                if(TextUtils.isEmpty(email) || !ValidationUtils.isValidEmail(email)){
                     Toast.makeText(getContext(), "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                    etUsername.setError("Please enter a valid email");
                 }
                 else if(TextUtils.isEmpty(password)) {
                     Toast.makeText(getContext(), "Please enter a valid password", Toast.LENGTH_SHORT).show();
+                    etPassword.setError("Please enter a valid password");
                 }
                 else {
                     validateUser(email, password);
