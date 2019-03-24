@@ -134,7 +134,9 @@ public class ProfileFragment extends Fragment {
             role = "Customer";
         }
         tvRole.setText(role);
-        tvAccountName.setText(userData.getLogedInAccount());
+
+        tvAccountName.setText(userData.getBusinessLegalName());
+
         if(userData.getKeyUser().equals("1")) {
             tvKeyUser.setText("Yes");
         }

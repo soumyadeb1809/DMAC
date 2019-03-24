@@ -269,7 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ssp_regular"
-                    android:text="Account ID"
+                    android:text="Account Name"
                     android:textSize="12sp" />
 
                 <TextView

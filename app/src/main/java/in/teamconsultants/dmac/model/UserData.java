@@ -17,6 +17,8 @@ public class UserData {
     private String EmailVerified;
     private String ProfilePic;
     private String LogedInAccount;
+    private String BusinessLegalName;
+    private String BusinessShortName;
 
     public String getUId() {
         return UId;
@@ -137,5 +139,21 @@ public class UserData {
 
     public void setLogedInAccount(String logedInAccount) {
         LogedInAccount = logedInAccount;
+    }
+
+    public String getBusinessLegalName() {
+        return BusinessLegalName;
+    }
+
+    public void setBusinessLegalName(String businessLegalName) {
+        BusinessLegalName = businessLegalName;
+    }
+
+    public String getBusinessShortName() {
+        return BusinessShortName;
+    }
+
+    public void setBusinessShortName(String businessShortName) {
+        BusinessShortName = businessShortName;
     }
 }
