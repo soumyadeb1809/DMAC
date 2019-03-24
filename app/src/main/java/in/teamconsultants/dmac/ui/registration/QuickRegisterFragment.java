@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,12 +20,19 @@ import android.widget.Spinner;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import in.teamconsultants.dmac.R;
+import in.teamconsultants.dmac.model.City;
+import in.teamconsultants.dmac.model.State;
+import in.teamconsultants.dmac.network.dto.CityResponse;
 import in.teamconsultants.dmac.network.dto.QuickRegisterResponse;
 import in.teamconsultants.dmac.network.api.ApiClient;
 import in.teamconsultants.dmac.network.api.ApiInterface;
+import in.teamconsultants.dmac.network.dto.StateResponse;
 import in.teamconsultants.dmac.ui.home.spinner.SimpleSpinnerAdapter;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
@@ -39,14 +47,19 @@ public class QuickRegisterFragment extends Fragment {
 
     private EditText etBusinessLegalName, etBusinessShortName, etBusinessAddress, etPinCode;
     private EditText etFullName, etEmail, etPhone, etPassword;
-    private Spinner spinnerState, spinnerCity, spinnerBusinessEntityType;
+    private Spinner stateSpinner, citySpinner, spinnerBusinessEntityType;
     private LinearLayout btnCreateAccount;
     private CheckBox cbTc;
 
 
-    private String[] states = {"Andrapradesh", "Telangana"};
-
-    private String[] cities = {"Hyderabad", "Nalgonda", "Karimnagar"};
+    private String[] stateArr;
+    private String[] citieArr;
+    private List<State> stateList;
+    private List<City> cityList;
+    private Map<String, String[]> citiesMap;
+    private Map<String, String> stateCodeMap;
+    private Map<String, String> cityCodeMap;
+    private String selectedState = null;
 
     private String[] entities = {"Proprietary", "Partnership Firm", "LLP", "Company", "Society", "Trust"};
 
@@ -86,6 +99,9 @@ public class QuickRegisterFragment extends Fragment {
             }
         });
 
+        cityCodeMap = new HashMap<>();
+        citiesMap = new HashMap<>();
+
         // Initialize API Interface:
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
@@ -96,6 +112,8 @@ public class QuickRegisterFragment extends Fragment {
         initializeUi(v);
 
         setOnClickListeners();
+
+        getStateSpinnerData();
 
         return v;
     }
@@ -112,19 +130,19 @@ public class QuickRegisterFragment extends Fragment {
         etPhone = v.findViewById(R.id.et_phone);
         etPassword = v.findViewById(R.id.et_password);
 
-        spinnerState = v.findViewById(R.id.spinner_state);
-        spinnerCity = v.findViewById(R.id.spinner_city);
+        stateSpinner = v.findViewById(R.id.spinner_state);
+        citySpinner = v.findViewById(R.id.spinner_city);
         spinnerBusinessEntityType = v.findViewById(R.id.spinner_entity_type);
 
         btnCreateAccount = v.findViewById(R.id.grp_create_account);
         cbTc = v.findViewById(R.id.cb_tc);
 
-        statesSpinnerAdapter = new SimpleSpinnerAdapter(getContext(), R.layout.spinner_layout, states);
-        citySpinnerAdapter = new SimpleSpinnerAdapter(getContext(), R.layout.spinner_layout, cities);
+        /*statesSpinnerAdapter = new SimpleSpinnerAdapter(getContext(), R.layout.spinner_layout, stateArr);
+        citySpinnerAdapter = new SimpleSpinnerAdapter(getContext(), R.layout.spinner_layout, cities);*/
         entityAdapter = new SimpleSpinnerAdapter(getContext(), R.layout.spinner_layout, entities);
 
-        spinnerState.setAdapter(statesSpinnerAdapter);
-        spinnerCity.setAdapter(citySpinnerAdapter);
+        /*spinnerState.setAdapter(statesSpinnerAdapter);
+        spinnerCity.setAdapter(citySpinnerAdapter);*/
         spinnerBusinessEntityType.setAdapter(entityAdapter);
 
     }
@@ -189,8 +207,9 @@ public class QuickRegisterFragment extends Fragment {
         progress.setCancelable(false);
         progress.show();
 
-        String state = (String) spinnerState.getSelectedItem();
-        String city = (String) spinnerCity.getSelectedItem();
+        String stateCode = stateCodeMap.get(stateSpinner.getSelectedItem());
+        String cityCode = cityCodeMap.get(citySpinner.getSelectedItem());
+
         String entityType = (String) spinnerBusinessEntityType.getSelectedItem();
 
         HashMap<String, String> fieldMap = new HashMap<>();
@@ -201,8 +220,8 @@ public class QuickRegisterFragment extends Fragment {
         fieldMap.put("BusinessLegalName", businessLegalName);
         fieldMap.put("BusinessShortName", businessShortName);
         fieldMap.put("BusinessAddress", businessAddress);
-        fieldMap.put("CityCode", city);
-        fieldMap.put("StateCode", state);
+        fieldMap.put("CityCode", cityCode);
+        fieldMap.put("StateCode", stateCode);
         fieldMap.put("PinCode", pinCode);
         fieldMap.put("TypeOfEntity", entityType);
 
@@ -275,5 +294,126 @@ public class QuickRegisterFragment extends Fragment {
 
     public interface OnQuickRegisterFragmentInteractionListener {
         void onQuickRegisterFragmentInteraction(Uri uri);
+    }
+
+
+    // Get data for state spinner:
+    private void getStateSpinnerData() {
+
+        progress.setMessage("Please wait...");
+        progress.show();
+
+        Call<StateResponse> stateResponseCall = apiInterface.doGetStates();
+        stateResponseCall.enqueue(new Callback<StateResponse>() {
+            @Override
+            public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {
+                //progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
+                Log.d(AppConstants.LOG_TAG, "stateResponseCall: "+ gson.toJson(response.body()));
+                StateResponse stateResponse = response.body();
+                stateList = stateResponse.getStateList();
+                stateArr = new String[stateList.size()];
+                stateCodeMap = new HashMap<>();
+                for (int i = 0; i < stateList.size(); i++){
+                    stateArr[i] = stateList.get(i).getStateName();
+                    stateCodeMap.put(stateList.get(i).getStateName(), stateList.get(i).getStateCode());
+                }
+
+                getCitySpinnerData();
+            }
+
+            @Override
+            public void onFailure(Call<StateResponse> call, Throwable t) {
+                progress.dismiss();
+                Utility.showAlert(getContext(), "Error", "An unknown error occurred, please try again");
+                Log.d(AppConstants.LOG_TAG, "FAILED: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+    }
+
+
+    // Get data for city spinner:
+    private void getCitySpinnerData() {
+
+        Call<CityResponse> cityResponseCall = apiInterface.doGetCities();
+        cityResponseCall.enqueue(new Callback<CityResponse>() {
+            @Override
+            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+
+                if(response.body() == null)
+                    return;
+
+                Log.d(AppConstants.LOG_TAG, "stateResponseCall: "+ gson.toJson(response.body()));
+                CityResponse cityResponse = response.body();
+                cityList = cityResponse.getCityList();
+                cityCodeMap = new HashMap<>();
+                citiesMap = new HashMap<>();
+                for(City city: cityList){
+                    cityCodeMap.put(city.getCityName(), city.getCityCode());
+                }
+
+                for(State state: stateList) {
+                    String stateCode = state.getStateCode();
+                    List<City> cities = new ArrayList<>();
+                    for (City city : cityList) {
+                        if(city.getStateCode().equals(stateCode)){
+                            cities.add(city);
+                        }
+                    }
+                    String[] citiesArr = new String[cities.size()];
+
+                    for (int i = 0; i < cities.size(); i++){
+                        citiesArr[i] = cities.get(i).getCityName();
+                    }
+
+                    citiesMap.put(state.getStateName(), citiesArr);
+                }
+                progress.dismiss();
+                setUpSpinners();
+
+            }
+
+            @Override
+            public void onFailure(Call<CityResponse> call, Throwable t) {
+                progress.dismiss();
+                Utility.showAlert(getContext(), "Error", "An unknown error occurred, please try again");
+                Log.d(AppConstants.LOG_TAG, "FAILED: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+    }
+
+    // Set up spinners with downloaded city and state data:
+    private void setUpSpinners() {
+
+        SimpleSpinnerAdapter stateAdapter = new SimpleSpinnerAdapter(getContext(), R.layout.spinner_layout, stateArr);
+        stateSpinner.setAdapter(stateAdapter);
+        stateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedState = stateArr[position];
+                SimpleSpinnerAdapter cityAdapter = new SimpleSpinnerAdapter(getContext(),
+                        R.layout.spinner_layout, citiesMap.get(selectedState));
+                citySpinner.setAdapter(cityAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                if(stateArr.length != 0) {
+                    selectedState = stateArr[0];
+                    SimpleSpinnerAdapter cityAdapter = new SimpleSpinnerAdapter(getContext(),
+                            R.layout.spinner_layout, citiesMap.get(selectedState));
+                    citySpinner.setAdapter(cityAdapter);
+                }
+            }
+        });
+
+
     }
 }

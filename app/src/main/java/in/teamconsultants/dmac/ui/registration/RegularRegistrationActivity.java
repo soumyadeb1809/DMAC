@@ -139,6 +139,9 @@ public class RegularRegistrationActivity extends AppCompatActivity {
         progress.setCancelable(false);
         gson = new Gson();
 
+        cityCodeMap = new HashMap<>();
+        citiesMap = new HashMap<>();
+
         directorsViewList = new ArrayList<>();
         inflater = getLayoutInflater();
         directorDocumentsMap = new HashMap<>();
