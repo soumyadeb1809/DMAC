@@ -4,33 +4,48 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.scanlibrary.ScanConstants;
 import com.squareup.picasso.Picasso;
 
+import org.beyka.tiffbitmapfactory.CompressionScheme;
+import org.beyka.tiffbitmapfactory.Orientation;
+import org.beyka.tiffbitmapfactory.TiffSaver;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import in.teamconsultants.dmac.R;
 import in.teamconsultants.dmac.model.CustomerJob;
+import in.teamconsultants.dmac.model.FileImages;
 import in.teamconsultants.dmac.network.dto.ReUploadFileResponse;
 import in.teamconsultants.dmac.network.api.ApiClient;
 import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -53,25 +68,24 @@ public class FileReUploadActivity extends AppCompatActivity {
     private Map<String,  String> headerMap;
     private ProgressDialog progress;
 
-    private Toolbar toolbar;
+    private FileImages fileImages;
+    private LinearLayout grpFileImagesContainer;
+    private LinearLayout grpBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_re_upload);
 
-        toolbar = findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        grpBack = findViewById(R.id.grp_back);
+        grpBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
+        fileImages = new FileImages();
 
         Intent intent = getIntent();
 
@@ -121,8 +135,9 @@ public class FileReUploadActivity extends AppCompatActivity {
         etFileId = findViewById(R.id.et_file_id);
         etFileName = findViewById(R.id.et_file_name);
         etFileNotes = findViewById(R.id.et_file_notes);
-        imgNewFile = findViewById(R.id.img_new_file);
+        imgNewFile = findViewById(R.id.img_attach_file);
         btnUploadFile = findViewById(R.id.grp_upload_file);
+        grpFileImagesContainer = findViewById(R.id.grp_files_container);
 
     }
 
@@ -160,7 +175,46 @@ public class FileReUploadActivity extends AppCompatActivity {
         requestBodyMap.put("Name", Utility.getTextRequestBody(customerJob.getName()));
         requestBodyMap.put("Notes", Utility.getTextRequestBody(notes));
 
-        MultipartBody.Part multipartImage = Utility.getMultipartImage("UploadFile", newFilePath);
+        ArrayList<String> fileImagesPathList = fileImages.getImageUrls();
+
+        Bitmap[] bitmapParts = new Bitmap[fileImagesPathList.size()];
+
+        for(int j = 0; j < fileImagesPathList.size(); j++){
+            String fileImagePath = fileImagesPathList.get(j);
+            bitmapParts[j] = BitmapFactory.decodeFile(fileImagePath);
+        }
+
+        TiffSaver.SaveOptions options = new TiffSaver.SaveOptions();
+
+        options.compressionScheme = CompressionScheme.JPEG;
+        //By default orientation is top left
+        options.orientation = Orientation.LEFT_TOP;
+        //Add author tag to output file
+        options.author = "beyka";
+        //Add copyright tag to output file
+        options.copyright = "Some copyright";
+        //Save image as tif. If image saved succesfull true will be returned
+
+        String fileName = String.valueOf(Calendar.getInstance().getTimeInMillis());
+
+        String destinationPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/dmac/files/";
+        File js = new File(destinationPath);
+        if(!js.exists()){
+            js.mkdirs();
+        }
+
+        destinationPath = destinationPath +fileName+".tif";
+
+        boolean saved = TiffSaver.saveBitmap(destinationPath, bitmapParts[0], options);
+
+        if(bitmapParts.length > 1) {
+
+            for (int k = 1; k < bitmapParts.length; k++) {
+                TiffSaver.appendBitmap(destinationPath, bitmapParts[k], options);
+            }
+        }
+
+        MultipartBody.Part multipartImage = Utility.getMultipartImage("UploadFile", destinationPath);
 
         Call<ReUploadFileResponse> reUploadFileResponseCall = apiInterface.doReUploadFile(headerMap, requestBodyMap, multipartImage);
 
@@ -245,7 +299,28 @@ public class FileReUploadActivity extends AppCompatActivity {
 
             try {
 
-                Picasso.get().load(path).resize(0, 500).into(imgNewFile);
+                ArrayList<String> imageUrls = fileImages.getImageUrls();
+
+                if(imageUrls == null)
+                    imageUrls = new ArrayList<>();
+
+                imageUrls.add(filePath);
+
+                fileImages.setImageUrls(imageUrls);
+
+                LayoutInflater inflater = getLayoutInflater();
+                LinearLayout newFileImage = (LinearLayout) inflater.inflate(R.layout.card_file_image, null);
+
+                ImageView imgFile = newFileImage.findViewById(R.id.img_file);
+                TextView tvFilePath = newFileImage.findViewById(R.id.file_name);
+                tvFilePath.setText(filePath);
+
+                Picasso.get().load(path).resize(0, 300).into(imgFile);
+
+                grpFileImagesContainer.addView(newFileImage);
+
+                //Picasso.get().load(path).resize(0, 500).into(imgNewFile);
+
                 newFilePath = filePath;
 
             }

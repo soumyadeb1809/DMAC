@@ -436,7 +436,6 @@ public class NewJobActivity extends AppCompatActivity {
 
         //Picasso.get().load(Uri.parse(filepath)).resize(0, 500).into(imgAttachFile);
         Picasso.get().load(path).resize(0, 300).into(imgFile);
-        //imgAttachFile.setImageBitmap(bitmap);
 
         grpImageContainer.addView(newFileImage);
 
@@ -487,8 +486,6 @@ public class NewJobActivity extends AppCompatActivity {
                 bitmapParts[j] = BitmapFactory.decodeFile(fileImagePath);
             }
 
-            Bitmap finalBitmap = bitmapParts[0];
-
             TiffSaver.SaveOptions options = new TiffSaver.SaveOptions();
 
             options.compressionScheme = CompressionScheme.JPEG;
@@ -500,15 +497,13 @@ public class NewJobActivity extends AppCompatActivity {
             options.copyright = "Some copyright";
             //Save image as tif. If image saved succesfull true will be returned
 
-            Date date = new Date();
-
             String fileName = String.valueOf(Calendar.getInstance().getTimeInMillis());
 
             //String destinationPath = "/sdcard/"+fileName+".tif";
             String destinationPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/dmac/files/";
             File js = new File(destinationPath);
             if(!js.exists()){
-                    js.mkdirs();
+                js.mkdirs();
             }
 
             destinationPath = destinationPath +fileName+".tif";

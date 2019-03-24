@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -29,7 +30,7 @@ public class JobDetailActivity extends AppCompatActivity {
     private TextView tvFileName, tvFileNotes, tvFileCategory, tvFileType, tvCreatedOn, tvUpdatedOn, tvFileStatus;
     private Button btnReUpload;
     private ImageView imgFilePreview;
-    private Toolbar toolbar;
+    private LinearLayout grpBack;
 
     private JobUploadFileAdapter jobUploadFileAdapter;
     private ArrayList<JobUploadFile> jobUploadFilesList;
@@ -40,11 +41,8 @@ public class JobDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_detail);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        grpBack = findViewById(R.id.grp_back);
+        grpBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

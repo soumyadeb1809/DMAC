@@ -15,34 +15,6 @@
         android:paddingBottom="20dp"
         >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorWhite"
-
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="File Details"
-            android:textSize="24sp"
-            android:id="@+id/title_job_detail"
-            android:fontFamily="@font/ssp_bold"
-            android:textColor="@color/bannerFilter"
-            />
-
-        <View
-            android:layout_width="48dp"
-            android:layout_height="3dp"
-            android:background="@color/colorYellow"
-            android:layout_marginTop="6dp"
-            android:id="@+id/title_dash_login"
-            />
-
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"

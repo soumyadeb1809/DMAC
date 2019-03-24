@@ -7,202 +7,269 @@
     android:orientation="vertical"
     tools:context=".ui.home.jobs.FileReUploadActivity">
 
-    <include layout="@layout/toolbar_transparent_light"
-        android:id="@+id/toolbar"/>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/colorWhite"
-        android:paddingStart="20dp"
-        android:elevation="0dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingEnd="20dp"
+        android:elevation="2dp"
+        android:id="@+id/grp_topbar"
+        android:paddingStart="8dp"
         >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:padding="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/grp_back"
+            android:background="@drawable/back_white_accent_rounded"
+            >
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/img_toggle"
+                android:src="@drawable/ic_back"
+                />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Re-Upload File"
-            android:textSize="20sp"
-            android:id="@+id/title_login"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/grp_back"
+            android:textSize="24sp"
+            android:id="@+id/title_my_files"
             android:fontFamily="@font/ssp_bold"
             android:textColor="@color/bannerFilter"
             />
 
+
         <View
             android:layout_width="48dp"
             android:layout_height="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/grp_back"
+            android:layout_below="@id/title_my_files"
             android:background="@color/colorYellow"
             android:layout_marginTop="6dp"
-            android:id="@+id/title_dash_login"
+            android:id="@+id/title_my_jobs"
             />
 
-    </LinearLayout>
 
-    <LinearLayout
+    </RelativeLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorWhite">
-
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="File ID"
-                android:textSize="12sp"
-                android:fontFamily="@font/ssp_regular"
-                android:layout_marginBottom="10dp"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:textSize="14sp"
-                android:focusable="false"
-                android:fontFamily="@font/ssp_regular"
-                android:background="@drawable/back_et_form"
-                android:id="@+id/et_file_id"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:visibility="gone"
-            android:layout_marginEnd="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="File Name"
-                android:textSize="12sp"
-                android:fontFamily="@font/ssp_regular"
-                android:layout_marginBottom="10dp"
-                android:id="@+id/label_business_name"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:textSize="14sp"
-                android:focusable="false"
-                android:fontFamily="@font/ssp_regular"
-                android:background="@drawable/back_et_form"
-                android:id="@+id/et_file_name"
-                />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="File Notes"
-                android:textSize="12sp"
-                android:fontFamily="@font/ssp_regular"
-                android:layout_marginBottom="10dp"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:textSize="14sp"
-                android:fontFamily="@font/ssp_regular"
-                android:background="@drawable/back_et_form"
-                android:id="@+id/et_file_notes"
-                />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Choose new file"
-                android:textSize="12sp"
-                android:fontFamily="@font/ssp_regular"
-                android:layout_marginBottom="10dp"
-                android:id="@+id/label_others_copy"
-                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorWhite">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="File ID"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/ssp_regular"
+                        android:layout_marginBottom="10dp"
+                        />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:textSize="14sp"
+                        android:focusable="false"
+                        android:fontFamily="@font/ssp_regular"
+                        android:background="@drawable/back_et_form"
+                        android:id="@+id/et_file_id"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    android:layout_marginEnd="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="File Name"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/ssp_regular"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/label_business_name"
+                        />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:textSize="14sp"
+                        android:focusable="false"
+                        android:fontFamily="@font/ssp_regular"
+                        android:background="@drawable/back_et_form"
+                        android:id="@+id/et_file_name"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="File Notes"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/ssp_regular"
+                        android:layout_marginBottom="10dp"
+                        />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/ssp_regular"
+                        android:background="@drawable/back_et_form"
+                        android:id="@+id/et_file_notes"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Choose new file"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/ssp_regular"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/label_others_copy"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/grp_files_container">
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:id="@+id/img_attach_file"
+                                android:src="@drawable/back_et_form"
+                                android:clickable="true"
+                                android:focusable="true"
+                                />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/ic_add_gray"
+                                android:layout_centerVertical="true"
+                                android:layout_centerHorizontal="true"
+                                />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="274dp"
+                android:layout_height="50dp"
+                android:padding="12dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:id="@+id/grp_upload_file"
+                android:background="@drawable/back_create_account"
+
                 >
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:id="@+id/img_new_file"
-                    android:src="@drawable/back_et_form"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload File"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorWhite"
+                    android:fontFamily="@font/ssp_bold"
+                    android:layout_marginStart="16dp"
                     />
 
             </LinearLayout>
 
         </LinearLayout>
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="274dp"
-        android:layout_height="50dp"
-        android:padding="12dp"
-        android:gravity="center"
-        android:clickable="true"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:id="@+id/grp_upload_file"
-        android:background="@drawable/back_create_account"
-
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload File"
-            android:textSize="14sp"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/ssp_bold"
-            android:layout_marginStart="16dp"
-            />
-
-    </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>
