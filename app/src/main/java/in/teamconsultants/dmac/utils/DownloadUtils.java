@@ -25,12 +25,12 @@ public class DownloadUtils {
 
         request.allowScanningByMediaScanner();
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setMimeType("*/*");
+        request.setMimeType("application/*");
 
         String fileFormat = downloadUri.getLastPathSegment();
 
         Log.d(AppConstants.LOG_TAG, "File name: " + documentTitle + fileFormat);
-        request.setDestinationInExternalPublicDir("/dmac_downloads/",documentTitle + fileFormat);
+        request.setDestinationInExternalPublicDir("/dmac/reports/",documentTitle + fileFormat);
 
         Long downloadReference = downloadManager.enqueue(request);
 

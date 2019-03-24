@@ -167,6 +167,7 @@
                 android:gravity="center"
                 android:layout_gravity="bottom|end"
                 android:clickable="true"
+                android:visibility="gone"
                 android:background="@drawable/back_remove"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
@@ -177,7 +178,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="REMOVE"
+                    android:text="Remove"
                     android:textSize="12sp"
                     android:id="@+id/btn_remove_director"
                     android:textColor="@color/colorWhite"
