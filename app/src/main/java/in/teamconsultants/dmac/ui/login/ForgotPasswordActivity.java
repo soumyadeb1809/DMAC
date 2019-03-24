@@ -93,6 +93,9 @@ import android.widget.LinearLayout;
 
                  progressDialog.dismiss();
 
+                 if(response.body() == null)
+                     return;
+
                  ForgotPasswordResponse forgotPasswordResponse = response.body();
 
                  AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ForgotPasswordActivity.this);

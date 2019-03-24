@@ -211,7 +211,7 @@
             android:focusable="true"
             android:layout_marginTop="30dp"
             android:orientation="horizontal"
-            android:id="@+id/grp_reset_password"
+            android:id="@+id/grp_save_changes"
             android:gravity="center"
             android:layout_gravity="center"
             >

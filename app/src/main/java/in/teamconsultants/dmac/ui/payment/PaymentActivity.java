@@ -106,6 +106,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             @Override
             public void onResponse(Call<TokenValidationResponse> call, Response<TokenValidationResponse> response) {
 
+                if(response.body() == null)
+                    return;
+
                 TokenValidationResponse tokenValidationResponse = response.body();
 
                 if(tokenValidationResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
@@ -257,6 +260,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             @Override
             public void onResponse(Call<UpdateInvoicePaymentResponse> call, Response<UpdateInvoicePaymentResponse> response) {
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 UpdateInvoicePaymentResponse updateInvoicePaymentResponse = response.body();
 
                 if(updateInvoicePaymentResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){

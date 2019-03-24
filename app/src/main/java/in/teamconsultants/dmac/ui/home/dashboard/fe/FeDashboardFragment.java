@@ -133,6 +133,10 @@ public class FeDashboardFragment extends Fragment {
         accountCountResponseCall.enqueue(new Callback<AccountCountResponse>() {
             @Override
             public void onResponse(Call<AccountCountResponse> call, Response<AccountCountResponse> response) {
+
+                if(response.body() == null)
+                    return;
+
                 Log.d(AppConstants.LOG_TAG, "accountCountResponseCall: "+gson.toJson(response.body()));
                 AccountCountResponse accountCountResponse = response.body();
                 if (accountCountResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
@@ -162,6 +166,10 @@ public class FeDashboardFragment extends Fragment {
         verifiedFilesResponseCall.enqueue(new Callback<AccountCountResponse>() {
             @Override
             public void onResponse(Call<AccountCountResponse> call, Response<AccountCountResponse> response) {
+
+                if(response.body() == null)
+                    return;
+
                 Log.d(AppConstants.LOG_TAG, "accountCountResponseCall: "+gson.toJson(response.body()));
                 AccountCountResponse accountCountResponse = response.body();
 

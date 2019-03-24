@@ -164,6 +164,10 @@ public class AccountsFragment extends Fragment {
         accountSearchResultCall.enqueue(new Callback<AccountSearchResponse>() {
             @Override
             public void onResponse(Call<AccountSearchResponse> call, Response<AccountSearchResponse> response) {
+
+                if(response.body() == null)
+                    return;
+
                 AccountSearchResponse accountSearchResponse = response.body();
                 Log.d(AppConstants.LOG_TAG, "response-type: "+ gson.toJson(accountSearchResponse));
 

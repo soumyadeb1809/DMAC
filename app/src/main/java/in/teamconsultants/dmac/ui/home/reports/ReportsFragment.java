@@ -111,6 +111,10 @@ public class ReportsFragment extends Fragment {
         reportTypeCall.enqueue(new Callback<ReportTypeResponse>() {
             @Override
             public void onResponse(Call<ReportTypeResponse> call, Response<ReportTypeResponse> response) {
+
+                if(response.body() == null)
+                    return;
+
                 ReportTypeResponse reportTypeResponse = response.body();
                 Log.d(AppConstants.LOG_TAG, "reportTypeResponse: " + gson.toJson(reportTypeResponse));
 
@@ -157,6 +161,10 @@ public class ReportsFragment extends Fragment {
             public void onResponse(Call<ReportsResponse> call, Response<ReportsResponse> response) {
 
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 ReportsResponse reportsResponse = response.body();
 
                 if(reportsResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
@@ -278,6 +286,10 @@ public class ReportsFragment extends Fragment {
             @Override
             public void onResponse(Call<CreateReportResponse> call, Response<CreateReportResponse> response) {
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 CreateReportResponse createReportResponse = response.body();
 
                 if(createReportResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){

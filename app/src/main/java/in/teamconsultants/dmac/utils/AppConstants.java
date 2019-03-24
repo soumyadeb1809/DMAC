@@ -128,5 +128,7 @@ public class AppConstants {
     public static final String FILE_BASE_URL = "https://staging.teamconsultants.in/upload/";
     public static final String PRIVACY_POLICY_URL = "https://teamconsultants.in/privacy-policy.php";
     public static final String ABOUT_US_URL = "http://teamconsultants.in/profile.php";
+    public static final String APP_MARKET_BASE_URL = "market://details?id=";
+    public static final String PLAY_STORE_BASE_URL = "http://play.google.com/store/apps/details?id=";
 
 }

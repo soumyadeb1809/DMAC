@@ -168,6 +168,10 @@ public class FileReUploadActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ReUploadFileResponse> call, Response<ReUploadFileResponse> response) {
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 ReUploadFileResponse reUploadFileResponse = response.body();
                 if(reUploadFileResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(FileReUploadActivity.this);

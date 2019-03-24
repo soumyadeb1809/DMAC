@@ -58,6 +58,8 @@ public class QuickRegisterFragment extends Fragment {
 
     private ProgressDialog progress;
 
+    private LinearLayout grpBack;
+
     public QuickRegisterFragment() {
         // Required empty public constructor
     }
@@ -73,6 +75,15 @@ public class QuickRegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_quick_register, container, false);
+
+        grpBack = v.findViewById(R.id.grp_back);
+        grpBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getActivity() != null)
+                    getActivity().finish();
+            }
+        });
 
         // Initialize API Interface:
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -189,6 +200,10 @@ public class QuickRegisterFragment extends Fragment {
             @Override
             public void onResponse(Call<QuickRegisterResponse> call, Response<QuickRegisterResponse> response) {
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 //Log.d(AppConstants.LOG_TAG, "response-type: "+ gson.toJson(response.body()));
                 QuickRegisterResponse quickRegisterResponse = response.body();
                 Log.d(AppConstants.LOG_TAG, "response-type: "+ gson.toJson(quickRegisterResponse));

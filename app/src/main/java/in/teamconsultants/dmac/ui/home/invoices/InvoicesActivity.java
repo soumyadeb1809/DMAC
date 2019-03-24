@@ -95,6 +95,10 @@ public class InvoicesActivity extends AppCompatActivity implements InvoiceAdapte
             @Override
             public void onResponse(Call<InvoiceResponse> call, Response<InvoiceResponse> response) {
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 InvoiceResponse invoiceResponse = response.body();
 
                 if(invoiceResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){

@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.net.Uri;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +14,6 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Environment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,10 +34,7 @@ import org.beyka.tiffbitmapfactory.CompressionScheme;
 import org.beyka.tiffbitmapfactory.Orientation;
 import org.beyka.tiffbitmapfactory.TiffSaver;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -69,11 +62,12 @@ import retrofit2.Response;
 
 public class NewJobActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     private LinearLayout grpJobs;
     private LinearLayout grpDefaultJob;
     private LinearLayout btnAddFile;
     private LinearLayout btnUploadJob;
+
+    private LinearLayout grpBack;
 
     private ArrayList<LinearLayout> jobsGrpList;
     private Map<Integer, String> jobFileUriMap;
@@ -100,12 +94,9 @@ public class NewJobActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_job);
 
-        // Set up toolbar:
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        // Set up back button click:
+        grpBack = findViewById(R.id.grp_back);
+        grpBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -300,6 +291,10 @@ public class NewJobActivity extends AppCompatActivity {
         fileCategoryResponseCall.enqueue(new Callback<FileCategoryResponse>() {
             @Override
             public void onResponse(Call<FileCategoryResponse> call, Response<FileCategoryResponse> response) {
+
+                if(response.body() == null)
+                    return;
+
                 Log.d(AppConstants.LOG_TAG, "response: "+ gson.toJson(response.body()));
                 FileCategoryResponse fileCategoryResponse = response.body();
 
@@ -339,6 +334,9 @@ public class NewJobActivity extends AppCompatActivity {
         fileTypeResponseCall.enqueue(new Callback<FileTypeResponse>() {
             @Override
             public void onResponse(Call<FileTypeResponse> call, Response<FileTypeResponse> response) {
+
+                if(response.body() == null)
+                    return;
 
                 FileTypeResponse fileTypeResponse = response.body();
                 Log.d(AppConstants.LOG_TAG, "response-type: " + gson.toJson(fileTypeResponse));
@@ -407,8 +405,6 @@ public class NewJobActivity extends AppCompatActivity {
 
 
             try {
-
-                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
 
                 setBitmapToImgAttachFile(requestCode, path, filePath);
 
@@ -545,6 +541,10 @@ public class NewJobActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CreateJobResponse> call, Response<CreateJobResponse> response) {
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 Log.d(AppConstants.LOG_TAG, "response: "+ gson.toJson(response.body()));
                 CreateJobResponse createJobResponse = response.body();
                 if(createJobResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
@@ -581,14 +581,6 @@ public class NewJobActivity extends AppCompatActivity {
     }
     public RequestBody getTextRequestBody(String text){
         return RequestBody.create(MediaType.parse("text/plain"), text);
-    }
-
-    public static Bitmap overlay(Bitmap bmp1, Bitmap bmp2) {
-        Bitmap bmOverlay = Bitmap.createBitmap(bmp1.getWidth(), bmp1.getHeight(), bmp1.getConfig());
-        Canvas canvas = new Canvas(bmOverlay);
-        canvas.drawBitmap(bmp1, new Matrix(), null);
-        canvas.drawBitmap(bmp2, 0, 0, null);
-        return bmOverlay;
     }
 
 

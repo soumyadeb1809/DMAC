@@ -167,6 +167,10 @@ public class ChangeAccountActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CustomerAccountsResponse> call, Response<CustomerAccountsResponse> response) {
                     progress.dismiss();
+
+                    if(response.body() == null)
+                        return;
+
                     CustomerAccountsResponse customerAccountsResponse = response.body();
 
                     if (customerAccountsResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {

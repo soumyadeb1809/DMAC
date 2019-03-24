@@ -177,6 +177,10 @@ public class AccountDetailActivity extends AppCompatActivity {
         accountDetailResponseCall.enqueue(new Callback<AccountDetailResponse>() {
             @Override
             public void onResponse(Call<AccountDetailResponse> call, Response<AccountDetailResponse> response) {
+
+                if(response.body() == null)
+                    return;
+
                 accountDetails = response.body();
                 if(accountDetails.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
                     getCityData();
@@ -206,6 +210,8 @@ public class AccountDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {
                 //progress.dismiss();
+                if(response.body() == null)
+                    return;
                 Log.d(AppConstants.LOG_TAG, "stateResponseCall: "+ gson.toJson(response.body()));
                 StateResponse stateResponse = response.body();
                 stateList = stateResponse.getStateList();
@@ -236,6 +242,9 @@ public class AccountDetailActivity extends AppCompatActivity {
         cityResponseCall.enqueue(new Callback<CityResponse>() {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+
+                if(response.body() == null)
+                    return;
 
                 Log.d(AppConstants.LOG_TAG, "stateResponseCall: "+ gson.toJson(response.body()));
                 CityResponse cityResponse = response.body();

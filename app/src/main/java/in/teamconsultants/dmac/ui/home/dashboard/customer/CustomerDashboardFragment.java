@@ -137,6 +137,11 @@ public class CustomerDashboardFragment extends Fragment {
             @Override
             public void onResponse(Call<FileCategoryWiseCountResponse> call, Response<FileCategoryWiseCountResponse> response) {
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
+
                 FileCategoryWiseCountResponse fileCategoryWiseCountResponse = response.body();
                 if(fileCategoryWiseCountResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
                     fileCategoryCountList = fileCategoryWiseCountResponse.getFileCategoryCount();

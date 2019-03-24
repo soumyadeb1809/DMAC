@@ -338,6 +338,11 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
             @Override
             public void onResponse(Call<CustomerAccountsResponse> call, Response<CustomerAccountsResponse> response) {
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
+
                 CustomerAccountsResponse customerAccountsResponse = response.body();
 
                 if(customerAccountsResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
@@ -387,6 +392,9 @@ public class CustomerHomeActivity extends AppCompatActivity implements CustomerD
         notificationCountCall.enqueue(new Callback<NotificationCountResponse>() {
             @Override
             public void onResponse(Call<NotificationCountResponse> call, Response<NotificationCountResponse> response) {
+
+                if(response.body() == null)
+                    return;
 
                 NotificationCountResponse notificationCountResponse = response.body();
 

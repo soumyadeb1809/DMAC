@@ -119,7 +119,7 @@ public class RegularRegistrationActivity extends AppCompatActivity {
     private String imgAuditBalSheetFilepath = "";
     private Map<Integer, DirectorDocuments> directorDocumentsMap;
 
-    private Toolbar toolbar;
+    private LinearLayout grpBack;
 
 
     @Override
@@ -127,11 +127,8 @@ public class RegularRegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regular_registration);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        grpBack = findViewById(R.id.grp_back);
+        grpBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -427,6 +424,10 @@ public class RegularRegistrationActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {
                 //progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 Log.d(AppConstants.LOG_TAG, "stateResponseCall: "+ gson.toJson(response.body()));
                 StateResponse stateResponse = response.body();
                 stateList = stateResponse.getStateList();
@@ -459,6 +460,9 @@ public class RegularRegistrationActivity extends AppCompatActivity {
         cityResponseCall.enqueue(new Callback<CityResponse>() {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+
+                if(response.body() == null)
+                    return;
 
                 Log.d(AppConstants.LOG_TAG, "stateResponseCall: "+ gson.toJson(response.body()));
                 CityResponse cityResponse = response.body();
@@ -1030,6 +1034,10 @@ public class RegularRegistrationActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CreateAccountResponse> call, Response<CreateAccountResponse> response) {
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 //Log.d(AppConstants.LOG_TAG, "createAccountResponseCall:" + gson.toJson(response));
                 CreateAccountResponse createAccountResponse = response.body();
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(RegularRegistrationActivity.this);

@@ -165,6 +165,10 @@ public class LoginFragment extends Fragment {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 progressDialog.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 Log.d(AppConstants.LOG_TAG, "response: "+ gson.toJson(response.body()));
                 LoginResponse loginResponse = response.body();
 

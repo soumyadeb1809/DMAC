@@ -266,6 +266,9 @@ public class ProfileFragment extends Fragment {
 
                 progress.dismiss();
 
+                if(response.body() == null)
+                    return;
+
                 ProfileImageUploadResponse profileImageUploadResponse = response.body();
 
                 if(profileImageUploadResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){

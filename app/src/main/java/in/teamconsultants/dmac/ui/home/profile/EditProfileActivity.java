@@ -6,6 +6,8 @@ import in.teamconsultants.dmac.model.UserData;
 import in.teamconsultants.dmac.network.api.ApiClient;
 import in.teamconsultants.dmac.network.api.ApiInterface;
 import in.teamconsultants.dmac.network.dto.EditProfileResponse;
+import in.teamconsultants.dmac.ui.home.dashboard.customer.CustomerHomeActivity;
+import in.teamconsultants.dmac.ui.home.dashboard.fe.FeHomeActivity;
 import in.teamconsultants.dmac.ui.home.jobs.NewJobActivity;
 import in.teamconsultants.dmac.utils.AppConstants;
 import in.teamconsultants.dmac.utils.Utility;
@@ -72,6 +74,7 @@ public class EditProfileActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.et_password);
         etConfirmPassword = findViewById(R.id.et_confirm_password);
         grpConfirmPassword = findViewById(R.id.grp_confirm_password);
+        grpSaveChanges = findViewById(R.id.grp_save_changes);
 
     }
 
@@ -158,10 +161,13 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onResponse(Call<EditProfileResponse> call, Response<EditProfileResponse> response) {
                 progress.dismiss();
 
+                if(response.body() == null)
+                    return;
+
                 EditProfileResponse editProfileResponse = response.body();
 
                 if(editProfileResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
-                    UserData userData = editProfileResponse.getUserData();
+                    final UserData userData = editProfileResponse.getUserData();
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString(AppConstants.SP.TAG_USER_DETAILS, gson.toJson(userData));
@@ -173,7 +179,25 @@ public class EditProfileActivity extends AppCompatActivity {
                     alertBuilder.setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
+                            String userRole = userData.getRoleId();
+
+                            Intent intent = null;
+
+                            if(userRole.equals(AppConstants.USER_ROLE.FE)){
+                                intent = new Intent(EditProfileActivity.this, FeHomeActivity.class);
+                            }
+                            else if(userRole.equals(AppConstants.USER_ROLE.CUSTOMER)) {
+                                intent = new Intent(EditProfileActivity.this, CustomerHomeActivity.class);
+                            }
+
+                            if(intent != null) {
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+
                             finish();
+
                         }
                     });
                     alertBuilder.setCancelable(false);

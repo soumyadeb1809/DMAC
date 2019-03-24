@@ -96,7 +96,7 @@ public class InformationFragment extends Fragment {
     }
 
     private void sendUserToPayStore(){
-        Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
+        Uri uri = Uri.parse(AppConstants.APP_MARKET_BASE_URL + getContext().getPackageName());
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
         // To count with Play market backstack, After pressing back button,
         // to taken back to our application, we need to add following flags to intent.
@@ -107,7 +107,7 @@ public class InformationFragment extends Fragment {
             startActivity(goToMarket);
         } catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/details?id=" + getContext().getPackageName())));
+                    Uri.parse(AppConstants.PLAY_STORE_BASE_URL + getContext().getPackageName())));
         }
     }
 

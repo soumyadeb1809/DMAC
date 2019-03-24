@@ -355,6 +355,9 @@ public class CustomerJobsFragment extends Fragment {
             @Override
             public void onResponse(Call<FileSearchResponse> call, Response<FileSearchResponse> response) {
 
+                if(response.body() == null)
+                    return;
+
                 Log.d(AppConstants.LOG_TAG, "response: "+ gson.toJson(response.body()));
                 FileSearchResponse fileSearchResponse = response.body();
                 if(fileSearchResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
@@ -411,6 +414,10 @@ public class CustomerJobsFragment extends Fragment {
         statusResponseCall.enqueue(new Callback<StatusResponse>() {
             @Override
             public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+
+                if(response.body() == null)
+                    return;
+
                 StatusResponse statusResponse = response.body();
                 if(statusResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
                     Log.d(AppConstants.LOG_TAG, "response-type: " + gson.toJson(statusResponse));

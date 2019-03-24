@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import androidx.appcompat.widget.Toolbar;
 
@@ -38,7 +39,7 @@ public class NotificationActivity extends AppCompatActivity {
 
     private Spinner spinNotfType;
     private RecyclerView rvNotifications;
-    private Toolbar toolbar;
+    private LinearLayout grpBack;
 
     private List<NotificationType> notificationTypeList;
     private Map<String, String> notificationTypeMap;
@@ -63,18 +64,14 @@ public class NotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        grpBack = findViewById(R.id.grp_back);
+        grpBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
 
         // Initialize API Interface:
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -97,6 +94,10 @@ public class NotificationActivity extends AppCompatActivity {
         notificationTypeCall.enqueue(new Callback<NotificationTypeResponse>() {
             @Override
             public void onResponse(Call<NotificationTypeResponse> call, Response<NotificationTypeResponse> response) {
+
+                if(response.body() == null)
+                    return;
+
                 NotificationTypeResponse notificationTypeResponse = response.body();
                 if(notificationTypeResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)) {
                     notificationTypeList = notificationTypeResponse.getNotificationTypeList();
@@ -150,6 +151,10 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<NotificationsResponse> call, Response<NotificationsResponse> response) {
                 progress.dismiss();
+
+                if(response.body() == null)
+                    return;
+
                 NotificationsResponse notificationsResponse = response.body();
                 if(notificationsResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
                     notificationList = notificationsResponse.getNotificationList();
