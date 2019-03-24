@@ -101,6 +101,8 @@ public class InvoicesActivity extends AppCompatActivity implements InvoiceAdapte
 
                 InvoiceResponse invoiceResponse = response.body();
 
+                Log.d(AppConstants.LOG_TAG, "Invoices: " + gson.toJson(invoiceResponse));
+
                 if(invoiceResponse.getStatus().equals(AppConstants.RESPONSE.SUCCESS)){
                     invoiceList = invoiceResponse.getInvoiceList();
 

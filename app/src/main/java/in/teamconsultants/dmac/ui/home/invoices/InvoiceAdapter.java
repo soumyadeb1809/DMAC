@@ -76,7 +76,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
         if(invoice != null){
 
             viewHolder.tvInvoiceName.setText(invoice.getInvoiceName());
-            viewHolder.tvAmount.setText("₹" + invoice.getInvoiceAmount());
+            viewHolder.tvAmount.setText("₹" + invoice.getTotalAmount());
             viewHolder.tvNotes.setText(invoice.getNotes());
 
             String createDate = invoice.getCreatedAt();
@@ -121,7 +121,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
                         invoiceSelectedListener.updateSelectedInvoiceItem(selectedInvoice);
                         invoiceSelectedListener.updatePayButtonVisibility(false);
 
-                    } else {
+                    } else if(invoice.getStatus().equals("New")) {
                         selectedInvoice = invoice;
                         invoiceSelectedListener.updateSelectedInvoiceItem(selectedInvoice);
                         if(null != selectedInvoiceHolder) {
